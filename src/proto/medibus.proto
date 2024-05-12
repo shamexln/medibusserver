@@ -1,0 +1,129 @@
+syntax = "proto3";
+package medibus;
+
+// The greeting service definition.
+service Medibus {
+  // The following are all request from client to server with the parameter filled with the device responds
+
+  // Request current Alarms (Codepage 3)
+  rpc CurAlarmsCP3 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current measured data (codepage 1) 24H
+  rpc CurMeasuredDataCP1 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current low Alarm Limits (Codepage 1) 25H
+  rpc CurLowAlarmLimitsCP1 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current high Alarm Limits (Codepage 1) 26H
+  rpc CurHighAlarmLimitsCP1 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current Alarms (Codepage 1) 27H
+  rpc CurAlarmsCP1 (MedibusRequest) returns (MedibusReply) {}
+  
+  // Request current device settings 29H
+  rpc CurDeviceSettings (MedibusRequest) returns (MedibusReply) {}
+
+  // Request test messages 2AH
+  rpc TextMessages (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current measured data (codepage 2) 2BH
+  rpc CurMeasuredDataCP2 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current low Alarm Limits (Codepage 2) 2CH
+  rpc CurLowAlarmLimitsCP2 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current high Alarm Limits (Codepage 2) 2DH
+  rpc CurHighAlarmLimitsCP2 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request current Alarms (Codepage 2) 2EH
+  rpc CurAlarmsCP2 (MedibusRequest) returns (MedibusReply) {}
+
+  // Request device identification 52H
+  rpc DeviceIdentification (DeviceIdentificationRequest) returns (MedibusReply) {}
+
+  // Request real time 
+  rpc RealTime (MedibusRealTimeRequest) returns (MedibusReply) {}
+
+  // Request all data for each medibus loop 
+  rpc DataInEachLoop (stream LoopRequest) returns (MedibusReply) {}
+
+  // Request all data for each medibus loop 
+  rpc DelimitedDataInEachLoop (stream DelimitedLoopRequest) returns (MedibusReply) {}
+
+}
+
+// Device Identification message
+message DeviceIdentificationRequest {
+  optional string instance_id = 1;
+  optional fixed64 sequence_id = 2;
+  message DeviceRespond {
+  optional string deviceid = 1;
+  optional string devicename = 2;
+  optional string facility = 3;
+  optional string poc = 4;
+  optional string bed = 5;
+  optional string room = 6;
+  optional string building = 7;
+  optional string floor = 8;
+  }
+  optional DeviceRespond deviceresponds = 3;
+}
+
+// The request common message
+message MedibusRequest {
+  optional string instance_id = 1;
+  optional fixed64 sequence_id = 2;
+  message DeviceRespond {
+  optional string code = 1;
+  optional string value = 2;
+  optional string unit = 3;
+  optional string description = 4;
+  }
+  repeated DeviceRespond deviceresponds = 3;
+  
+}
+
+// The response common message
+message MedibusReply {
+  optional string instance_id = 1;
+  string message = 2;
+}
+
+// The request real time message
+message MedibusRealTimeRequest {
+  optional string instance_id = 1;
+  optional fixed64 sequence_id = 2;
+  message DeviceRespond {
+  optional string min = 1;
+  optional string max = 2;
+  optional string maxbin = 3;
+  optional string interval = 4;
+  optional string description = 5;
+  }
+  repeated DeviceRespond deviceresponds = 3;
+  optional string description = 4;
+}
+
+// The request common message
+message LoopRequest {
+  optional string instance_id = 1;
+  optional fixed64 sequence_id = 2;
+  optional MedibusRequest cur_measured_data_cp1 = 3;
+  optional MedibusRequest cur_low_alarm_limits_cp1 = 4;
+  optional MedibusRequest cur_high_alarm_limits_cp1 = 5;
+  optional MedibusRequest cur_alarms_cp1 = 6;
+  optional MedibusRequest cur_device_settings = 7;
+  optional MedibusRequest text_messages = 8;
+  optional MedibusRequest cur_measured_data_cp2 = 9;
+  optional MedibusRequest cur_low_alarm_limits_cp2 = 10;
+  optional MedibusRequest cur_high_alarm_limits_cp2 = 11;
+  optional MedibusRequest cur_alarms_cp2 = 12;
+  optional MedibusRequest device_identification = 13;
+  repeated MedibusRealTimeRequest real_time = 14;
+ 
+}
+
+message DelimitedLoopRequest {
+  optional bytes msg = 1;
+}
+ 

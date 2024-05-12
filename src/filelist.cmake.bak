@@ -1,0 +1,4 @@
+set(MEDIBUS_FILES 
+    server.cpp
+	proto/medibus.pb.cc
+)

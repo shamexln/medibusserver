@@ -1,0 +1,63 @@
+cmake_minimum_required(VERSION 3.22)
+
+project(medibus)
+
+message(STATUS "Edit these paths according to your system")
+SET(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_LIST_DIR}/bin")
+SET(BOOST_ROOT "${CMAKE_CURRENT_LIST_DIR}/../boost/boost_1_71_0")
+SET(OPENSSL_ROOT_DIR "${CMAKE_CURRENT_LIST_DIR}/../boost/OpenSSL")
+#SET(gRPC_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/grpc")
+SET(gRPC_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/grpc")
+#SET(Protobuf_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/protobuf")
+SET(Protobuf_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/protobuf")
+#SET(Protobuf_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/include")
+SET(Protobuf_INCLUDE_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include")
+#SET(Protobuf_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/3rd/library")
+SET(Protobuf_LIBRARIES "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/lib")
+SET(ZLIB_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/zlib")
+SET(ZLIB_LIBRARY "${CMAKE_CURRENT_LIST_DIR}/3rd/library")
+#SET(c-ares_DIR "D:/project/medibus/3rd/c-ares")
+SET(c-ares_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/c-ares")
+#SET(c-ares_INCLUDE_DIR "${CMAKE_CURRENT_LIST_DIR}/3rd/include")
+SET(c-ares_INCLUDE_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include")
+#SET(c-ares_LIBRARY "${CMAKE_CURRENT_LIST_DIR}/3rd/library")
+SET(c-ares_LIBRARY "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/lib")
+#SET(absl_DIR "D:/project/medibus/3rd/absl")
+SET(absl_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/absl")
+SET(PKG_CONFIG_EXECUTABLE "D:/project/github/vcpkg-2024.04.26/packages/pkgconf_x64-windows/tools/pkgconf/pkgconf.exe")
+SET(upb_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/upb")
+SET(re2_DIR "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/share/re2")
+
+set(Boost_version 1.71.0)
+find_package(Boost ${Boost_version} REQUIRED EXACT)
+if(Boost_FOUND)
+    include_directories(${Boost_INCLUDE_DIRS})
+endif()
+
+find_package(OpenSSL REQUIRED)
+if(OPENSSL_FOUND)
+    include_directories(${OPENSSL_INCLUDE_DIR})
+endif()
+
+
+#find_package(c-ares REQUIRED)
+#if(c-ares_FOUND)
+#    include_directories(${c-ares_INCLUDE_DIR})
+#endif()
+
+find_package(PkgConfig REQUIRED)
+find_package(re2 REQUIRED)
+find_package( gRPC REQUIRED )
+if(gRPC_FOUND)
+    include_directories(${gRPC_INCLUDE_DIRS})
+endif()
+
+find_package( Protobuf REQUIRED )
+if(Protobuf_FOUND)
+    include_directories(${Protobuf_INCLUDE_DIRS})
+endif()
+
+add_compile_definitions(BOOST_AUTO_LINK_NOMANGLE)
+
+add_subdirectory(src)
+

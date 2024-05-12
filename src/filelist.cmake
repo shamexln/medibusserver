@@ -1,0 +1,10 @@
+set(MEDIBUS_FILES 
+    server.cpp
+	SdcProvider.cpp
+	NumericMetric.cpp
+	Waveform.cpp
+	StringMetric.cpp
+	Alert.cpp
+    proto/medibus.grpc.pb.cc
+	proto/medibus.pb.cc
+)
