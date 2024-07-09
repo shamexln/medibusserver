@@ -1,0 +1,403 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{6240879F-2509-3D7E-85E5-B4CD6E9A4F46}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <VcpkgEnabled>false</VcpkgEnabled>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>medibus</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="do_not_import_user.props" Condition="exists('do_not_import_user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\project\medibus\src\src\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">medibus.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">medibus</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\project\medibus\src\src\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">medibus.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">medibus</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\project\medibus\src\src\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">medibus.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">medibus</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\project\medibus\src\src\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">medibus.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">medibus</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include" /w14640 /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/project/github/vcpkg-2024.04.26/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/project/medibus/src/src/Debug/medibus.exe -installedDir D:/project/github/vcpkg-2024.04.26/installed/x64-windows/debug/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\grpc++.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\libprotocd.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\libprotobufd.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\libprotobuf-lited.lib;S31_Core.lib;S31_Log.lib;S31_SdcTestUtils.lib;S31_TestUtils.lib;S31_History.lib;S31_Lts.lib;S31_Utils.lib;DFL_Crypto.lib;DFL_Mdib.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;DFL_Mdib.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\grpc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\zlibd.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\cares.lib;advapi32.lib;iphlpapi.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\address_sorting.lib;wsock32.lib;ws2_32.lib;crypt32.lib;gdi32.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\re2.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_marshalling.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_config.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_program_name.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_private_handle_accessor.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_commandlineflag.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\absl_flags_commandlineflag_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\gpr.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_json.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_textformat.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_collections.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_mini_table.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_fastdecode.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_utf8_range.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\upb_extension_registry.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\descriptor_upb_proto.lib;-ignore:4221;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\abseil_dll.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\libssl.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\debug\lib\libcrypto.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/project/medibus/src/../lib;D:/project/medibus/src/../lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/project/medibus/src/src/Debug/medibus.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/project/medibus/src/src/Debug/medibus.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include" /w14640 /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/project/github/vcpkg-2024.04.26/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/project/medibus/src/src/Release/medibus.exe -installedDir D:/project/github/vcpkg-2024.04.26/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc++.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotoc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf-lite.lib;S31_Core.lib;S31_Log.lib;S31_SdcTestUtils.lib;S31_TestUtils.lib;S31_History.lib;S31_Lts.lib;S31_Utils.lib;DFL_Crypto.lib;DFL_Mdib.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;DFL_Mdib.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\zlib.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\cares.lib;advapi32.lib;iphlpapi.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\address_sorting.lib;wsock32.lib;ws2_32.lib;crypt32.lib;gdi32.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\re2.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_marshalling.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_config.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_program_name.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_private_handle_accessor.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\gpr.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_json.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_textformat.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_collections.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_mini_table.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_fastdecode.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_utf8_range.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_extension_registry.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\descriptor_upb_proto.lib;-ignore:4221;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\abseil_dll.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libssl.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libcrypto.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/project/medibus/src/../lib;D:/project/medibus/src/../lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/project/medibus/src/src/Release/medibus.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/project/medibus/src/src/Release/medibus.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include" /w14640 /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DisableSpecificWarnings>4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/project/github/vcpkg-2024.04.26/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/project/medibus/src/src/MinSizeRel/medibus.exe -installedDir D:/project/github/vcpkg-2024.04.26/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc++.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotoc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf-lite.lib;S31_Core.lib;S31_Log.lib;S31_SdcTestUtils.lib;S31_TestUtils.lib;S31_History.lib;S31_Lts.lib;S31_Utils.lib;DFL_Crypto.lib;DFL_Mdib.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;DFL_Mdib.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\zlib.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\cares.lib;advapi32.lib;iphlpapi.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\address_sorting.lib;wsock32.lib;ws2_32.lib;crypt32.lib;gdi32.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\re2.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_marshalling.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_config.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_program_name.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_private_handle_accessor.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\gpr.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_json.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_textformat.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_collections.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_mini_table.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_fastdecode.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_utf8_range.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_extension_registry.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\descriptor_upb_proto.lib;-ignore:4221;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\abseil_dll.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libssl.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libcrypto.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/project/medibus/src/../lib;D:/project/medibus/src/../lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/project/medibus/src/src/MinSizeRel/medibus.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/project/medibus/src/src/MinSizeRel/medibus.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/project/github/vcpkg-2024.04.26/installed/x64-windows/include" /w14640 /bigobj</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;4275</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp17</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level4</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ScanSourceForModuleDependencies>false</ScanSourceForModuleDependencies>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;BOOST_AUTO_LINK_NOMANGLE;PROTOBUF_USE_DLLS;ABSL_CONSUME_DLL;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\project\medibus\3rd\boost;D:\project\medibus\src\.;D:\project\medibus\src\..\inc;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <PostBuildEvent>
+      <Message></Message>
+      <Command>setlocal
+C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -noprofile -executionpolicy Bypass -file D:/project/github/vcpkg-2024.04.26/scripts/buildsystems/msbuild/applocal.ps1 -targetBinary D:/project/medibus/src/src/RelWithDebInfo/medibus.exe -installedDir D:/project/github/vcpkg-2024.04.26/installed/x64-windows/bin -OutVariable out
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+    </PostBuildEvent>
+    <Link>
+      <AdditionalDependencies>D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc++.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotoc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libprotobuf-lite.lib;S31_Core.lib;S31_Log.lib;S31_SdcTestUtils.lib;S31_TestUtils.lib;S31_History.lib;S31_Lts.lib;S31_Utils.lib;DFL_Crypto.lib;DFL_Mdib.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;DFL_Mdib.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\grpc.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\zlib.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\cares.lib;advapi32.lib;iphlpapi.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\address_sorting.lib;wsock32.lib;ws2_32.lib;crypt32.lib;gdi32.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\re2.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_marshalling.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_config.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_program_name.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_private_handle_accessor.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\absl_flags_commandlineflag_internal.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\gpr.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_json.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_textformat.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_reflection.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_collections.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_mini_table.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_fastdecode.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_utf8_range.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\upb_extension_registry.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\descriptor_upb_proto.lib;-ignore:4221;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\abseil_dll.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libssl.lib;D:\project\github\vcpkg-2024.04.26\installed\x64-windows\lib\libcrypto.lib;DFL_Utils.lib;DFL_Log.lib;DFL_Chrono.lib;DFL_Encoding.lib;DFL_Filesystem.lib;DFL_Format.lib;DFL_Thread.lib;Boost_chrono.lib;Boost_filesystem.lib;Boost_date_time.lib;Boost_system.lib;Boost_thread.lib;Boost_serialization.lib;libssl.lib;libcrypto.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/project/medibus/src/../lib;D:/project/medibus/src/../lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/project/medibus/src/src/RelWithDebInfo/medibus.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/project/medibus/src/src/RelWithDebInfo/medibus.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\project\medibus\src\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/project/medibus/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/project/medibus -BD:/project/medibus/src --check-stamp-file D:/project/medibus/src/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\project\medibus\cmake\CompileOptions.cmake;D:\project\medibus\src\filelist.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\project\medibus\src\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/project/medibus/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/project/medibus -BD:/project/medibus/src --check-stamp-file D:/project/medibus/src/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\project\medibus\cmake\CompileOptions.cmake;D:\project\medibus\src\filelist.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\project\medibus\src\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/project/medibus/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/project/medibus -BD:/project/medibus/src --check-stamp-file D:/project/medibus/src/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\project\medibus\cmake\CompileOptions.cmake;D:\project\medibus\src\filelist.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\project\medibus\src\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/project/medibus/src/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/project/medibus -BD:/project/medibus/src --check-stamp-file D:/project/medibus/src/src/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\project\medibus\cmake\CompileOptions.cmake;D:\project\medibus\src\filelist.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\project\medibus\src\src\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\project\medibus\src\server.cpp" />
+    <ClCompile Include="D:\project\medibus\src\SdcProvider.cpp" />
+    <ClCompile Include="D:\project\medibus\src\NumericMetric.cpp" />
+    <ClCompile Include="D:\project\medibus\src\Waveform.cpp" />
+    <ClCompile Include="D:\project\medibus\src\StringMetric.cpp" />
+    <ClCompile Include="D:\project\medibus\src\Alert.cpp" />
+    <ClCompile Include="D:\project\medibus\src\proto\medibus.grpc.pb.cc" />
+    <ClCompile Include="D:\project\medibus\src\proto\medibus.pb.cc" />
+    <ClInclude Include="D:\project\medibus\src\sformat.h" />
+    <ClInclude Include="D:\project\medibus\src\SdcProvider.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\project\medibus\src\ZERO_CHECK.vcxproj">
+      <Project>{4E0110FE-4F09-36CE-B3EC-F67F6148FF4F}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

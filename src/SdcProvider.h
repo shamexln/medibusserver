@@ -1,52 +1,46 @@
 #pragma once
+#pragma comment(lib, "../SdcProvider/bin/SdcProvider.lib")  
+#include <string>
+#include "../SdcProvider/SdcProvider.h"
+//class __declspec(dllimport) CSdcProvider;
 
-#include <NumericMetric.h>
-#include <StringMetric.h>
-#include <Waveform.h>
-
-#include <S31/Sdc/S31Only/CommandLineOptions.h>
-#include <Alert.h>
-
-namespace S31
-{
-namespace Sdc
-{
-class IDispatcher;
-class LocalDevice;
-}  // namespace Sdc
-namespace Samples
-{
 /**
  * @brief Sample SDC provider for metric values, waveforms and alarms.
  */
-class SampleProvider
+class SdcProvider
 {
 public:
-    explicit SampleProvider(CommandLineOptions options);
-    ~SampleProvider();
+    explicit SdcProvider();
+    ~SdcProvider();
 
-    void start();
-    void stop();
+    void start(const std::string& strDeviceName, const std::string& strMdsCFCode, const std::string& strMdsHandle);
+    void initLocation(const std::string& strFacility, const std::string& strPointOfCare,
+        const std::string& strBed, const std::string& strRoom = "", const std::string& strBuilding = "", const std::string& strFloor = "");
+	void initNumericMetric(DFL::Mdib::MdibChangeSet& changeSet,
+		const std::string& strMdsHandle,
+		const std::string& strVmdHandle,
+		const std::string& strVmdCode,
+		const std::string& strChannelHandle,
+		const std::string& strChannelCode,
+		const std::string& strHandleNumericMetric,
+		const std::string& strMedicalClass,
+		const std::string& strTypeCode,
+		const std::string& strUnitCode,
+		const std::string& strMetricCategory,
+		const std::string& strLowerRange,
+		const std::string& strUpperRange,
+		const std::string& strDeterminationPeriod,
+		const std::string& strLifeTimePeriod,
+		const std::string& strResolution,
+		const std::string& strDerivation,
+		const std::string& strAvailability);
+	void updateNumericMetricValue(const std::string& handle, int value);
     void shutdownMdsAndWaitReportSent();
 
 private:
-    bool m_started{false};
-    void initMetadata();
+    void initMetadata(std::string strDeviceName, std::string strDeviceId);
     void initPatient();
-    void initLocation();
-
-    NumericMetric m_numericMetric;
-    Waveform      m_waveform;
-    StringMetric  m_stringMetric;
-    Alert         m_alert;
-
-    void initMdib();
-
-    int                                               m_paramValue;
-    CommandLineOptions                                m_options;
-    std::shared_ptr<S31::Sdc::LocalDevice>            m_dpwsDevice;
-    DFL::NotNull<DFL::Mdib::LocalMdibAccessSharedPtr> m_localMdibAccess;
-    std::shared_ptr<S31::Sdc::IDispatcher>            m_dispatcher;
+    
+    void initMdib(std::string strDeviceName, std::string strCode);
+    CSdcProvider m_provider;
 };
-}  // namespace Samples
-}  // namespace S31

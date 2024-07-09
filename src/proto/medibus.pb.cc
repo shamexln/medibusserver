@@ -21,7 +21,7 @@ namespace _pb = ::PROTOBUF_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace medibus {
-PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceRespond::DeviceIdentificationRequest_DeviceRespond(
+PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceIdentificationRespond::DeviceIdentificationRequest_DeviceIdentificationRespond(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
@@ -33,15 +33,15 @@ PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceRespond::DeviceIdentificati
   , /*decltype(_impl_.room_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.building_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.floor_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}} {}
-struct DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal()
+struct DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
-  ~DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal() {}
+  ~DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal() {}
   union {
-    DeviceIdentificationRequest_DeviceRespond _instance;
+    DeviceIdentificationRequest_DeviceIdentificationRespond _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal _DeviceIdentificationRequest_DeviceRespond_default_instance_;
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal _DeviceIdentificationRequest_DeviceIdentificationRespond_default_instance_;
 PROTOBUF_CONSTEXPR DeviceIdentificationRequest::DeviceIdentificationRequest(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_._has_bits_)*/{}
@@ -158,6 +158,7 @@ PROTOBUF_CONSTEXPR LoopRequest::LoopRequest(
   , /*decltype(_impl_.cur_high_alarm_limits_cp2_)*/nullptr
   , /*decltype(_impl_.cur_alarms_cp2_)*/nullptr
   , /*decltype(_impl_.device_identification_)*/nullptr
+  , /*decltype(_impl_.cur_alarms_cp3_)*/nullptr
   , /*decltype(_impl_.sequence_id_)*/uint64_t{0u}} {}
 struct LoopRequestDefaultTypeInternal {
   PROTOBUF_CONSTEXPR LoopRequestDefaultTypeInternal()
@@ -188,20 +189,20 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_medib
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_medibus_2eproto = nullptr;
 
 const uint32_t TableStruct_medibus_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_._has_bits_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _internal_metadata_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_._has_bits_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.deviceid_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.devicename_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.facility_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.poc_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.bed_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.room_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.building_),
-  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceRespond, _impl_.floor_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.deviceid_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.devicename_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.facility_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.poc_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.bed_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.room_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.building_),
+  PROTOBUF_FIELD_OFFSET(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond, _impl_.floor_),
   0,
   1,
   2,
@@ -307,9 +308,10 @@ const uint32_t TableStruct_medibus_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   PROTOBUF_FIELD_OFFSET(::medibus::LoopRequest, _impl_.cur_high_alarm_limits_cp2_),
   PROTOBUF_FIELD_OFFSET(::medibus::LoopRequest, _impl_.cur_alarms_cp2_),
   PROTOBUF_FIELD_OFFSET(::medibus::LoopRequest, _impl_.device_identification_),
+  PROTOBUF_FIELD_OFFSET(::medibus::LoopRequest, _impl_.cur_alarms_cp3_),
   PROTOBUF_FIELD_OFFSET(::medibus::LoopRequest, _impl_.real_time_),
   0,
-  12,
+  13,
   1,
   2,
   3,
@@ -321,6 +323,7 @@ const uint32_t TableStruct_medibus_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   9,
   10,
   11,
+  12,
   ~0u,
   PROTOBUF_FIELD_OFFSET(::medibus::DelimitedLoopRequest, _impl_._has_bits_),
   PROTOBUF_FIELD_OFFSET(::medibus::DelimitedLoopRequest, _internal_metadata_),
@@ -332,19 +335,19 @@ const uint32_t TableStruct_medibus_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
   0,
 };
 static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 14, -1, sizeof(::medibus::DeviceIdentificationRequest_DeviceRespond)},
+  { 0, 14, -1, sizeof(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond)},
   { 22, 31, -1, sizeof(::medibus::DeviceIdentificationRequest)},
   { 34, 44, -1, sizeof(::medibus::MedibusRequest_DeviceRespond)},
   { 48, 57, -1, sizeof(::medibus::MedibusRequest)},
   { 60, 68, -1, sizeof(::medibus::MedibusReply)},
   { 70, 81, -1, sizeof(::medibus::MedibusRealTimeRequest_DeviceRespond)},
   { 86, 96, -1, sizeof(::medibus::MedibusRealTimeRequest)},
-  { 100, 120, -1, sizeof(::medibus::LoopRequest)},
-  { 134, 141, -1, sizeof(::medibus::DelimitedLoopRequest)},
+  { 100, 121, -1, sizeof(::medibus::LoopRequest)},
+  { 136, 143, -1, sizeof(::medibus::DelimitedLoopRequest)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::medibus::_DeviceIdentificationRequest_DeviceRespond_default_instance_._instance,
+  &::medibus::_DeviceIdentificationRequest_DeviceIdentificationRespond_default_instance_._instance,
   &::medibus::_DeviceIdentificationRequest_default_instance_._instance,
   &::medibus::_MedibusRequest_DeviceRespond_default_instance_._instance,
   &::medibus::_MedibusRequest_default_instance_._instance,
@@ -356,99 +359,102 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_medibus_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\rmedibus.proto\022\007medibus\"\351\003\n\033DeviceIdent"
+  "\n\rmedibus.proto\022\007medibus\"\205\004\n\033DeviceIdent"
   "ificationRequest\022\030\n\013instance_id\030\001 \001(\tH\000\210"
-  "\001\001\022\030\n\013sequence_id\030\002 \001(\006H\001\210\001\001\022O\n\016devicere"
-  "sponds\030\003 \001(\01322.medibus.DeviceIdentificat"
-  "ionRequest.DeviceRespondH\002\210\001\001\032\221\002\n\rDevice"
-  "Respond\022\025\n\010deviceid\030\001 \001(\tH\000\210\001\001\022\027\n\ndevice"
-  "name\030\002 \001(\tH\001\210\001\001\022\025\n\010facility\030\003 \001(\tH\002\210\001\001\022\020"
-  "\n\003poc\030\004 \001(\tH\003\210\001\001\022\020\n\003bed\030\005 \001(\tH\004\210\001\001\022\021\n\004ro"
-  "om\030\006 \001(\tH\005\210\001\001\022\025\n\010building\030\007 \001(\tH\006\210\001\001\022\022\n\005"
-  "floor\030\010 \001(\tH\007\210\001\001B\013\n\t_deviceidB\r\n\013_device"
-  "nameB\013\n\t_facilityB\006\n\004_pocB\006\n\004_bedB\007\n\005_ro"
-  "omB\013\n\t_buildingB\010\n\006_floorB\016\n\014_instance_i"
-  "dB\016\n\014_sequence_idB\021\n\017_deviceresponds\"\265\002\n"
-  "\016MedibusRequest\022\030\n\013instance_id\030\001 \001(\tH\000\210\001"
-  "\001\022\030\n\013sequence_id\030\002 \001(\006H\001\210\001\001\022=\n\016deviceres"
-  "ponds\030\003 \003(\0132%.medibus.MedibusRequest.Dev"
-  "iceRespond\032\217\001\n\rDeviceRespond\022\021\n\004code\030\001 \001"
-  "(\tH\000\210\001\001\022\022\n\005value\030\002 \001(\tH\001\210\001\001\022\021\n\004unit\030\003 \001("
-  "\tH\002\210\001\001\022\030\n\013description\030\004 \001(\tH\003\210\001\001B\007\n\005_cod"
-  "eB\010\n\006_valueB\007\n\005_unitB\016\n\014_descriptionB\016\n\014"
-  "_instance_idB\016\n\014_sequence_id\"I\n\014MedibusR"
-  "eply\022\030\n\013instance_id\030\001 \001(\tH\000\210\001\001\022\017\n\007messag"
-  "e\030\002 \001(\tB\016\n\014_instance_id\"\221\003\n\026MedibusRealT"
-  "imeRequest\022\030\n\013instance_id\030\001 \001(\tH\000\210\001\001\022\030\n\013"
-  "sequence_id\030\002 \001(\006H\001\210\001\001\022E\n\016deviceresponds"
-  "\030\003 \003(\0132-.medibus.MedibusRealTimeRequest."
-  "DeviceRespond\022\030\n\013description\030\004 \001(\tH\002\210\001\001\032"
-  "\261\001\n\rDeviceRespond\022\020\n\003min\030\001 \001(\tH\000\210\001\001\022\020\n\003m"
-  "ax\030\002 \001(\tH\001\210\001\001\022\023\n\006maxbin\030\003 \001(\tH\002\210\001\001\022\025\n\010in"
-  "terval\030\004 \001(\tH\003\210\001\001\022\030\n\013description\030\005 \001(\tH\004"
-  "\210\001\001B\006\n\004_minB\006\n\004_maxB\t\n\007_maxbinB\013\n\t_inter"
-  "valB\016\n\014_descriptionB\016\n\014_instance_idB\016\n\014_"
-  "sequence_idB\016\n\014_description\"\276\010\n\013LoopRequ"
+  "\001\001\022\030\n\013sequence_id\030\002 \001(\006H\001\210\001\001\022]\n\016devicere"
+  "sponds\030\003 \001(\0132@.medibus.DeviceIdentificat"
+  "ionRequest.DeviceIdentificationRespondH\002"
+  "\210\001\001\032\237\002\n\033DeviceIdentificationRespond\022\025\n\010d"
+  "eviceid\030\001 \001(\tH\000\210\001\001\022\027\n\ndevicename\030\002 \001(\tH\001"
+  "\210\001\001\022\025\n\010facility\030\003 \001(\tH\002\210\001\001\022\020\n\003poc\030\004 \001(\tH"
+  "\003\210\001\001\022\020\n\003bed\030\005 \001(\tH\004\210\001\001\022\021\n\004room\030\006 \001(\tH\005\210\001"
+  "\001\022\025\n\010building\030\007 \001(\tH\006\210\001\001\022\022\n\005floor\030\010 \001(\tH"
+  "\007\210\001\001B\013\n\t_deviceidB\r\n\013_devicenameB\013\n\t_fac"
+  "ilityB\006\n\004_pocB\006\n\004_bedB\007\n\005_roomB\013\n\t_build"
+  "ingB\010\n\006_floorB\016\n\014_instance_idB\016\n\014_sequen"
+  "ce_idB\021\n\017_deviceresponds\"\265\002\n\016MedibusRequ"
   "est\022\030\n\013instance_id\030\001 \001(\tH\000\210\001\001\022\030\n\013sequenc"
-  "e_id\030\002 \001(\006H\001\210\001\001\022;\n\025cur_measured_data_cp1"
-  "\030\003 \001(\0132\027.medibus.MedibusRequestH\002\210\001\001\022>\n\030"
-  "cur_low_alarm_limits_cp1\030\004 \001(\0132\027.medibus"
-  ".MedibusRequestH\003\210\001\001\022\?\n\031cur_high_alarm_l"
-  "imits_cp1\030\005 \001(\0132\027.medibus.MedibusRequest"
-  "H\004\210\001\001\0224\n\016cur_alarms_cp1\030\006 \001(\0132\027.medibus."
-  "MedibusRequestH\005\210\001\001\0229\n\023cur_device_settin"
-  "gs\030\007 \001(\0132\027.medibus.MedibusRequestH\006\210\001\001\0223"
-  "\n\rtext_messages\030\010 \001(\0132\027.medibus.MedibusR"
-  "equestH\007\210\001\001\022;\n\025cur_measured_data_cp2\030\t \001"
-  "(\0132\027.medibus.MedibusRequestH\010\210\001\001\022>\n\030cur_"
-  "low_alarm_limits_cp2\030\n \001(\0132\027.medibus.Med"
-  "ibusRequestH\t\210\001\001\022\?\n\031cur_high_alarm_limit"
-  "s_cp2\030\013 \001(\0132\027.medibus.MedibusRequestH\n\210\001"
-  "\001\0224\n\016cur_alarms_cp2\030\014 \001(\0132\027.medibus.Medi"
-  "busRequestH\013\210\001\001\022;\n\025device_identification"
-  "\030\r \001(\0132\027.medibus.MedibusRequestH\014\210\001\001\0222\n\t"
-  "real_time\030\016 \003(\0132\037.medibus.MedibusRealTim"
-  "eRequestB\016\n\014_instance_idB\016\n\014_sequence_id"
-  "B\030\n\026_cur_measured_data_cp1B\033\n\031_cur_low_a"
-  "larm_limits_cp1B\034\n\032_cur_high_alarm_limit"
-  "s_cp1B\021\n\017_cur_alarms_cp1B\026\n\024_cur_device_"
-  "settingsB\020\n\016_text_messagesB\030\n\026_cur_measu"
-  "red_data_cp2B\033\n\031_cur_low_alarm_limits_cp"
-  "2B\034\n\032_cur_high_alarm_limits_cp2B\021\n\017_cur_"
-  "alarms_cp2B\030\n\026_device_identification\"0\n\024"
-  "DelimitedLoopRequest\022\020\n\003msg\030\001 \001(\014H\000\210\001\001B\006"
-  "\n\004_msg2\307\010\n\007Medibus\022@\n\014CurAlarmsCP3\022\027.med"
+  "e_id\030\002 \001(\006H\001\210\001\001\022=\n\016deviceresponds\030\003 \003(\0132"
+  "%.medibus.MedibusRequest.DeviceRespond\032\217"
+  "\001\n\rDeviceRespond\022\021\n\004code\030\001 \001(\tH\000\210\001\001\022\022\n\005v"
+  "alue\030\002 \001(\tH\001\210\001\001\022\021\n\004unit\030\003 \001(\tH\002\210\001\001\022\030\n\013de"
+  "scription\030\004 \001(\tH\003\210\001\001B\007\n\005_codeB\010\n\006_valueB"
+  "\007\n\005_unitB\016\n\014_descriptionB\016\n\014_instance_id"
+  "B\016\n\014_sequence_id\"I\n\014MedibusReply\022\030\n\013inst"
+  "ance_id\030\001 \001(\tH\000\210\001\001\022\017\n\007message\030\002 \001(\tB\016\n\014_"
+  "instance_id\"\221\003\n\026MedibusRealTimeRequest\022\030"
+  "\n\013instance_id\030\001 \001(\tH\000\210\001\001\022\030\n\013sequence_id\030"
+  "\002 \001(\006H\001\210\001\001\022E\n\016deviceresponds\030\003 \003(\0132-.med"
+  "ibus.MedibusRealTimeRequest.DeviceRespon"
+  "d\022\030\n\013description\030\004 \001(\tH\002\210\001\001\032\261\001\n\rDeviceRe"
+  "spond\022\020\n\003min\030\001 \001(\tH\000\210\001\001\022\020\n\003max\030\002 \001(\tH\001\210\001"
+  "\001\022\023\n\006maxbin\030\003 \001(\tH\002\210\001\001\022\025\n\010interval\030\004 \001(\t"
+  "H\003\210\001\001\022\030\n\013description\030\005 \001(\tH\004\210\001\001B\006\n\004_minB"
+  "\006\n\004_maxB\t\n\007_maxbinB\013\n\t_intervalB\016\n\014_desc"
+  "riptionB\016\n\014_instance_idB\016\n\014_sequence_idB"
+  "\016\n\014_description\"\224\t\n\013LoopRequest\022\030\n\013insta"
+  "nce_id\030\001 \001(\tH\000\210\001\001\022\030\n\013sequence_id\030\002 \001(\006H\001"
+  "\210\001\001\022;\n\025cur_measured_data_cp1\030\003 \001(\0132\027.med"
+  "ibus.MedibusRequestH\002\210\001\001\022>\n\030cur_low_alar"
+  "m_limits_cp1\030\004 \001(\0132\027.medibus.MedibusRequ"
+  "estH\003\210\001\001\022\?\n\031cur_high_alarm_limits_cp1\030\005 "
+  "\001(\0132\027.medibus.MedibusRequestH\004\210\001\001\0224\n\016cur"
+  "_alarms_cp1\030\006 \001(\0132\027.medibus.MedibusReque"
+  "stH\005\210\001\001\0229\n\023cur_device_settings\030\007 \001(\0132\027.m"
+  "edibus.MedibusRequestH\006\210\001\001\0223\n\rtext_messa"
+  "ges\030\010 \001(\0132\027.medibus.MedibusRequestH\007\210\001\001\022"
+  ";\n\025cur_measured_data_cp2\030\t \001(\0132\027.medibus"
+  ".MedibusRequestH\010\210\001\001\022>\n\030cur_low_alarm_li"
+  "mits_cp2\030\n \001(\0132\027.medibus.MedibusRequestH"
+  "\t\210\001\001\022\?\n\031cur_high_alarm_limits_cp2\030\013 \001(\0132"
+  "\027.medibus.MedibusRequestH\n\210\001\001\0224\n\016cur_ala"
+  "rms_cp2\030\014 \001(\0132\027.medibus.MedibusRequestH\013"
+  "\210\001\001\022H\n\025device_identification\030\r \001(\0132$.med"
+  "ibus.DeviceIdentificationRequestH\014\210\001\001\0224\n"
+  "\016cur_alarms_cp3\030\016 \001(\0132\027.medibus.MedibusR"
+  "equestH\r\210\001\001\0222\n\treal_time\030\017 \003(\0132\037.medibus"
+  ".MedibusRealTimeRequestB\016\n\014_instance_idB"
+  "\016\n\014_sequence_idB\030\n\026_cur_measured_data_cp"
+  "1B\033\n\031_cur_low_alarm_limits_cp1B\034\n\032_cur_h"
+  "igh_alarm_limits_cp1B\021\n\017_cur_alarms_cp1B"
+  "\026\n\024_cur_device_settingsB\020\n\016_text_message"
+  "sB\030\n\026_cur_measured_data_cp2B\033\n\031_cur_low_"
+  "alarm_limits_cp2B\034\n\032_cur_high_alarm_limi"
+  "ts_cp2B\021\n\017_cur_alarms_cp2B\030\n\026_device_ide"
+  "ntificationB\021\n\017_cur_alarms_cp3\"0\n\024Delimi"
+  "tedLoopRequest\022\020\n\003msg\030\001 \001(\014H\000\210\001\001B\006\n\004_msg"
+  "2\307\010\n\007Medibus\022F\n\022CurMeasuredDataCP1\022\027.med"
   "ibus.MedibusRequest\032\025.medibus.MedibusRep"
-  "ly\"\000\022F\n\022CurMeasuredDataCP1\022\027.medibus.Med"
-  "ibusRequest\032\025.medibus.MedibusReply\"\000\022H\n\024"
-  "CurLowAlarmLimitsCP1\022\027.medibus.MedibusRe"
-  "quest\032\025.medibus.MedibusReply\"\000\022I\n\025CurHig"
-  "hAlarmLimitsCP1\022\027.medibus.MedibusRequest"
-  "\032\025.medibus.MedibusReply\"\000\022@\n\014CurAlarmsCP"
-  "1\022\027.medibus.MedibusRequest\032\025.medibus.Med"
-  "ibusReply\"\000\022E\n\021CurDeviceSettings\022\027.medib"
-  "us.MedibusRequest\032\025.medibus.MedibusReply"
-  "\"\000\022@\n\014TextMessages\022\027.medibus.MedibusRequ"
-  "est\032\025.medibus.MedibusReply\"\000\022F\n\022CurMeasu"
-  "redDataCP2\022\027.medibus.MedibusRequest\032\025.me"
-  "dibus.MedibusReply\"\000\022H\n\024CurLowAlarmLimit"
-  "sCP2\022\027.medibus.MedibusRequest\032\025.medibus."
-  "MedibusReply\"\000\022I\n\025CurHighAlarmLimitsCP2\022"
-  "\027.medibus.MedibusRequest\032\025.medibus.Medib"
-  "usReply\"\000\022@\n\014CurAlarmsCP2\022\027.medibus.Medi"
-  "busRequest\032\025.medibus.MedibusReply\"\000\022U\n\024D"
-  "eviceIdentification\022$.medibus.DeviceIden"
-  "tificationRequest\032\025.medibus.MedibusReply"
-  "\"\000\022D\n\010RealTime\022\037.medibus.MedibusRealTime"
-  "Request\032\025.medibus.MedibusReply\"\000\022A\n\016Data"
-  "InEachLoop\022\024.medibus.LoopRequest\032\025.medib"
-  "us.MedibusReply\"\000(\001\022S\n\027DelimitedDataInEa"
-  "chLoop\022\035.medibus.DelimitedLoopRequest\032\025."
-  "medibus.MedibusReply\"\000(\001b\006proto3"
+  "ly\"\000\022H\n\024CurLowAlarmLimitsCP1\022\027.medibus.M"
+  "edibusRequest\032\025.medibus.MedibusReply\"\000\022I"
+  "\n\025CurHighAlarmLimitsCP1\022\027.medibus.Medibu"
+  "sRequest\032\025.medibus.MedibusReply\"\000\022@\n\014Cur"
+  "AlarmsCP1\022\027.medibus.MedibusRequest\032\025.med"
+  "ibus.MedibusReply\"\000\022E\n\021CurDeviceSettings"
+  "\022\027.medibus.MedibusRequest\032\025.medibus.Medi"
+  "busReply\"\000\022@\n\014TextMessages\022\027.medibus.Med"
+  "ibusRequest\032\025.medibus.MedibusReply\"\000\022F\n\022"
+  "CurMeasuredDataCP2\022\027.medibus.MedibusRequ"
+  "est\032\025.medibus.MedibusReply\"\000\022H\n\024CurLowAl"
+  "armLimitsCP2\022\027.medibus.MedibusRequest\032\025."
+  "medibus.MedibusReply\"\000\022I\n\025CurHighAlarmLi"
+  "mitsCP2\022\027.medibus.MedibusRequest\032\025.medib"
+  "us.MedibusReply\"\000\022@\n\014CurAlarmsCP2\022\027.medi"
+  "bus.MedibusRequest\032\025.medibus.MedibusRepl"
+  "y\"\000\022U\n\024DeviceIdentification\022$.medibus.De"
+  "viceIdentificationRequest\032\025.medibus.Medi"
+  "busReply\"\000\022@\n\014CurAlarmsCP3\022\027.medibus.Med"
+  "ibusRequest\032\025.medibus.MedibusReply\"\000\022D\n\010"
+  "RealTime\022\037.medibus.MedibusRealTimeReques"
+  "t\032\025.medibus.MedibusReply\"\000\022A\n\016DataInEach"
+  "Loop\022\024.medibus.LoopRequest\032\025.medibus.Med"
+  "ibusReply\"\000(\001\022S\n\027DelimitedDataInEachLoop"
+  "\022\035.medibus.DelimitedLoopRequest\032\025.medibu"
+  "s.MedibusReply\"\000(\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_medibus_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_medibus_2eproto = {
-    false, false, 3552, descriptor_table_protodef_medibus_2eproto,
+    false, false, 3666, descriptor_table_protodef_medibus_2eproto,
     "medibus.proto",
     &descriptor_table_medibus_2eproto_once, nullptr, 0, 9,
     schemas, file_default_instances, TableStruct_medibus_2eproto::offsets,
@@ -465,9 +471,9 @@ namespace medibus {
 
 // ===================================================================
 
-class DeviceIdentificationRequest_DeviceRespond::_Internal {
+class DeviceIdentificationRequest_DeviceIdentificationRespond::_Internal {
  public:
-  using HasBits = decltype(std::declval<DeviceIdentificationRequest_DeviceRespond>()._impl_._has_bits_);
+  using HasBits = decltype(std::declval<DeviceIdentificationRequest_DeviceIdentificationRespond>()._impl_._has_bits_);
   static void set_has_deviceid(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -494,15 +500,15 @@ class DeviceIdentificationRequest_DeviceRespond::_Internal {
   }
 };
 
-DeviceIdentificationRequest_DeviceRespond::DeviceIdentificationRequest_DeviceRespond(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+DeviceIdentificationRequest_DeviceIdentificationRespond::DeviceIdentificationRequest_DeviceIdentificationRespond(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:medibus.DeviceIdentificationRequest.DeviceRespond)
+  // @@protoc_insertion_point(arena_constructor:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
 }
-DeviceIdentificationRequest_DeviceRespond::DeviceIdentificationRequest_DeviceRespond(const DeviceIdentificationRequest_DeviceRespond& from)
+DeviceIdentificationRequest_DeviceIdentificationRespond::DeviceIdentificationRequest_DeviceIdentificationRespond(const DeviceIdentificationRequest_DeviceIdentificationRespond& from)
   : ::PROTOBUF_NAMESPACE_ID::Message() {
-  DeviceIdentificationRequest_DeviceRespond* const _this = this; (void)_this;
+  DeviceIdentificationRequest_DeviceIdentificationRespond* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
@@ -580,10 +586,10 @@ DeviceIdentificationRequest_DeviceRespond::DeviceIdentificationRequest_DeviceRes
     _this->_impl_.floor_.Set(from._internal_floor(), 
       _this->GetArenaForAllocation());
   }
-  // @@protoc_insertion_point(copy_constructor:medibus.DeviceIdentificationRequest.DeviceRespond)
+  // @@protoc_insertion_point(copy_constructor:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
 }
 
-inline void DeviceIdentificationRequest_DeviceRespond::SharedCtor(
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
@@ -633,8 +639,8 @@ inline void DeviceIdentificationRequest_DeviceRespond::SharedCtor(
   #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
 }
 
-DeviceIdentificationRequest_DeviceRespond::~DeviceIdentificationRequest_DeviceRespond() {
-  // @@protoc_insertion_point(destructor:medibus.DeviceIdentificationRequest.DeviceRespond)
+DeviceIdentificationRequest_DeviceIdentificationRespond::~DeviceIdentificationRequest_DeviceIdentificationRespond() {
+  // @@protoc_insertion_point(destructor:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -642,7 +648,7 @@ DeviceIdentificationRequest_DeviceRespond::~DeviceIdentificationRequest_DeviceRe
   SharedDtor();
 }
 
-inline void DeviceIdentificationRequest_DeviceRespond::SharedDtor() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_.deviceid_.Destroy();
   _impl_.devicename_.Destroy();
@@ -654,12 +660,12 @@ inline void DeviceIdentificationRequest_DeviceRespond::SharedDtor() {
   _impl_.floor_.Destroy();
 }
 
-void DeviceIdentificationRequest_DeviceRespond::SetCachedSize(int size) const {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::SetCachedSize(int size) const {
   _impl_._cached_size_.Set(size);
 }
 
-void DeviceIdentificationRequest_DeviceRespond::Clear() {
-// @@protoc_insertion_point(message_clear_start:medibus.DeviceIdentificationRequest.DeviceRespond)
+void DeviceIdentificationRequest_DeviceIdentificationRespond::Clear() {
+// @@protoc_insertion_point(message_clear_start:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -695,7 +701,7 @@ void DeviceIdentificationRequest_DeviceRespond::Clear() {
   _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
 }
 
-const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
+const char* DeviceIdentificationRequest_DeviceIdentificationRespond::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
@@ -708,7 +714,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_deviceid();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.deviceid"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid"));
         } else
           goto handle_unusual;
         continue;
@@ -718,7 +724,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_devicename();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.devicename"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename"));
         } else
           goto handle_unusual;
         continue;
@@ -728,7 +734,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_facility();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.facility"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility"));
         } else
           goto handle_unusual;
         continue;
@@ -738,7 +744,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_poc();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.poc"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc"));
         } else
           goto handle_unusual;
         continue;
@@ -748,7 +754,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_bed();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.bed"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed"));
         } else
           goto handle_unusual;
         continue;
@@ -758,7 +764,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_room();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.room"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room"));
         } else
           goto handle_unusual;
         continue;
@@ -768,7 +774,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_building();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.building"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building"));
         } else
           goto handle_unusual;
         continue;
@@ -778,7 +784,7 @@ const char* DeviceIdentificationRequest_DeviceRespond::_InternalParse(const char
           auto str = _internal_mutable_floor();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceRespond.floor"));
+          CHK_(::_pbi::VerifyUTF8(str, "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor"));
         } else
           goto handle_unusual;
         continue;
@@ -806,9 +812,9 @@ failure:
 #undef CHK_
 }
 
-uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
+uint8_t* DeviceIdentificationRequest_DeviceIdentificationRespond::_InternalSerialize(
     uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:medibus.DeviceIdentificationRequest.DeviceRespond)
+  // @@protoc_insertion_point(serialize_to_array_start:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -817,7 +823,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_deviceid().data(), static_cast<int>(this->_internal_deviceid().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.deviceid");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_deviceid(), target);
   }
@@ -827,7 +833,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_devicename().data(), static_cast<int>(this->_internal_devicename().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.devicename");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_devicename(), target);
   }
@@ -837,7 +843,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_facility().data(), static_cast<int>(this->_internal_facility().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.facility");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility");
     target = stream->WriteStringMaybeAliased(
         3, this->_internal_facility(), target);
   }
@@ -847,7 +853,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_poc().data(), static_cast<int>(this->_internal_poc().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.poc");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc");
     target = stream->WriteStringMaybeAliased(
         4, this->_internal_poc(), target);
   }
@@ -857,7 +863,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_bed().data(), static_cast<int>(this->_internal_bed().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.bed");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed");
     target = stream->WriteStringMaybeAliased(
         5, this->_internal_bed(), target);
   }
@@ -867,7 +873,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_room().data(), static_cast<int>(this->_internal_room().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.room");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room");
     target = stream->WriteStringMaybeAliased(
         6, this->_internal_room(), target);
   }
@@ -877,7 +883,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_building().data(), static_cast<int>(this->_internal_building().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.building");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building");
     target = stream->WriteStringMaybeAliased(
         7, this->_internal_building(), target);
   }
@@ -887,7 +893,7 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_floor().data(), static_cast<int>(this->_internal_floor().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "medibus.DeviceIdentificationRequest.DeviceRespond.floor");
+      "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor");
     target = stream->WriteStringMaybeAliased(
         8, this->_internal_floor(), target);
   }
@@ -896,12 +902,12 @@ uint8_t* DeviceIdentificationRequest_DeviceRespond::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:medibus.DeviceIdentificationRequest.DeviceRespond)
+  // @@protoc_insertion_point(serialize_to_array_end:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   return target;
 }
 
-size_t DeviceIdentificationRequest_DeviceRespond::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:medibus.DeviceIdentificationRequest.DeviceRespond)
+size_t DeviceIdentificationRequest_DeviceIdentificationRespond::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -970,17 +976,17 @@ size_t DeviceIdentificationRequest_DeviceRespond::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeviceIdentificationRequest_DeviceRespond::_class_data_ = {
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData DeviceIdentificationRequest_DeviceIdentificationRespond::_class_data_ = {
     ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    DeviceIdentificationRequest_DeviceRespond::MergeImpl
+    DeviceIdentificationRequest_DeviceIdentificationRespond::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeviceIdentificationRequest_DeviceRespond::GetClassData() const { return &_class_data_; }
+const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*DeviceIdentificationRequest_DeviceIdentificationRespond::GetClassData() const { return &_class_data_; }
 
 
-void DeviceIdentificationRequest_DeviceRespond::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<DeviceIdentificationRequest_DeviceRespond*>(&to_msg);
-  auto& from = static_cast<const DeviceIdentificationRequest_DeviceRespond&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:medibus.DeviceIdentificationRequest.DeviceRespond)
+void DeviceIdentificationRequest_DeviceIdentificationRespond::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+  auto* const _this = static_cast<DeviceIdentificationRequest_DeviceIdentificationRespond*>(&to_msg);
+  auto& from = static_cast<const DeviceIdentificationRequest_DeviceIdentificationRespond&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1015,18 +1021,18 @@ void DeviceIdentificationRequest_DeviceRespond::MergeImpl(::PROTOBUF_NAMESPACE_I
   _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void DeviceIdentificationRequest_DeviceRespond::CopyFrom(const DeviceIdentificationRequest_DeviceRespond& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:medibus.DeviceIdentificationRequest.DeviceRespond)
+void DeviceIdentificationRequest_DeviceIdentificationRespond::CopyFrom(const DeviceIdentificationRequest_DeviceIdentificationRespond& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool DeviceIdentificationRequest_DeviceRespond::IsInitialized() const {
+bool DeviceIdentificationRequest_DeviceIdentificationRespond::IsInitialized() const {
   return true;
 }
 
-void DeviceIdentificationRequest_DeviceRespond::InternalSwap(DeviceIdentificationRequest_DeviceRespond* other) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::InternalSwap(DeviceIdentificationRequest_DeviceIdentificationRespond* other) {
   using std::swap;
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
@@ -1066,7 +1072,7 @@ void DeviceIdentificationRequest_DeviceRespond::InternalSwap(DeviceIdentificatio
   );
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata DeviceIdentificationRequest_DeviceRespond::GetMetadata() const {
+::PROTOBUF_NAMESPACE_ID::Metadata DeviceIdentificationRequest_DeviceIdentificationRespond::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_medibus_2eproto_getter, &descriptor_table_medibus_2eproto_once,
       file_level_metadata_medibus_2eproto[0]);
@@ -1083,13 +1089,13 @@ class DeviceIdentificationRequest::_Internal {
   static void set_has_sequence_id(HasBits* has_bits) {
     (*has_bits)[0] |= 4u;
   }
-  static const ::medibus::DeviceIdentificationRequest_DeviceRespond& deviceresponds(const DeviceIdentificationRequest* msg);
+  static const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond& deviceresponds(const DeviceIdentificationRequest* msg);
   static void set_has_deviceresponds(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
 };
 
-const ::medibus::DeviceIdentificationRequest_DeviceRespond&
+const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond&
 DeviceIdentificationRequest::_Internal::deviceresponds(const DeviceIdentificationRequest* msg) {
   return *msg->_impl_.deviceresponds_;
 }
@@ -1119,7 +1125,7 @@ DeviceIdentificationRequest::DeviceIdentificationRequest(const DeviceIdentificat
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_deviceresponds()) {
-    _this->_impl_.deviceresponds_ = new ::medibus::DeviceIdentificationRequest_DeviceRespond(*from._impl_.deviceresponds_);
+    _this->_impl_.deviceresponds_ = new ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond(*from._impl_.deviceresponds_);
   }
   _this->_impl_.sequence_id_ = from._impl_.sequence_id_;
   // @@protoc_insertion_point(copy_constructor:medibus.DeviceIdentificationRequest)
@@ -1208,7 +1214,7 @@ const char* DeviceIdentificationRequest::_InternalParse(const char* ptr, ::_pbi:
         } else
           goto handle_unusual;
         continue;
-      // optional .medibus.DeviceIdentificationRequest.DeviceRespond deviceresponds = 3;
+      // optional .medibus.DeviceIdentificationRequest.DeviceIdentificationRespond deviceresponds = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_deviceresponds(), ptr);
@@ -1262,7 +1268,7 @@ uint8_t* DeviceIdentificationRequest::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteFixed64ToArray(2, this->_internal_sequence_id(), target);
   }
 
-  // optional .medibus.DeviceIdentificationRequest.DeviceRespond deviceresponds = 3;
+  // optional .medibus.DeviceIdentificationRequest.DeviceIdentificationRespond deviceresponds = 3;
   if (_internal_has_deviceresponds()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(3, _Internal::deviceresponds(this),
@@ -1294,7 +1300,7 @@ size_t DeviceIdentificationRequest::ByteSizeLong() const {
           this->_internal_instance_id());
     }
 
-    // optional .medibus.DeviceIdentificationRequest.DeviceRespond deviceresponds = 3;
+    // optional .medibus.DeviceIdentificationRequest.DeviceIdentificationRespond deviceresponds = 3;
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1331,7 +1337,7 @@ void DeviceIdentificationRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to
       _this->_internal_set_instance_id(from._internal_instance_id());
     }
     if (cached_has_bits & 0x00000002u) {
-      _this->_internal_mutable_deviceresponds()->::medibus::DeviceIdentificationRequest_DeviceRespond::MergeFrom(
+      _this->_internal_mutable_deviceresponds()->::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond::MergeFrom(
           from._internal_deviceresponds());
     }
     if (cached_has_bits & 0x00000004u) {
@@ -3119,7 +3125,7 @@ class LoopRequest::_Internal {
     (*has_bits)[0] |= 1u;
   }
   static void set_has_sequence_id(HasBits* has_bits) {
-    (*has_bits)[0] |= 4096u;
+    (*has_bits)[0] |= 8192u;
   }
   static const ::medibus::MedibusRequest& cur_measured_data_cp1(const LoopRequest* msg);
   static void set_has_cur_measured_data_cp1(HasBits* has_bits) {
@@ -3161,9 +3167,13 @@ class LoopRequest::_Internal {
   static void set_has_cur_alarms_cp2(HasBits* has_bits) {
     (*has_bits)[0] |= 1024u;
   }
-  static const ::medibus::MedibusRequest& device_identification(const LoopRequest* msg);
+  static const ::medibus::DeviceIdentificationRequest& device_identification(const LoopRequest* msg);
   static void set_has_device_identification(HasBits* has_bits) {
     (*has_bits)[0] |= 2048u;
+  }
+  static const ::medibus::MedibusRequest& cur_alarms_cp3(const LoopRequest* msg);
+  static void set_has_cur_alarms_cp3(HasBits* has_bits) {
+    (*has_bits)[0] |= 4096u;
   }
 };
 
@@ -3207,9 +3217,13 @@ const ::medibus::MedibusRequest&
 LoopRequest::_Internal::cur_alarms_cp2(const LoopRequest* msg) {
   return *msg->_impl_.cur_alarms_cp2_;
 }
-const ::medibus::MedibusRequest&
+const ::medibus::DeviceIdentificationRequest&
 LoopRequest::_Internal::device_identification(const LoopRequest* msg) {
   return *msg->_impl_.device_identification_;
+}
+const ::medibus::MedibusRequest&
+LoopRequest::_Internal::cur_alarms_cp3(const LoopRequest* msg) {
+  return *msg->_impl_.cur_alarms_cp3_;
 }
 LoopRequest::LoopRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
@@ -3236,6 +3250,7 @@ LoopRequest::LoopRequest(const LoopRequest& from)
     , decltype(_impl_.cur_high_alarm_limits_cp2_){nullptr}
     , decltype(_impl_.cur_alarms_cp2_){nullptr}
     , decltype(_impl_.device_identification_){nullptr}
+    , decltype(_impl_.cur_alarms_cp3_){nullptr}
     , decltype(_impl_.sequence_id_){}};
 
   _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -3278,7 +3293,10 @@ LoopRequest::LoopRequest(const LoopRequest& from)
     _this->_impl_.cur_alarms_cp2_ = new ::medibus::MedibusRequest(*from._impl_.cur_alarms_cp2_);
   }
   if (from._internal_has_device_identification()) {
-    _this->_impl_.device_identification_ = new ::medibus::MedibusRequest(*from._impl_.device_identification_);
+    _this->_impl_.device_identification_ = new ::medibus::DeviceIdentificationRequest(*from._impl_.device_identification_);
+  }
+  if (from._internal_has_cur_alarms_cp3()) {
+    _this->_impl_.cur_alarms_cp3_ = new ::medibus::MedibusRequest(*from._impl_.cur_alarms_cp3_);
   }
   _this->_impl_.sequence_id_ = from._impl_.sequence_id_;
   // @@protoc_insertion_point(copy_constructor:medibus.LoopRequest)
@@ -3304,6 +3322,7 @@ inline void LoopRequest::SharedCtor(
     , decltype(_impl_.cur_high_alarm_limits_cp2_){nullptr}
     , decltype(_impl_.cur_alarms_cp2_){nullptr}
     , decltype(_impl_.device_identification_){nullptr}
+    , decltype(_impl_.cur_alarms_cp3_){nullptr}
     , decltype(_impl_.sequence_id_){uint64_t{0u}}
   };
   _impl_.instance_id_.InitDefault();
@@ -3336,6 +3355,7 @@ inline void LoopRequest::SharedDtor() {
   if (this != internal_default_instance()) delete _impl_.cur_high_alarm_limits_cp2_;
   if (this != internal_default_instance()) delete _impl_.cur_alarms_cp2_;
   if (this != internal_default_instance()) delete _impl_.device_identification_;
+  if (this != internal_default_instance()) delete _impl_.cur_alarms_cp3_;
 }
 
 void LoopRequest::SetCachedSize(int size) const {
@@ -3383,7 +3403,7 @@ void LoopRequest::Clear() {
       _impl_.cur_measured_data_cp2_->Clear();
     }
   }
-  if (cached_has_bits & 0x00000f00u) {
+  if (cached_has_bits & 0x00001f00u) {
     if (cached_has_bits & 0x00000100u) {
       GOOGLE_DCHECK(_impl_.cur_low_alarm_limits_cp2_ != nullptr);
       _impl_.cur_low_alarm_limits_cp2_->Clear();
@@ -3399,6 +3419,10 @@ void LoopRequest::Clear() {
     if (cached_has_bits & 0x00000800u) {
       GOOGLE_DCHECK(_impl_.device_identification_ != nullptr);
       _impl_.device_identification_->Clear();
+    }
+    if (cached_has_bits & 0x00001000u) {
+      GOOGLE_DCHECK(_impl_.cur_alarms_cp3_ != nullptr);
+      _impl_.cur_alarms_cp3_->Clear();
     }
   }
   _impl_.sequence_id_ = uint64_t{0u};
@@ -3512,7 +3536,7 @@ const char* LoopRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // optional .medibus.MedibusRequest device_identification = 13;
+      // optional .medibus.DeviceIdentificationRequest device_identification = 13;
       case 13:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
           ptr = ctx->ParseMessage(_internal_mutable_device_identification(), ptr);
@@ -3520,16 +3544,24 @@ const char* LoopRequest::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // repeated .medibus.MedibusRealTimeRequest real_time = 14;
+      // optional .medibus.MedibusRequest cur_alarms_cp3 = 14;
       case 14:
         if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
+          ptr = ctx->ParseMessage(_internal_mutable_cur_alarms_cp3(), ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // repeated .medibus.MedibusRealTimeRequest real_time = 15;
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_real_time(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<114>(ptr));
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<122>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -3649,19 +3681,26 @@ uint8_t* LoopRequest::_InternalSerialize(
         _Internal::cur_alarms_cp2(this).GetCachedSize(), target, stream);
   }
 
-  // optional .medibus.MedibusRequest device_identification = 13;
+  // optional .medibus.DeviceIdentificationRequest device_identification = 13;
   if (_internal_has_device_identification()) {
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(13, _Internal::device_identification(this),
         _Internal::device_identification(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .medibus.MedibusRealTimeRequest real_time = 14;
+  // optional .medibus.MedibusRequest cur_alarms_cp3 = 14;
+  if (_internal_has_cur_alarms_cp3()) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+      InternalWriteMessage(14, _Internal::cur_alarms_cp3(this),
+        _Internal::cur_alarms_cp3(this).GetCachedSize(), target, stream);
+  }
+
+  // repeated .medibus.MedibusRealTimeRequest real_time = 15;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_real_time_size()); i < n; i++) {
     const auto& repfield = this->_internal_real_time(i);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-        InternalWriteMessage(14, repfield, repfield.GetCachedSize(), target, stream);
+        InternalWriteMessage(15, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -3680,7 +3719,7 @@ size_t LoopRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .medibus.MedibusRealTimeRequest real_time = 14;
+  // repeated .medibus.MedibusRealTimeRequest real_time = 15;
   total_size += 1UL * this->_internal_real_time_size();
   for (const auto& msg : this->_impl_.real_time_) {
     total_size +=
@@ -3746,7 +3785,7 @@ size_t LoopRequest::ByteSizeLong() const {
     }
 
   }
-  if (cached_has_bits & 0x00001f00u) {
+  if (cached_has_bits & 0x00003f00u) {
     // optional .medibus.MedibusRequest cur_low_alarm_limits_cp2 = 10;
     if (cached_has_bits & 0x00000100u) {
       total_size += 1 +
@@ -3768,15 +3807,22 @@ size_t LoopRequest::ByteSizeLong() const {
           *_impl_.cur_alarms_cp2_);
     }
 
-    // optional .medibus.MedibusRequest device_identification = 13;
+    // optional .medibus.DeviceIdentificationRequest device_identification = 13;
     if (cached_has_bits & 0x00000800u) {
       total_size += 1 +
         ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *_impl_.device_identification_);
     }
 
-    // optional fixed64 sequence_id = 2;
+    // optional .medibus.MedibusRequest cur_alarms_cp3 = 14;
     if (cached_has_bits & 0x00001000u) {
+      total_size += 1 +
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+          *_impl_.cur_alarms_cp3_);
+    }
+
+    // optional fixed64 sequence_id = 2;
+    if (cached_has_bits & 0x00002000u) {
       total_size += 1 + 8;
     }
 
@@ -3834,7 +3880,7 @@ void LoopRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
           from._internal_cur_measured_data_cp2());
     }
   }
-  if (cached_has_bits & 0x00001f00u) {
+  if (cached_has_bits & 0x00003f00u) {
     if (cached_has_bits & 0x00000100u) {
       _this->_internal_mutable_cur_low_alarm_limits_cp2()->::medibus::MedibusRequest::MergeFrom(
           from._internal_cur_low_alarm_limits_cp2());
@@ -3848,10 +3894,14 @@ void LoopRequest::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PR
           from._internal_cur_alarms_cp2());
     }
     if (cached_has_bits & 0x00000800u) {
-      _this->_internal_mutable_device_identification()->::medibus::MedibusRequest::MergeFrom(
+      _this->_internal_mutable_device_identification()->::medibus::DeviceIdentificationRequest::MergeFrom(
           from._internal_device_identification());
     }
     if (cached_has_bits & 0x00001000u) {
+      _this->_internal_mutable_cur_alarms_cp3()->::medibus::MedibusRequest::MergeFrom(
+          from._internal_cur_alarms_cp3());
+    }
+    if (cached_has_bits & 0x00002000u) {
       _this->_impl_.sequence_id_ = from._impl_.sequence_id_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -4110,9 +4160,9 @@ void DelimitedLoopRequest::InternalSwap(DelimitedLoopRequest* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace medibus
 PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::medibus::DeviceIdentificationRequest_DeviceRespond*
-Arena::CreateMaybeMessage< ::medibus::DeviceIdentificationRequest_DeviceRespond >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::medibus::DeviceIdentificationRequest_DeviceRespond >(arena);
+template<> PROTOBUF_NOINLINE ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond*
+Arena::CreateMaybeMessage< ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond >(arena);
 }
 template<> PROTOBUF_NOINLINE ::medibus::DeviceIdentificationRequest*
 Arena::CreateMaybeMessage< ::medibus::DeviceIdentificationRequest >(Arena* arena) {

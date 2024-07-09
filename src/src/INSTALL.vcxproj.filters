@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\project\medibus\src\CMakeFiles\23bd87da4cc5bd74df06030575d7c807\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{E3A2A405-0D4A-3708-A50A-D76798AE6D4E}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

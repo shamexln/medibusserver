@@ -5,9 +5,6 @@ package medibus;
 service Medibus {
   // The following are all request from client to server with the parameter filled with the device responds
 
-  // Request current Alarms (Codepage 3)
-  rpc CurAlarmsCP3 (MedibusRequest) returns (MedibusReply) {}
-
   // Request current measured data (codepage 1) 24H
   rpc CurMeasuredDataCP1 (MedibusRequest) returns (MedibusReply) {}
 
@@ -41,6 +38,9 @@ service Medibus {
   // Request device identification 52H
   rpc DeviceIdentification (DeviceIdentificationRequest) returns (MedibusReply) {}
 
+  // Request current Alarms (Codepage 3)
+  rpc CurAlarmsCP3 (MedibusRequest) returns (MedibusReply) {}
+  
   // Request real time 
   rpc RealTime (MedibusRealTimeRequest) returns (MedibusReply) {}
 
@@ -56,7 +56,7 @@ service Medibus {
 message DeviceIdentificationRequest {
   optional string instance_id = 1;
   optional fixed64 sequence_id = 2;
-  message DeviceRespond {
+  message DeviceIdentificationRespond {
   optional string deviceid = 1;
   optional string devicename = 2;
   optional string facility = 3;
@@ -66,7 +66,7 @@ message DeviceIdentificationRequest {
   optional string building = 7;
   optional string floor = 8;
   }
-  optional DeviceRespond deviceresponds = 3;
+  optional DeviceIdentificationRespond deviceresponds = 3;
 }
 
 // The request common message
@@ -118,8 +118,9 @@ message LoopRequest {
   optional MedibusRequest cur_low_alarm_limits_cp2 = 10;
   optional MedibusRequest cur_high_alarm_limits_cp2 = 11;
   optional MedibusRequest cur_alarms_cp2 = 12;
-  optional MedibusRequest device_identification = 13;
-  repeated MedibusRealTimeRequest real_time = 14;
+  optional DeviceIdentificationRequest device_identification = 13;
+  optional MedibusRequest cur_alarms_cp3 = 14;
+  repeated MedibusRealTimeRequest real_time = 15;
  
 }
 

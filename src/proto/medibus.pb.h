@@ -51,9 +51,9 @@ extern DelimitedLoopRequestDefaultTypeInternal _DelimitedLoopRequest_default_ins
 class DeviceIdentificationRequest;
 struct DeviceIdentificationRequestDefaultTypeInternal;
 extern DeviceIdentificationRequestDefaultTypeInternal _DeviceIdentificationRequest_default_instance_;
-class DeviceIdentificationRequest_DeviceRespond;
-struct DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal;
-extern DeviceIdentificationRequest_DeviceRespondDefaultTypeInternal _DeviceIdentificationRequest_DeviceRespond_default_instance_;
+class DeviceIdentificationRequest_DeviceIdentificationRespond;
+struct DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal;
+extern DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInternal _DeviceIdentificationRequest_DeviceIdentificationRespond_default_instance_;
 class LoopRequest;
 struct LoopRequestDefaultTypeInternal;
 extern LoopRequestDefaultTypeInternal _LoopRequest_default_instance_;
@@ -76,7 +76,7 @@ extern MedibusRequest_DeviceRespondDefaultTypeInternal _MedibusRequest_DeviceRes
 PROTOBUF_NAMESPACE_OPEN
 template<> ::medibus::DelimitedLoopRequest* Arena::CreateMaybeMessage<::medibus::DelimitedLoopRequest>(Arena*);
 template<> ::medibus::DeviceIdentificationRequest* Arena::CreateMaybeMessage<::medibus::DeviceIdentificationRequest>(Arena*);
-template<> ::medibus::DeviceIdentificationRequest_DeviceRespond* Arena::CreateMaybeMessage<::medibus::DeviceIdentificationRequest_DeviceRespond>(Arena*);
+template<> ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* Arena::CreateMaybeMessage<::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond>(Arena*);
 template<> ::medibus::LoopRequest* Arena::CreateMaybeMessage<::medibus::LoopRequest>(Arena*);
 template<> ::medibus::MedibusRealTimeRequest* Arena::CreateMaybeMessage<::medibus::MedibusRealTimeRequest>(Arena*);
 template<> ::medibus::MedibusRealTimeRequest_DeviceRespond* Arena::CreateMaybeMessage<::medibus::MedibusRealTimeRequest_DeviceRespond>(Arena*);
@@ -88,24 +88,24 @@ namespace medibus {
 
 // ===================================================================
 
-class DeviceIdentificationRequest_DeviceRespond final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:medibus.DeviceIdentificationRequest.DeviceRespond) */ {
+class DeviceIdentificationRequest_DeviceIdentificationRespond final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond) */ {
  public:
-  inline DeviceIdentificationRequest_DeviceRespond() : DeviceIdentificationRequest_DeviceRespond(nullptr) {}
-  ~DeviceIdentificationRequest_DeviceRespond() override;
-  explicit PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceRespond(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+  inline DeviceIdentificationRequest_DeviceIdentificationRespond() : DeviceIdentificationRequest_DeviceIdentificationRespond(nullptr) {}
+  ~DeviceIdentificationRequest_DeviceIdentificationRespond() override;
+  explicit PROTOBUF_CONSTEXPR DeviceIdentificationRequest_DeviceIdentificationRespond(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
 
-  DeviceIdentificationRequest_DeviceRespond(const DeviceIdentificationRequest_DeviceRespond& from);
-  DeviceIdentificationRequest_DeviceRespond(DeviceIdentificationRequest_DeviceRespond&& from) noexcept
-    : DeviceIdentificationRequest_DeviceRespond() {
+  DeviceIdentificationRequest_DeviceIdentificationRespond(const DeviceIdentificationRequest_DeviceIdentificationRespond& from);
+  DeviceIdentificationRequest_DeviceIdentificationRespond(DeviceIdentificationRequest_DeviceIdentificationRespond&& from) noexcept
+    : DeviceIdentificationRequest_DeviceIdentificationRespond() {
     *this = ::std::move(from);
   }
 
-  inline DeviceIdentificationRequest_DeviceRespond& operator=(const DeviceIdentificationRequest_DeviceRespond& from) {
+  inline DeviceIdentificationRequest_DeviceIdentificationRespond& operator=(const DeviceIdentificationRequest_DeviceIdentificationRespond& from) {
     CopyFrom(from);
     return *this;
   }
-  inline DeviceIdentificationRequest_DeviceRespond& operator=(DeviceIdentificationRequest_DeviceRespond&& from) noexcept {
+  inline DeviceIdentificationRequest_DeviceIdentificationRespond& operator=(DeviceIdentificationRequest_DeviceIdentificationRespond&& from) noexcept {
     if (this == &from) return *this;
     if (GetOwningArena() == from.GetOwningArena()
   #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
@@ -128,20 +128,20 @@ class DeviceIdentificationRequest_DeviceRespond final :
   static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const DeviceIdentificationRequest_DeviceRespond& default_instance() {
+  static const DeviceIdentificationRequest_DeviceIdentificationRespond& default_instance() {
     return *internal_default_instance();
   }
-  static inline const DeviceIdentificationRequest_DeviceRespond* internal_default_instance() {
-    return reinterpret_cast<const DeviceIdentificationRequest_DeviceRespond*>(
-               &_DeviceIdentificationRequest_DeviceRespond_default_instance_);
+  static inline const DeviceIdentificationRequest_DeviceIdentificationRespond* internal_default_instance() {
+    return reinterpret_cast<const DeviceIdentificationRequest_DeviceIdentificationRespond*>(
+               &_DeviceIdentificationRequest_DeviceIdentificationRespond_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
     0;
 
-  friend void swap(DeviceIdentificationRequest_DeviceRespond& a, DeviceIdentificationRequest_DeviceRespond& b) {
+  friend void swap(DeviceIdentificationRequest_DeviceIdentificationRespond& a, DeviceIdentificationRequest_DeviceIdentificationRespond& b) {
     a.Swap(&b);
   }
-  inline void Swap(DeviceIdentificationRequest_DeviceRespond* other) {
+  inline void Swap(DeviceIdentificationRequest_DeviceIdentificationRespond* other) {
     if (other == this) return;
   #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
     if (GetOwningArena() != nullptr &&
@@ -154,7 +154,7 @@ class DeviceIdentificationRequest_DeviceRespond final :
       ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(DeviceIdentificationRequest_DeviceRespond* other) {
+  void UnsafeArenaSwap(DeviceIdentificationRequest_DeviceIdentificationRespond* other) {
     if (other == this) return;
     GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
     InternalSwap(other);
@@ -162,14 +162,14 @@ class DeviceIdentificationRequest_DeviceRespond final :
 
   // implements Message ----------------------------------------------
 
-  DeviceIdentificationRequest_DeviceRespond* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<DeviceIdentificationRequest_DeviceRespond>(arena);
+  DeviceIdentificationRequest_DeviceIdentificationRespond* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<DeviceIdentificationRequest_DeviceIdentificationRespond>(arena);
   }
   using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const DeviceIdentificationRequest_DeviceRespond& from);
+  void CopyFrom(const DeviceIdentificationRequest_DeviceIdentificationRespond& from);
   using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const DeviceIdentificationRequest_DeviceRespond& from) {
-    DeviceIdentificationRequest_DeviceRespond::MergeImpl(*this, from);
+  void MergeFrom( const DeviceIdentificationRequest_DeviceIdentificationRespond& from) {
+    DeviceIdentificationRequest_DeviceIdentificationRespond::MergeImpl(*this, from);
   }
   private:
   static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
@@ -187,15 +187,15 @@ class DeviceIdentificationRequest_DeviceRespond final :
   void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
   void SharedDtor();
   void SetCachedSize(int size) const final;
-  void InternalSwap(DeviceIdentificationRequest_DeviceRespond* other);
+  void InternalSwap(DeviceIdentificationRequest_DeviceIdentificationRespond* other);
 
   private:
   friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
   static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "medibus.DeviceIdentificationRequest.DeviceRespond";
+    return "medibus.DeviceIdentificationRequest.DeviceIdentificationRespond";
   }
   protected:
-  explicit DeviceIdentificationRequest_DeviceRespond(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+  explicit DeviceIdentificationRequest_DeviceIdentificationRespond(::PROTOBUF_NAMESPACE_ID::Arena* arena,
                        bool is_message_owned = false);
   public:
 
@@ -362,7 +362,7 @@ class DeviceIdentificationRequest_DeviceRespond final :
   std::string* _internal_mutable_floor();
   public:
 
-  // @@protoc_insertion_point(class_scope:medibus.DeviceIdentificationRequest.DeviceRespond)
+  // @@protoc_insertion_point(class_scope:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond)
  private:
   class _Internal;
 
@@ -504,7 +504,7 @@ class DeviceIdentificationRequest final :
 
   // nested types ----------------------------------------------------
 
-  typedef DeviceIdentificationRequest_DeviceRespond DeviceRespond;
+  typedef DeviceIdentificationRequest_DeviceIdentificationRespond DeviceIdentificationRespond;
 
   // accessors -------------------------------------------------------
 
@@ -531,23 +531,23 @@ class DeviceIdentificationRequest final :
   std::string* _internal_mutable_instance_id();
   public:
 
-  // optional .medibus.DeviceIdentificationRequest.DeviceRespond deviceresponds = 3;
+  // optional .medibus.DeviceIdentificationRequest.DeviceIdentificationRespond deviceresponds = 3;
   bool has_deviceresponds() const;
   private:
   bool _internal_has_deviceresponds() const;
   public:
   void clear_deviceresponds();
-  const ::medibus::DeviceIdentificationRequest_DeviceRespond& deviceresponds() const;
-  PROTOBUF_NODISCARD ::medibus::DeviceIdentificationRequest_DeviceRespond* release_deviceresponds();
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* mutable_deviceresponds();
-  void set_allocated_deviceresponds(::medibus::DeviceIdentificationRequest_DeviceRespond* deviceresponds);
+  const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond& deviceresponds() const;
+  PROTOBUF_NODISCARD ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* release_deviceresponds();
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* mutable_deviceresponds();
+  void set_allocated_deviceresponds(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* deviceresponds);
   private:
-  const ::medibus::DeviceIdentificationRequest_DeviceRespond& _internal_deviceresponds() const;
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* _internal_mutable_deviceresponds();
+  const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond& _internal_deviceresponds() const;
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* _internal_mutable_deviceresponds();
   public:
   void unsafe_arena_set_allocated_deviceresponds(
-      ::medibus::DeviceIdentificationRequest_DeviceRespond* deviceresponds);
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* unsafe_arena_release_deviceresponds();
+      ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* deviceresponds);
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* unsafe_arena_release_deviceresponds();
 
   // optional fixed64 sequence_id = 2;
   bool has_sequence_id() const;
@@ -573,7 +573,7 @@ class DeviceIdentificationRequest final :
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr instance_id_;
-    ::medibus::DeviceIdentificationRequest_DeviceRespond* deviceresponds_;
+    ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* deviceresponds_;
     uint64_t sequence_id_;
   };
   union { Impl_ _impl_; };
@@ -1742,7 +1742,7 @@ class LoopRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRealTimeFieldNumber = 14,
+    kRealTimeFieldNumber = 15,
     kInstanceIdFieldNumber = 1,
     kCurMeasuredDataCp1FieldNumber = 3,
     kCurLowAlarmLimitsCp1FieldNumber = 4,
@@ -1755,9 +1755,10 @@ class LoopRequest final :
     kCurHighAlarmLimitsCp2FieldNumber = 11,
     kCurAlarmsCp2FieldNumber = 12,
     kDeviceIdentificationFieldNumber = 13,
+    kCurAlarmsCp3FieldNumber = 14,
     kSequenceIdFieldNumber = 2,
   };
-  // repeated .medibus.MedibusRealTimeRequest real_time = 14;
+  // repeated .medibus.MedibusRealTimeRequest real_time = 15;
   int real_time_size() const;
   private:
   int _internal_real_time_size() const;
@@ -1973,23 +1974,41 @@ class LoopRequest final :
       ::medibus::MedibusRequest* cur_alarms_cp2);
   ::medibus::MedibusRequest* unsafe_arena_release_cur_alarms_cp2();
 
-  // optional .medibus.MedibusRequest device_identification = 13;
+  // optional .medibus.DeviceIdentificationRequest device_identification = 13;
   bool has_device_identification() const;
   private:
   bool _internal_has_device_identification() const;
   public:
   void clear_device_identification();
-  const ::medibus::MedibusRequest& device_identification() const;
-  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_device_identification();
-  ::medibus::MedibusRequest* mutable_device_identification();
-  void set_allocated_device_identification(::medibus::MedibusRequest* device_identification);
+  const ::medibus::DeviceIdentificationRequest& device_identification() const;
+  PROTOBUF_NODISCARD ::medibus::DeviceIdentificationRequest* release_device_identification();
+  ::medibus::DeviceIdentificationRequest* mutable_device_identification();
+  void set_allocated_device_identification(::medibus::DeviceIdentificationRequest* device_identification);
   private:
-  const ::medibus::MedibusRequest& _internal_device_identification() const;
-  ::medibus::MedibusRequest* _internal_mutable_device_identification();
+  const ::medibus::DeviceIdentificationRequest& _internal_device_identification() const;
+  ::medibus::DeviceIdentificationRequest* _internal_mutable_device_identification();
   public:
   void unsafe_arena_set_allocated_device_identification(
-      ::medibus::MedibusRequest* device_identification);
-  ::medibus::MedibusRequest* unsafe_arena_release_device_identification();
+      ::medibus::DeviceIdentificationRequest* device_identification);
+  ::medibus::DeviceIdentificationRequest* unsafe_arena_release_device_identification();
+
+  // optional .medibus.MedibusRequest cur_alarms_cp3 = 14;
+  bool has_cur_alarms_cp3() const;
+  private:
+  bool _internal_has_cur_alarms_cp3() const;
+  public:
+  void clear_cur_alarms_cp3();
+  const ::medibus::MedibusRequest& cur_alarms_cp3() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_alarms_cp3();
+  ::medibus::MedibusRequest* mutable_cur_alarms_cp3();
+  void set_allocated_cur_alarms_cp3(::medibus::MedibusRequest* cur_alarms_cp3);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_alarms_cp3() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_alarms_cp3();
+  public:
+  void unsafe_arena_set_allocated_cur_alarms_cp3(
+      ::medibus::MedibusRequest* cur_alarms_cp3);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_alarms_cp3();
 
   // optional fixed64 sequence_id = 2;
   bool has_sequence_id() const;
@@ -2026,7 +2045,8 @@ class LoopRequest final :
     ::medibus::MedibusRequest* cur_low_alarm_limits_cp2_;
     ::medibus::MedibusRequest* cur_high_alarm_limits_cp2_;
     ::medibus::MedibusRequest* cur_alarms_cp2_;
-    ::medibus::MedibusRequest* device_identification_;
+    ::medibus::DeviceIdentificationRequest* device_identification_;
+    ::medibus::MedibusRequest* cur_alarms_cp3_;
     uint64_t sequence_id_;
   };
   union { Impl_ _impl_; };
@@ -2199,49 +2219,49 @@ class DelimitedLoopRequest final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// DeviceIdentificationRequest_DeviceRespond
+// DeviceIdentificationRequest_DeviceIdentificationRespond
 
 // optional string deviceid = 1;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_deviceid() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_deviceid() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_deviceid() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_deviceid() const {
   return _internal_has_deviceid();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_deviceid() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_deviceid() {
   _impl_.deviceid_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::deviceid() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.deviceid)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::deviceid() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid)
   return _internal_deviceid();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_deviceid(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_deviceid(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.deviceid_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.deviceid)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_deviceid() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_deviceid() {
   std::string* _s = _internal_mutable_deviceid();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.deviceid)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_deviceid() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_deviceid() const {
   return _impl_.deviceid_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_deviceid(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_deviceid(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.deviceid_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_deviceid() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_deviceid() {
   _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.deviceid_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_deviceid() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.deviceid)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_deviceid() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid)
   if (!_internal_has_deviceid()) {
     return nullptr;
   }
@@ -2254,7 +2274,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_deviceid(
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_deviceid(std::string* deviceid) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_deviceid(std::string* deviceid) {
   if (deviceid != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
@@ -2266,50 +2286,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_deviceid(st
     _impl_.deviceid_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.deviceid)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.deviceid)
 }
 
 // optional string devicename = 2;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_devicename() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_devicename() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_devicename() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_devicename() const {
   return _internal_has_devicename();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_devicename() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_devicename() {
   _impl_.devicename_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::devicename() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.devicename)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::devicename() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename)
   return _internal_devicename();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_devicename(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_devicename(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.devicename_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.devicename)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_devicename() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_devicename() {
   std::string* _s = _internal_mutable_devicename();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.devicename)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_devicename() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_devicename() const {
   return _impl_.devicename_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_devicename(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_devicename(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.devicename_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_devicename() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_devicename() {
   _impl_._has_bits_[0] |= 0x00000002u;
   return _impl_.devicename_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_devicename() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.devicename)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_devicename() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename)
   if (!_internal_has_devicename()) {
     return nullptr;
   }
@@ -2322,7 +2342,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_devicenam
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_devicename(std::string* devicename) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_devicename(std::string* devicename) {
   if (devicename != nullptr) {
     _impl_._has_bits_[0] |= 0x00000002u;
   } else {
@@ -2334,50 +2354,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_devicename(
     _impl_.devicename_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.devicename)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.devicename)
 }
 
 // optional string facility = 3;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_facility() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_facility() const {
   bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_facility() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_facility() const {
   return _internal_has_facility();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_facility() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_facility() {
   _impl_.facility_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::facility() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.facility)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::facility() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility)
   return _internal_facility();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_facility(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_facility(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.facility_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.facility)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_facility() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_facility() {
   std::string* _s = _internal_mutable_facility();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.facility)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_facility() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_facility() const {
   return _impl_.facility_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_facility(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_facility(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.facility_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_facility() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_facility() {
   _impl_._has_bits_[0] |= 0x00000004u;
   return _impl_.facility_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_facility() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.facility)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_facility() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility)
   if (!_internal_has_facility()) {
     return nullptr;
   }
@@ -2390,7 +2410,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_facility(
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_facility(std::string* facility) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_facility(std::string* facility) {
   if (facility != nullptr) {
     _impl_._has_bits_[0] |= 0x00000004u;
   } else {
@@ -2402,50 +2422,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_facility(st
     _impl_.facility_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.facility)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.facility)
 }
 
 // optional string poc = 4;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_poc() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_poc() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_poc() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_poc() const {
   return _internal_has_poc();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_poc() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_poc() {
   _impl_.poc_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::poc() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.poc)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::poc() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc)
   return _internal_poc();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_poc(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_poc(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000008u;
  _impl_.poc_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.poc)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_poc() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_poc() {
   std::string* _s = _internal_mutable_poc();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.poc)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_poc() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_poc() const {
   return _impl_.poc_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_poc(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_poc(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000008u;
   _impl_.poc_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_poc() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_poc() {
   _impl_._has_bits_[0] |= 0x00000008u;
   return _impl_.poc_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_poc() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.poc)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_poc() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc)
   if (!_internal_has_poc()) {
     return nullptr;
   }
@@ -2458,7 +2478,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_poc() {
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_poc(std::string* poc) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_poc(std::string* poc) {
   if (poc != nullptr) {
     _impl_._has_bits_[0] |= 0x00000008u;
   } else {
@@ -2470,50 +2490,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_poc(std::st
     _impl_.poc_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.poc)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.poc)
 }
 
 // optional string bed = 5;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_bed() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_bed() const {
   bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_bed() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_bed() const {
   return _internal_has_bed();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_bed() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_bed() {
   _impl_.bed_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::bed() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.bed)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::bed() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed)
   return _internal_bed();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_bed(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_bed(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000010u;
  _impl_.bed_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.bed)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_bed() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_bed() {
   std::string* _s = _internal_mutable_bed();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.bed)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_bed() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_bed() const {
   return _impl_.bed_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_bed(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_bed(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000010u;
   _impl_.bed_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_bed() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_bed() {
   _impl_._has_bits_[0] |= 0x00000010u;
   return _impl_.bed_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_bed() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.bed)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_bed() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed)
   if (!_internal_has_bed()) {
     return nullptr;
   }
@@ -2526,7 +2546,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_bed() {
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_bed(std::string* bed) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_bed(std::string* bed) {
   if (bed != nullptr) {
     _impl_._has_bits_[0] |= 0x00000010u;
   } else {
@@ -2538,50 +2558,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_bed(std::st
     _impl_.bed_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.bed)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.bed)
 }
 
 // optional string room = 6;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_room() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_room() const {
   bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_room() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_room() const {
   return _internal_has_room();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_room() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_room() {
   _impl_.room_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000020u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::room() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.room)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::room() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room)
   return _internal_room();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_room(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_room(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000020u;
  _impl_.room_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.room)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_room() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_room() {
   std::string* _s = _internal_mutable_room();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.room)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_room() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_room() const {
   return _impl_.room_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_room(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_room(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000020u;
   _impl_.room_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_room() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_room() {
   _impl_._has_bits_[0] |= 0x00000020u;
   return _impl_.room_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_room() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.room)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_room() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room)
   if (!_internal_has_room()) {
     return nullptr;
   }
@@ -2594,7 +2614,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_room() {
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_room(std::string* room) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_room(std::string* room) {
   if (room != nullptr) {
     _impl_._has_bits_[0] |= 0x00000020u;
   } else {
@@ -2606,50 +2626,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_room(std::s
     _impl_.room_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.room)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.room)
 }
 
 // optional string building = 7;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_building() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_building() const {
   bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_building() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_building() const {
   return _internal_has_building();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_building() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_building() {
   _impl_.building_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000040u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::building() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.building)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::building() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building)
   return _internal_building();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_building(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_building(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000040u;
  _impl_.building_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.building)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_building() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_building() {
   std::string* _s = _internal_mutable_building();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.building)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_building() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_building() const {
   return _impl_.building_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_building(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_building(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000040u;
   _impl_.building_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_building() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_building() {
   _impl_._has_bits_[0] |= 0x00000040u;
   return _impl_.building_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_building() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.building)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_building() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building)
   if (!_internal_has_building()) {
     return nullptr;
   }
@@ -2662,7 +2682,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_building(
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_building(std::string* building) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_building(std::string* building) {
   if (building != nullptr) {
     _impl_._has_bits_[0] |= 0x00000040u;
   } else {
@@ -2674,50 +2694,50 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_building(st
     _impl_.building_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.building)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.building)
 }
 
 // optional string floor = 8;
-inline bool DeviceIdentificationRequest_DeviceRespond::_internal_has_floor() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_has_floor() const {
   bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
   return value;
 }
-inline bool DeviceIdentificationRequest_DeviceRespond::has_floor() const {
+inline bool DeviceIdentificationRequest_DeviceIdentificationRespond::has_floor() const {
   return _internal_has_floor();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::clear_floor() {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::clear_floor() {
   _impl_.floor_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000080u;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::floor() const {
-  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceRespond.floor)
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::floor() const {
+  // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor)
   return _internal_floor();
 }
 template <typename ArgT0, typename... ArgT>
 inline PROTOBUF_ALWAYS_INLINE
-void DeviceIdentificationRequest_DeviceRespond::set_floor(ArgT0&& arg0, ArgT... args) {
+void DeviceIdentificationRequest_DeviceIdentificationRespond::set_floor(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000080u;
  _impl_.floor_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceRespond.floor)
+  // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor)
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::mutable_floor() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::mutable_floor() {
   std::string* _s = _internal_mutable_floor();
-  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceRespond.floor)
+  // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor)
   return _s;
 }
-inline const std::string& DeviceIdentificationRequest_DeviceRespond::_internal_floor() const {
+inline const std::string& DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_floor() const {
   return _impl_.floor_.Get();
 }
-inline void DeviceIdentificationRequest_DeviceRespond::_internal_set_floor(const std::string& value) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_set_floor(const std::string& value) {
   _impl_._has_bits_[0] |= 0x00000080u;
   _impl_.floor_.Set(value, GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::_internal_mutable_floor() {
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::_internal_mutable_floor() {
   _impl_._has_bits_[0] |= 0x00000080u;
   return _impl_.floor_.Mutable(GetArenaForAllocation());
 }
-inline std::string* DeviceIdentificationRequest_DeviceRespond::release_floor() {
-  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceRespond.floor)
+inline std::string* DeviceIdentificationRequest_DeviceIdentificationRespond::release_floor() {
+  // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor)
   if (!_internal_has_floor()) {
     return nullptr;
   }
@@ -2730,7 +2750,7 @@ inline std::string* DeviceIdentificationRequest_DeviceRespond::release_floor() {
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
   return p;
 }
-inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_floor(std::string* floor) {
+inline void DeviceIdentificationRequest_DeviceIdentificationRespond::set_allocated_floor(std::string* floor) {
   if (floor != nullptr) {
     _impl_._has_bits_[0] |= 0x00000080u;
   } else {
@@ -2742,7 +2762,7 @@ inline void DeviceIdentificationRequest_DeviceRespond::set_allocated_floor(std::
     _impl_.floor_.Set("", GetArenaForAllocation());
   }
 #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceRespond.floor)
+  // @@protoc_insertion_point(field_set_allocated:medibus.DeviceIdentificationRequest.DeviceIdentificationRespond.floor)
 }
 
 // -------------------------------------------------------------------
@@ -2845,7 +2865,7 @@ inline void DeviceIdentificationRequest::set_sequence_id(uint64_t value) {
   // @@protoc_insertion_point(field_set:medibus.DeviceIdentificationRequest.sequence_id)
 }
 
-// optional .medibus.DeviceIdentificationRequest.DeviceRespond deviceresponds = 3;
+// optional .medibus.DeviceIdentificationRequest.DeviceIdentificationRespond deviceresponds = 3;
 inline bool DeviceIdentificationRequest::_internal_has_deviceresponds() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.deviceresponds_ != nullptr);
@@ -2858,17 +2878,17 @@ inline void DeviceIdentificationRequest::clear_deviceresponds() {
   if (_impl_.deviceresponds_ != nullptr) _impl_.deviceresponds_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::medibus::DeviceIdentificationRequest_DeviceRespond& DeviceIdentificationRequest::_internal_deviceresponds() const {
-  const ::medibus::DeviceIdentificationRequest_DeviceRespond* p = _impl_.deviceresponds_;
-  return p != nullptr ? *p : reinterpret_cast<const ::medibus::DeviceIdentificationRequest_DeviceRespond&>(
-      ::medibus::_DeviceIdentificationRequest_DeviceRespond_default_instance_);
+inline const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond& DeviceIdentificationRequest::_internal_deviceresponds() const {
+  const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* p = _impl_.deviceresponds_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond&>(
+      ::medibus::_DeviceIdentificationRequest_DeviceIdentificationRespond_default_instance_);
 }
-inline const ::medibus::DeviceIdentificationRequest_DeviceRespond& DeviceIdentificationRequest::deviceresponds() const {
+inline const ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond& DeviceIdentificationRequest::deviceresponds() const {
   // @@protoc_insertion_point(field_get:medibus.DeviceIdentificationRequest.deviceresponds)
   return _internal_deviceresponds();
 }
 inline void DeviceIdentificationRequest::unsafe_arena_set_allocated_deviceresponds(
-    ::medibus::DeviceIdentificationRequest_DeviceRespond* deviceresponds) {
+    ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* deviceresponds) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.deviceresponds_);
   }
@@ -2880,9 +2900,9 @@ inline void DeviceIdentificationRequest::unsafe_arena_set_allocated_devicerespon
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.DeviceIdentificationRequest.deviceresponds)
 }
-inline ::medibus::DeviceIdentificationRequest_DeviceRespond* DeviceIdentificationRequest::release_deviceresponds() {
+inline ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* DeviceIdentificationRequest::release_deviceresponds() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* temp = _impl_.deviceresponds_;
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* temp = _impl_.deviceresponds_;
   _impl_.deviceresponds_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -2895,27 +2915,27 @@ inline ::medibus::DeviceIdentificationRequest_DeviceRespond* DeviceIdentificatio
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::medibus::DeviceIdentificationRequest_DeviceRespond* DeviceIdentificationRequest::unsafe_arena_release_deviceresponds() {
+inline ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* DeviceIdentificationRequest::unsafe_arena_release_deviceresponds() {
   // @@protoc_insertion_point(field_release:medibus.DeviceIdentificationRequest.deviceresponds)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* temp = _impl_.deviceresponds_;
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* temp = _impl_.deviceresponds_;
   _impl_.deviceresponds_ = nullptr;
   return temp;
 }
-inline ::medibus::DeviceIdentificationRequest_DeviceRespond* DeviceIdentificationRequest::_internal_mutable_deviceresponds() {
+inline ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* DeviceIdentificationRequest::_internal_mutable_deviceresponds() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.deviceresponds_ == nullptr) {
-    auto* p = CreateMaybeMessage<::medibus::DeviceIdentificationRequest_DeviceRespond>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond>(GetArenaForAllocation());
     _impl_.deviceresponds_ = p;
   }
   return _impl_.deviceresponds_;
 }
-inline ::medibus::DeviceIdentificationRequest_DeviceRespond* DeviceIdentificationRequest::mutable_deviceresponds() {
-  ::medibus::DeviceIdentificationRequest_DeviceRespond* _msg = _internal_mutable_deviceresponds();
+inline ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* DeviceIdentificationRequest::mutable_deviceresponds() {
+  ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* _msg = _internal_mutable_deviceresponds();
   // @@protoc_insertion_point(field_mutable:medibus.DeviceIdentificationRequest.deviceresponds)
   return _msg;
 }
-inline void DeviceIdentificationRequest::set_allocated_deviceresponds(::medibus::DeviceIdentificationRequest_DeviceRespond* deviceresponds) {
+inline void DeviceIdentificationRequest::set_allocated_deviceresponds(::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* deviceresponds) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.deviceresponds_;
@@ -4099,7 +4119,7 @@ inline void LoopRequest::set_allocated_instance_id(std::string* instance_id) {
 
 // optional fixed64 sequence_id = 2;
 inline bool LoopRequest::_internal_has_sequence_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
   return value;
 }
 inline bool LoopRequest::has_sequence_id() const {
@@ -4107,7 +4127,7 @@ inline bool LoopRequest::has_sequence_id() const {
 }
 inline void LoopRequest::clear_sequence_id() {
   _impl_.sequence_id_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00001000u;
+  _impl_._has_bits_[0] &= ~0x00002000u;
 }
 inline uint64_t LoopRequest::_internal_sequence_id() const {
   return _impl_.sequence_id_;
@@ -4117,7 +4137,7 @@ inline uint64_t LoopRequest::sequence_id() const {
   return _internal_sequence_id();
 }
 inline void LoopRequest::_internal_set_sequence_id(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00001000u;
+  _impl_._has_bits_[0] |= 0x00002000u;
   _impl_.sequence_id_ = value;
 }
 inline void LoopRequest::set_sequence_id(uint64_t value) {
@@ -5025,7 +5045,7 @@ inline void LoopRequest::set_allocated_cur_alarms_cp2(::medibus::MedibusRequest*
   // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_alarms_cp2)
 }
 
-// optional .medibus.MedibusRequest device_identification = 13;
+// optional .medibus.DeviceIdentificationRequest device_identification = 13;
 inline bool LoopRequest::_internal_has_device_identification() const {
   bool value = (_impl_._has_bits_[0] & 0x00000800u) != 0;
   PROTOBUF_ASSUME(!value || _impl_.device_identification_ != nullptr);
@@ -5038,17 +5058,17 @@ inline void LoopRequest::clear_device_identification() {
   if (_impl_.device_identification_ != nullptr) _impl_.device_identification_->Clear();
   _impl_._has_bits_[0] &= ~0x00000800u;
 }
-inline const ::medibus::MedibusRequest& LoopRequest::_internal_device_identification() const {
-  const ::medibus::MedibusRequest* p = _impl_.device_identification_;
-  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
-      ::medibus::_MedibusRequest_default_instance_);
+inline const ::medibus::DeviceIdentificationRequest& LoopRequest::_internal_device_identification() const {
+  const ::medibus::DeviceIdentificationRequest* p = _impl_.device_identification_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::DeviceIdentificationRequest&>(
+      ::medibus::_DeviceIdentificationRequest_default_instance_);
 }
-inline const ::medibus::MedibusRequest& LoopRequest::device_identification() const {
+inline const ::medibus::DeviceIdentificationRequest& LoopRequest::device_identification() const {
   // @@protoc_insertion_point(field_get:medibus.LoopRequest.device_identification)
   return _internal_device_identification();
 }
 inline void LoopRequest::unsafe_arena_set_allocated_device_identification(
-    ::medibus::MedibusRequest* device_identification) {
+    ::medibus::DeviceIdentificationRequest* device_identification) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.device_identification_);
   }
@@ -5060,9 +5080,9 @@ inline void LoopRequest::unsafe_arena_set_allocated_device_identification(
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.device_identification)
 }
-inline ::medibus::MedibusRequest* LoopRequest::release_device_identification() {
+inline ::medibus::DeviceIdentificationRequest* LoopRequest::release_device_identification() {
   _impl_._has_bits_[0] &= ~0x00000800u;
-  ::medibus::MedibusRequest* temp = _impl_.device_identification_;
+  ::medibus::DeviceIdentificationRequest* temp = _impl_.device_identification_;
   _impl_.device_identification_ = nullptr;
 #ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
@@ -5075,27 +5095,27 @@ inline ::medibus::MedibusRequest* LoopRequest::release_device_identification() {
 #endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_device_identification() {
+inline ::medibus::DeviceIdentificationRequest* LoopRequest::unsafe_arena_release_device_identification() {
   // @@protoc_insertion_point(field_release:medibus.LoopRequest.device_identification)
   _impl_._has_bits_[0] &= ~0x00000800u;
-  ::medibus::MedibusRequest* temp = _impl_.device_identification_;
+  ::medibus::DeviceIdentificationRequest* temp = _impl_.device_identification_;
   _impl_.device_identification_ = nullptr;
   return temp;
 }
-inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_device_identification() {
+inline ::medibus::DeviceIdentificationRequest* LoopRequest::_internal_mutable_device_identification() {
   _impl_._has_bits_[0] |= 0x00000800u;
   if (_impl_.device_identification_ == nullptr) {
-    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::medibus::DeviceIdentificationRequest>(GetArenaForAllocation());
     _impl_.device_identification_ = p;
   }
   return _impl_.device_identification_;
 }
-inline ::medibus::MedibusRequest* LoopRequest::mutable_device_identification() {
-  ::medibus::MedibusRequest* _msg = _internal_mutable_device_identification();
+inline ::medibus::DeviceIdentificationRequest* LoopRequest::mutable_device_identification() {
+  ::medibus::DeviceIdentificationRequest* _msg = _internal_mutable_device_identification();
   // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.device_identification)
   return _msg;
 }
-inline void LoopRequest::set_allocated_device_identification(::medibus::MedibusRequest* device_identification) {
+inline void LoopRequest::set_allocated_device_identification(::medibus::DeviceIdentificationRequest* device_identification) {
   ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.device_identification_;
@@ -5115,7 +5135,97 @@ inline void LoopRequest::set_allocated_device_identification(::medibus::MedibusR
   // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.device_identification)
 }
 
-// repeated .medibus.MedibusRealTimeRequest real_time = 14;
+// optional .medibus.MedibusRequest cur_alarms_cp3 = 14;
+inline bool LoopRequest::_internal_has_cur_alarms_cp3() const {
+  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_alarms_cp3_ != nullptr);
+  return value;
+}
+inline bool LoopRequest::has_cur_alarms_cp3() const {
+  return _internal_has_cur_alarms_cp3();
+}
+inline void LoopRequest::clear_cur_alarms_cp3() {
+  if (_impl_.cur_alarms_cp3_ != nullptr) _impl_.cur_alarms_cp3_->Clear();
+  _impl_._has_bits_[0] &= ~0x00001000u;
+}
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_alarms_cp3() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_alarms_cp3_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
+}
+inline const ::medibus::MedibusRequest& LoopRequest::cur_alarms_cp3() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_alarms_cp3)
+  return _internal_cur_alarms_cp3();
+}
+inline void LoopRequest::unsafe_arena_set_allocated_cur_alarms_cp3(
+    ::medibus::MedibusRequest* cur_alarms_cp3) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_alarms_cp3_);
+  }
+  _impl_.cur_alarms_cp3_ = cur_alarms_cp3;
+  if (cur_alarms_cp3) {
+    _impl_._has_bits_[0] |= 0x00001000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00001000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_alarms_cp3)
+}
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_alarms_cp3() {
+  _impl_._has_bits_[0] &= ~0x00001000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_alarms_cp3_;
+  _impl_.cur_alarms_cp3_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_alarms_cp3() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_alarms_cp3)
+  _impl_._has_bits_[0] &= ~0x00001000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_alarms_cp3_;
+  _impl_.cur_alarms_cp3_ = nullptr;
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_alarms_cp3() {
+  _impl_._has_bits_[0] |= 0x00001000u;
+  if (_impl_.cur_alarms_cp3_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_alarms_cp3_ = p;
+  }
+  return _impl_.cur_alarms_cp3_;
+}
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_alarms_cp3() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_alarms_cp3();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_alarms_cp3)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_alarms_cp3(::medibus::MedibusRequest* cur_alarms_cp3) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_alarms_cp3_;
+  }
+  if (cur_alarms_cp3) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_alarms_cp3);
+    if (message_arena != submessage_arena) {
+      cur_alarms_cp3 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_alarms_cp3, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00001000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00001000u;
+  }
+  _impl_.cur_alarms_cp3_ = cur_alarms_cp3;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_alarms_cp3)
+}
+
+// repeated .medibus.MedibusRealTimeRequest real_time = 15;
 inline int LoopRequest::_internal_real_time_size() const {
   return _impl_.real_time_.size();
 }

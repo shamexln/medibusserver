@@ -60,7 +60,7 @@ void NumericMetric::metricUpdateThread()
         auto nextTick     = previousTick + interval;
 
         value = (value + 1) % 100;
-        //writeMetricValue(HandleNumericMetric, value);
+        writeMetricValue(HandleNumericMetric, value);
 
         std::stringstream msg;
         msg << "\rNumericMetric: "

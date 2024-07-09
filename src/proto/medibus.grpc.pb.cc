@@ -22,7 +22,6 @@
 namespace medibus {
 
 static const char* Medibus_method_names[] = {
-  "/medibus.Medibus/CurAlarmsCP3",
   "/medibus.Medibus/CurMeasuredDataCP1",
   "/medibus.Medibus/CurLowAlarmLimitsCP1",
   "/medibus.Medibus/CurHighAlarmLimitsCP1",
@@ -34,6 +33,7 @@ static const char* Medibus_method_names[] = {
   "/medibus.Medibus/CurHighAlarmLimitsCP2",
   "/medibus.Medibus/CurAlarmsCP2",
   "/medibus.Medibus/DeviceIdentification",
+  "/medibus.Medibus/CurAlarmsCP3",
   "/medibus.Medibus/RealTime",
   "/medibus.Medibus/DataInEachLoop",
   "/medibus.Medibus/DelimitedDataInEachLoop",
@@ -46,45 +46,22 @@ std::unique_ptr< Medibus::Stub> Medibus::NewStub(const std::shared_ptr< ::grpc::
 }
 
 Medibus::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options)
-  : channel_(channel), rpcmethod_CurAlarmsCP3_(Medibus_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurMeasuredDataCP1_(Medibus_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurLowAlarmLimitsCP1_(Medibus_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurHighAlarmLimitsCP1_(Medibus_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurAlarmsCP1_(Medibus_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurDeviceSettings_(Medibus_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_TextMessages_(Medibus_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurMeasuredDataCP2_(Medibus_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurLowAlarmLimitsCP2_(Medibus_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurHighAlarmLimitsCP2_(Medibus_method_names[9], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_CurAlarmsCP2_(Medibus_method_names[10], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
-  , rpcmethod_DeviceIdentification_(Medibus_method_names[11], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  : channel_(channel), rpcmethod_CurMeasuredDataCP1_(Medibus_method_names[0], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurLowAlarmLimitsCP1_(Medibus_method_names[1], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurHighAlarmLimitsCP1_(Medibus_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurAlarmsCP1_(Medibus_method_names[3], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurDeviceSettings_(Medibus_method_names[4], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_TextMessages_(Medibus_method_names[5], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurMeasuredDataCP2_(Medibus_method_names[6], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurLowAlarmLimitsCP2_(Medibus_method_names[7], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurHighAlarmLimitsCP2_(Medibus_method_names[8], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurAlarmsCP2_(Medibus_method_names[9], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_DeviceIdentification_(Medibus_method_names[10], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
+  , rpcmethod_CurAlarmsCP3_(Medibus_method_names[11], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_RealTime_(Medibus_method_names[12], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   , rpcmethod_DataInEachLoop_(Medibus_method_names[13], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
   , rpcmethod_DelimitedDataInEachLoop_(Medibus_method_names[14], options.suffix_for_stats(),::grpc::internal::RpcMethod::CLIENT_STREAMING, channel)
   {}
-
-::grpc::Status Medibus::Stub::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CurAlarmsCP3_, context, request, response);
-}
-
-void Medibus::Stub::async::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CurAlarmsCP3_, context, request, response, std::move(f));
-}
-
-void Medibus::Stub::async::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) {
-  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CurAlarmsCP3_, context, request, response, reactor);
-}
-
-::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::medibus::MedibusReply, ::medibus::MedibusRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_CurAlarmsCP3_, context, request);
-}
-
-::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-  auto* result =
-    this->PrepareAsyncCurAlarmsCP3Raw(context, request, cq);
-  result->StartCall();
-  return result;
-}
 
 ::grpc::Status Medibus::Stub::CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CurMeasuredDataCP1_, context, request, response);
@@ -339,6 +316,29 @@ void Medibus::Stub::async::DeviceIdentification(::grpc::ClientContext* context, 
   return result;
 }
 
+::grpc::Status Medibus::Stub::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_CurAlarmsCP3_, context, request, response);
+}
+
+void Medibus::Stub::async::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CurAlarmsCP3_, context, request, response, std::move(f));
+}
+
+void Medibus::Stub::async::CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) {
+  ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_CurAlarmsCP3_, context, request, response, reactor);
+}
+
+::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::medibus::MedibusReply, ::medibus::MedibusRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_CurAlarmsCP3_, context, request);
+}
+
+::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+  auto* result =
+    this->PrepareAsyncCurAlarmsCP3Raw(context, request, cq);
+  result->StartCall();
+  return result;
+}
+
 ::grpc::Status Medibus::Stub::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) {
   return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RealTime_, context, request, response);
 }
@@ -403,7 +403,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurAlarmsCP3(ctx, req, resp);
+               return service->CurMeasuredDataCP1(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[1],
@@ -413,7 +413,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurMeasuredDataCP1(ctx, req, resp);
+               return service->CurLowAlarmLimitsCP1(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[2],
@@ -423,7 +423,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurLowAlarmLimitsCP1(ctx, req, resp);
+               return service->CurHighAlarmLimitsCP1(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[3],
@@ -433,7 +433,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurHighAlarmLimitsCP1(ctx, req, resp);
+               return service->CurAlarmsCP1(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[4],
@@ -443,7 +443,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurAlarmsCP1(ctx, req, resp);
+               return service->CurDeviceSettings(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[5],
@@ -453,7 +453,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurDeviceSettings(ctx, req, resp);
+               return service->TextMessages(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[6],
@@ -463,7 +463,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->TextMessages(ctx, req, resp);
+               return service->CurMeasuredDataCP2(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[7],
@@ -473,7 +473,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurMeasuredDataCP2(ctx, req, resp);
+               return service->CurLowAlarmLimitsCP2(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[8],
@@ -483,7 +483,7 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurLowAlarmLimitsCP2(ctx, req, resp);
+               return service->CurHighAlarmLimitsCP2(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[9],
@@ -493,20 +493,10 @@ Medibus::Service::Service() {
              ::grpc::ServerContext* ctx,
              const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
-               return service->CurHighAlarmLimitsCP2(ctx, req, resp);
-             }, this)));
-  AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Medibus_method_names[10],
-      ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Medibus::Service, ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
-          [](Medibus::Service* service,
-             ::grpc::ServerContext* ctx,
-             const ::medibus::MedibusRequest* req,
-             ::medibus::MedibusReply* resp) {
                return service->CurAlarmsCP2(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
-      Medibus_method_names[11],
+      Medibus_method_names[10],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
       new ::grpc::internal::RpcMethodHandler< Medibus::Service, ::medibus::DeviceIdentificationRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](Medibus::Service* service,
@@ -514,6 +504,16 @@ Medibus::Service::Service() {
              const ::medibus::DeviceIdentificationRequest* req,
              ::medibus::MedibusReply* resp) {
                return service->DeviceIdentification(ctx, req, resp);
+             }, this)));
+  AddMethod(new ::grpc::internal::RpcServiceMethod(
+      Medibus_method_names[11],
+      ::grpc::internal::RpcMethod::NORMAL_RPC,
+      new ::grpc::internal::RpcMethodHandler< Medibus::Service, ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+          [](Medibus::Service* service,
+             ::grpc::ServerContext* ctx,
+             const ::medibus::MedibusRequest* req,
+             ::medibus::MedibusReply* resp) {
+               return service->CurAlarmsCP3(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[12],
@@ -548,13 +548,6 @@ Medibus::Service::Service() {
 }
 
 Medibus::Service::~Service() {
-}
-
-::grpc::Status Medibus::Service::CurAlarmsCP3(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) {
-  (void) context;
-  (void) request;
-  (void) response;
-  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
 ::grpc::Status Medibus::Service::CurMeasuredDataCP1(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) {
@@ -628,6 +621,13 @@ Medibus::Service::~Service() {
 }
 
 ::grpc::Status Medibus::Service::DeviceIdentification(::grpc::ServerContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response) {
+  (void) context;
+  (void) request;
+  (void) response;
+  return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+}
+
+::grpc::Status Medibus::Service::CurAlarmsCP3(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) {
   (void) context;
   (void) request;
   (void) response;

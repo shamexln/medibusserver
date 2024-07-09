@@ -36,14 +36,6 @@ class Medibus final {
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    // Request current Alarms (Codepage 3)
-    virtual ::grpc::Status CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(AsyncCurAlarmsCP3Raw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> PrepareAsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
-    }
     // Request current measured data (codepage 1) 24H
     virtual ::grpc::Status CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncCurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
@@ -132,6 +124,14 @@ class Medibus final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> PrepareAsyncDeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(PrepareAsyncDeviceIdentificationRaw(context, request, cq));
     }
+    // Request current Alarms (Codepage 3)
+    virtual ::grpc::Status CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(AsyncCurAlarmsCP3Raw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> PrepareAsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
+    }
     // Request real time 
     virtual ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) = 0;
     std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
@@ -163,9 +163,6 @@ class Medibus final {
     class async_interface {
      public:
       virtual ~async_interface() {}
-      // Request current Alarms (Codepage 3)
-      virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Request current measured data (codepage 1) 24H
       virtual void CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -199,6 +196,9 @@ class Medibus final {
       // Request device identification 52H
       virtual void DeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void DeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      // Request current Alarms (Codepage 3)
+      virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Request real time 
       virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
@@ -211,8 +211,6 @@ class Medibus final {
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncCurMeasuredDataCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncCurMeasuredDataCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncCurLowAlarmLimitsCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
@@ -235,6 +233,8 @@ class Medibus final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP2Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientWriterInterface< ::medibus::LoopRequest>* DataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response) = 0;
@@ -247,13 +247,6 @@ class Medibus final {
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(AsyncCurAlarmsCP3Raw(context, request, cq));
-    }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
-    }
     ::grpc::Status CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncCurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(AsyncCurMeasuredDataCP1Raw(context, request, cq));
@@ -331,6 +324,13 @@ class Medibus final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncDeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(PrepareAsyncDeviceIdentificationRaw(context, request, cq));
     }
+    ::grpc::Status CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(AsyncCurAlarmsCP3Raw(context, request, cq));
+    }
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
+    }
     ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) override;
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(AsyncRealTimeRaw(context, request, cq));
@@ -359,8 +359,6 @@ class Medibus final {
     class async final :
       public StubInterface::async_interface {
      public:
-      void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
-      void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
       void CurMeasuredDataCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void CurLowAlarmLimitsCP1(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
@@ -383,6 +381,8 @@ class Medibus final {
       void CurAlarmsCP2(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void DeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
       void DeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
+      void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
       void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void DataInEachLoop(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::ClientWriteReactor< ::medibus::LoopRequest>* reactor) override;
@@ -398,8 +398,6 @@ class Medibus final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncCurMeasuredDataCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncCurMeasuredDataCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncCurLowAlarmLimitsCP1Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
@@ -422,6 +420,8 @@ class Medibus final {
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP2Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientWriter< ::medibus::LoopRequest>* DataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response) override;
@@ -430,7 +430,6 @@ class Medibus final {
     ::grpc::ClientWriter< ::medibus::DelimitedLoopRequest>* DelimitedDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response) override;
     ::grpc::ClientAsyncWriter< ::medibus::DelimitedLoopRequest>* AsyncDelimitedDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncWriter< ::medibus::DelimitedLoopRequest>* PrepareAsyncDelimitedDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq) override;
-    const ::grpc::internal::RpcMethod rpcmethod_CurAlarmsCP3_;
     const ::grpc::internal::RpcMethod rpcmethod_CurMeasuredDataCP1_;
     const ::grpc::internal::RpcMethod rpcmethod_CurLowAlarmLimitsCP1_;
     const ::grpc::internal::RpcMethod rpcmethod_CurHighAlarmLimitsCP1_;
@@ -442,6 +441,7 @@ class Medibus final {
     const ::grpc::internal::RpcMethod rpcmethod_CurHighAlarmLimitsCP2_;
     const ::grpc::internal::RpcMethod rpcmethod_CurAlarmsCP2_;
     const ::grpc::internal::RpcMethod rpcmethod_DeviceIdentification_;
+    const ::grpc::internal::RpcMethod rpcmethod_CurAlarmsCP3_;
     const ::grpc::internal::RpcMethod rpcmethod_RealTime_;
     const ::grpc::internal::RpcMethod rpcmethod_DataInEachLoop_;
     const ::grpc::internal::RpcMethod rpcmethod_DelimitedDataInEachLoop_;
@@ -452,8 +452,6 @@ class Medibus final {
    public:
     Service();
     virtual ~Service();
-    // Request current Alarms (Codepage 3)
-    virtual ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request current measured data (codepage 1) 24H
     virtual ::grpc::Status CurMeasuredDataCP1(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request current low Alarm Limits (Codepage 1) 25H
@@ -476,6 +474,8 @@ class Medibus final {
     virtual ::grpc::Status CurAlarmsCP2(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request device identification 52H
     virtual ::grpc::Status DeviceIdentification(::grpc::ServerContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response);
+    // Request current Alarms (Codepage 3)
+    virtual ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request real time 
     virtual ::grpc::Status RealTime(::grpc::ServerContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response);
     // Request all data for each medibus loop 
@@ -484,32 +484,12 @@ class Medibus final {
     virtual ::grpc::Status DelimitedDataInEachLoop(::grpc::ServerContext* context, ::grpc::ServerReader< ::medibus::DelimitedLoopRequest>* reader, ::medibus::MedibusReply* response);
   };
   template <class BaseClass>
-  class WithAsyncMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithAsyncMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodAsync(0);
-    }
-    ~WithAsyncMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestCurAlarmsCP3(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithAsyncMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodAsync(1);
+      ::grpc::Service::MarkMethodAsync(0);
     }
     ~WithAsyncMethod_CurMeasuredDataCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -520,7 +500,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurMeasuredDataCP1(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -529,7 +509,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodAsync(2);
+      ::grpc::Service::MarkMethodAsync(1);
     }
     ~WithAsyncMethod_CurLowAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -540,7 +520,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurLowAlarmLimitsCP1(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -549,7 +529,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodAsync(3);
+      ::grpc::Service::MarkMethodAsync(2);
     }
     ~WithAsyncMethod_CurHighAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -560,7 +540,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurHighAlarmLimitsCP1(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -569,7 +549,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodAsync(4);
+      ::grpc::Service::MarkMethodAsync(3);
     }
     ~WithAsyncMethod_CurAlarmsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -580,7 +560,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurAlarmsCP1(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -589,7 +569,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodAsync(5);
+      ::grpc::Service::MarkMethodAsync(4);
     }
     ~WithAsyncMethod_CurDeviceSettings() override {
       BaseClassMustBeDerivedFromService(this);
@@ -600,7 +580,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurDeviceSettings(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -609,7 +589,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_TextMessages() {
-      ::grpc::Service::MarkMethodAsync(6);
+      ::grpc::Service::MarkMethodAsync(5);
     }
     ~WithAsyncMethod_TextMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -620,7 +600,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestTextMessages(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -629,7 +609,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodAsync(7);
+      ::grpc::Service::MarkMethodAsync(6);
     }
     ~WithAsyncMethod_CurMeasuredDataCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -640,7 +620,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurMeasuredDataCP2(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -649,7 +629,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodAsync(8);
+      ::grpc::Service::MarkMethodAsync(7);
     }
     ~WithAsyncMethod_CurLowAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -660,7 +640,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurLowAlarmLimitsCP2(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -669,7 +649,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodAsync(9);
+      ::grpc::Service::MarkMethodAsync(8);
     }
     ~WithAsyncMethod_CurHighAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -680,7 +660,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurHighAlarmLimitsCP2(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -689,7 +669,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodAsync(10);
+      ::grpc::Service::MarkMethodAsync(9);
     }
     ~WithAsyncMethod_CurAlarmsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -700,7 +680,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurAlarmsCP2(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -709,7 +689,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithAsyncMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodAsync(11);
+      ::grpc::Service::MarkMethodAsync(10);
     }
     ~WithAsyncMethod_DeviceIdentification() override {
       BaseClassMustBeDerivedFromService(this);
@@ -720,6 +700,26 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeviceIdentification(::grpc::ServerContext* context, ::medibus::DeviceIdentificationRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithAsyncMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithAsyncMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodAsync(11);
+    }
+    ~WithAsyncMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCurAlarmsCP3(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -783,47 +783,20 @@ class Medibus final {
       ::grpc::Service::RequestAsyncClientStreaming(14, context, reader, new_call_cq, notification_cq, tag);
     }
   };
-  typedef WithAsyncMethod_CurAlarmsCP3<WithAsyncMethod_CurMeasuredDataCP1<WithAsyncMethod_CurLowAlarmLimitsCP1<WithAsyncMethod_CurHighAlarmLimitsCP1<WithAsyncMethod_CurAlarmsCP1<WithAsyncMethod_CurDeviceSettings<WithAsyncMethod_TextMessages<WithAsyncMethod_CurMeasuredDataCP2<WithAsyncMethod_CurLowAlarmLimitsCP2<WithAsyncMethod_CurHighAlarmLimitsCP2<WithAsyncMethod_CurAlarmsCP2<WithAsyncMethod_DeviceIdentification<WithAsyncMethod_RealTime<WithAsyncMethod_DataInEachLoop<WithAsyncMethod_DelimitedDataInEachLoop<Service > > > > > > > > > > > > > > > AsyncService;
-  template <class BaseClass>
-  class WithCallbackMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithCallbackMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
-            [this](
-                   ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurAlarmsCP3(context, request, response); }));}
-    void SetMessageAllocatorFor_CurAlarmsCP3(
-        ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
-              ->SetMessageAllocator(allocator);
-    }
-    ~WithCallbackMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual ::grpc::ServerUnaryReactor* CurAlarmsCP3(
-      ::grpc::CallbackServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
-  };
+  typedef WithAsyncMethod_CurMeasuredDataCP1<WithAsyncMethod_CurLowAlarmLimitsCP1<WithAsyncMethod_CurHighAlarmLimitsCP1<WithAsyncMethod_CurAlarmsCP1<WithAsyncMethod_CurDeviceSettings<WithAsyncMethod_TextMessages<WithAsyncMethod_CurMeasuredDataCP2<WithAsyncMethod_CurLowAlarmLimitsCP2<WithAsyncMethod_CurHighAlarmLimitsCP2<WithAsyncMethod_CurAlarmsCP2<WithAsyncMethod_DeviceIdentification<WithAsyncMethod_CurAlarmsCP3<WithAsyncMethod_RealTime<WithAsyncMethod_DataInEachLoop<WithAsyncMethod_DelimitedDataInEachLoop<Service > > > > > > > > > > > > > > > AsyncService;
   template <class BaseClass>
   class WithCallbackMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodCallback(1,
+      ::grpc::Service::MarkMethodCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurMeasuredDataCP1(context, request, response); }));}
     void SetMessageAllocatorFor_CurMeasuredDataCP1(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -844,13 +817,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodCallback(2,
+      ::grpc::Service::MarkMethodCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurLowAlarmLimitsCP1(context, request, response); }));}
     void SetMessageAllocatorFor_CurLowAlarmLimitsCP1(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -871,13 +844,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodCallback(3,
+      ::grpc::Service::MarkMethodCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurHighAlarmLimitsCP1(context, request, response); }));}
     void SetMessageAllocatorFor_CurHighAlarmLimitsCP1(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -898,13 +871,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodCallback(4,
+      ::grpc::Service::MarkMethodCallback(3,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurAlarmsCP1(context, request, response); }));}
     void SetMessageAllocatorFor_CurAlarmsCP1(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(3);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -925,13 +898,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodCallback(5,
+      ::grpc::Service::MarkMethodCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurDeviceSettings(context, request, response); }));}
     void SetMessageAllocatorFor_CurDeviceSettings(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(4);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -952,13 +925,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_TextMessages() {
-      ::grpc::Service::MarkMethodCallback(6,
+      ::grpc::Service::MarkMethodCallback(5,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->TextMessages(context, request, response); }));}
     void SetMessageAllocatorFor_TextMessages(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(6);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(5);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -979,13 +952,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodCallback(7,
+      ::grpc::Service::MarkMethodCallback(6,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurMeasuredDataCP2(context, request, response); }));}
     void SetMessageAllocatorFor_CurMeasuredDataCP2(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(7);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(6);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -1006,13 +979,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodCallback(8,
+      ::grpc::Service::MarkMethodCallback(7,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurLowAlarmLimitsCP2(context, request, response); }));}
     void SetMessageAllocatorFor_CurLowAlarmLimitsCP2(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(8);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(7);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -1033,13 +1006,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodCallback(9,
+      ::grpc::Service::MarkMethodCallback(8,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurHighAlarmLimitsCP2(context, request, response); }));}
     void SetMessageAllocatorFor_CurHighAlarmLimitsCP2(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(9);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(8);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -1060,13 +1033,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodCallback(10,
+      ::grpc::Service::MarkMethodCallback(9,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurAlarmsCP2(context, request, response); }));}
     void SetMessageAllocatorFor_CurAlarmsCP2(
         ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(10);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(9);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -1087,13 +1060,13 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithCallbackMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodCallback(11,
+      ::grpc::Service::MarkMethodCallback(10,
           new ::grpc::internal::CallbackUnaryHandler< ::medibus::DeviceIdentificationRequest, ::medibus::MedibusReply>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response) { return this->DeviceIdentification(context, request, response); }));}
     void SetMessageAllocatorFor_DeviceIdentification(
         ::grpc::MessageAllocator< ::medibus::DeviceIdentificationRequest, ::medibus::MedibusReply>* allocator) {
-      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(11);
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(10);
       static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::DeviceIdentificationRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
@@ -1107,6 +1080,33 @@ class Medibus final {
     }
     virtual ::grpc::ServerUnaryReactor* DeviceIdentification(
       ::grpc::CallbackServerContext* /*context*/, const ::medibus::DeviceIdentificationRequest* /*request*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithCallbackMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithCallbackMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodCallback(11,
+          new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->CurAlarmsCP3(context, request, response); }));}
+    void SetMessageAllocatorFor_CurAlarmsCP3(
+        ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
+      ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(11);
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
+              ->SetMessageAllocator(allocator);
+    }
+    ~WithCallbackMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CurAlarmsCP3(
+      ::grpc::CallbackServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_RealTime : public BaseClass {
@@ -1179,32 +1179,15 @@ class Medibus final {
     virtual ::grpc::ServerReadReactor< ::medibus::DelimitedLoopRequest>* DelimitedDataInEachLoop(
       ::grpc::CallbackServerContext* /*context*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
   };
-  typedef WithCallbackMethod_CurAlarmsCP3<WithCallbackMethod_CurMeasuredDataCP1<WithCallbackMethod_CurLowAlarmLimitsCP1<WithCallbackMethod_CurHighAlarmLimitsCP1<WithCallbackMethod_CurAlarmsCP1<WithCallbackMethod_CurDeviceSettings<WithCallbackMethod_TextMessages<WithCallbackMethod_CurMeasuredDataCP2<WithCallbackMethod_CurLowAlarmLimitsCP2<WithCallbackMethod_CurHighAlarmLimitsCP2<WithCallbackMethod_CurAlarmsCP2<WithCallbackMethod_DeviceIdentification<WithCallbackMethod_RealTime<WithCallbackMethod_DataInEachLoop<WithCallbackMethod_DelimitedDataInEachLoop<Service > > > > > > > > > > > > > > > CallbackService;
+  typedef WithCallbackMethod_CurMeasuredDataCP1<WithCallbackMethod_CurLowAlarmLimitsCP1<WithCallbackMethod_CurHighAlarmLimitsCP1<WithCallbackMethod_CurAlarmsCP1<WithCallbackMethod_CurDeviceSettings<WithCallbackMethod_TextMessages<WithCallbackMethod_CurMeasuredDataCP2<WithCallbackMethod_CurLowAlarmLimitsCP2<WithCallbackMethod_CurHighAlarmLimitsCP2<WithCallbackMethod_CurAlarmsCP2<WithCallbackMethod_DeviceIdentification<WithCallbackMethod_CurAlarmsCP3<WithCallbackMethod_RealTime<WithCallbackMethod_DataInEachLoop<WithCallbackMethod_DelimitedDataInEachLoop<Service > > > > > > > > > > > > > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
-  template <class BaseClass>
-  class WithGenericMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithGenericMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodGeneric(0);
-    }
-    ~WithGenericMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-  };
   template <class BaseClass>
   class WithGenericMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodGeneric(1);
+      ::grpc::Service::MarkMethodGeneric(0);
     }
     ~WithGenericMethod_CurMeasuredDataCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1221,7 +1204,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodGeneric(2);
+      ::grpc::Service::MarkMethodGeneric(1);
     }
     ~WithGenericMethod_CurLowAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1238,7 +1221,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodGeneric(3);
+      ::grpc::Service::MarkMethodGeneric(2);
     }
     ~WithGenericMethod_CurHighAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1255,7 +1238,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodGeneric(4);
+      ::grpc::Service::MarkMethodGeneric(3);
     }
     ~WithGenericMethod_CurAlarmsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1272,7 +1255,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodGeneric(5);
+      ::grpc::Service::MarkMethodGeneric(4);
     }
     ~WithGenericMethod_CurDeviceSettings() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1289,7 +1272,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_TextMessages() {
-      ::grpc::Service::MarkMethodGeneric(6);
+      ::grpc::Service::MarkMethodGeneric(5);
     }
     ~WithGenericMethod_TextMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1306,7 +1289,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodGeneric(7);
+      ::grpc::Service::MarkMethodGeneric(6);
     }
     ~WithGenericMethod_CurMeasuredDataCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1323,7 +1306,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodGeneric(8);
+      ::grpc::Service::MarkMethodGeneric(7);
     }
     ~WithGenericMethod_CurLowAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1340,7 +1323,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodGeneric(9);
+      ::grpc::Service::MarkMethodGeneric(8);
     }
     ~WithGenericMethod_CurHighAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1357,7 +1340,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodGeneric(10);
+      ::grpc::Service::MarkMethodGeneric(9);
     }
     ~WithGenericMethod_CurAlarmsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1374,13 +1357,30 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithGenericMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodGeneric(11);
+      ::grpc::Service::MarkMethodGeneric(10);
     }
     ~WithGenericMethod_DeviceIdentification() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
     ::grpc::Status DeviceIdentification(::grpc::ServerContext* /*context*/, const ::medibus::DeviceIdentificationRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+  };
+  template <class BaseClass>
+  class WithGenericMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithGenericMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodGeneric(11);
+    }
+    ~WithGenericMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1437,32 +1437,12 @@ class Medibus final {
     }
   };
   template <class BaseClass>
-  class WithRawMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodRaw(0);
-    }
-    ~WithRawMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    void RequestCurAlarmsCP3(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
-    }
-  };
-  template <class BaseClass>
   class WithRawMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodRaw(1);
+      ::grpc::Service::MarkMethodRaw(0);
     }
     ~WithRawMethod_CurMeasuredDataCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1473,7 +1453,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurMeasuredDataCP1(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1482,7 +1462,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodRaw(2);
+      ::grpc::Service::MarkMethodRaw(1);
     }
     ~WithRawMethod_CurLowAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1493,7 +1473,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurLowAlarmLimitsCP1(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1502,7 +1482,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodRaw(3);
+      ::grpc::Service::MarkMethodRaw(2);
     }
     ~WithRawMethod_CurHighAlarmLimitsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1513,7 +1493,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurHighAlarmLimitsCP1(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1522,7 +1502,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodRaw(4);
+      ::grpc::Service::MarkMethodRaw(3);
     }
     ~WithRawMethod_CurAlarmsCP1() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1533,7 +1513,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurAlarmsCP1(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(3, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1542,7 +1522,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodRaw(5);
+      ::grpc::Service::MarkMethodRaw(4);
     }
     ~WithRawMethod_CurDeviceSettings() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1553,7 +1533,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurDeviceSettings(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(4, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1562,7 +1542,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_TextMessages() {
-      ::grpc::Service::MarkMethodRaw(6);
+      ::grpc::Service::MarkMethodRaw(5);
     }
     ~WithRawMethod_TextMessages() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1573,7 +1553,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestTextMessages(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(5, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1582,7 +1562,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodRaw(7);
+      ::grpc::Service::MarkMethodRaw(6);
     }
     ~WithRawMethod_CurMeasuredDataCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1593,7 +1573,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurMeasuredDataCP2(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(6, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1602,7 +1582,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodRaw(8);
+      ::grpc::Service::MarkMethodRaw(7);
     }
     ~WithRawMethod_CurLowAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1613,7 +1593,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurLowAlarmLimitsCP2(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(7, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1622,7 +1602,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodRaw(9);
+      ::grpc::Service::MarkMethodRaw(8);
     }
     ~WithRawMethod_CurHighAlarmLimitsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1633,7 +1613,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurHighAlarmLimitsCP2(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(8, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1642,7 +1622,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodRaw(10);
+      ::grpc::Service::MarkMethodRaw(9);
     }
     ~WithRawMethod_CurAlarmsCP2() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1653,7 +1633,7 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestCurAlarmsCP2(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
-      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+      ::grpc::Service::RequestAsyncUnary(9, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
   template <class BaseClass>
@@ -1662,7 +1642,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodRaw(11);
+      ::grpc::Service::MarkMethodRaw(10);
     }
     ~WithRawMethod_DeviceIdentification() override {
       BaseClassMustBeDerivedFromService(this);
@@ -1673,6 +1653,26 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     void RequestDeviceIdentification(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+      ::grpc::Service::RequestAsyncUnary(10, context, request, response, new_call_cq, notification_cq, tag);
+    }
+  };
+  template <class BaseClass>
+  class WithRawMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodRaw(11);
+    }
+    ~WithRawMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    void RequestCurAlarmsCP3(::grpc::ServerContext* context, ::grpc::ByteBuffer* request, ::grpc::ServerAsyncResponseWriter< ::grpc::ByteBuffer>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(11, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -1737,34 +1737,12 @@ class Medibus final {
     }
   };
   template <class BaseClass>
-  class WithRawCallbackMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithRawCallbackMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodRawCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
-            [this](
-                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurAlarmsCP3(context, request, response); }));
-    }
-    ~WithRawCallbackMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable synchronous version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    virtual ::grpc::ServerUnaryReactor* CurAlarmsCP3(
-      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
-  };
-  template <class BaseClass>
   class WithRawCallbackMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodRawCallback(1,
+      ::grpc::Service::MarkMethodRawCallback(0,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurMeasuredDataCP1(context, request, response); }));
@@ -1786,7 +1764,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodRawCallback(2,
+      ::grpc::Service::MarkMethodRawCallback(1,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurLowAlarmLimitsCP1(context, request, response); }));
@@ -1808,7 +1786,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodRawCallback(3,
+      ::grpc::Service::MarkMethodRawCallback(2,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurHighAlarmLimitsCP1(context, request, response); }));
@@ -1830,7 +1808,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodRawCallback(4,
+      ::grpc::Service::MarkMethodRawCallback(3,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurAlarmsCP1(context, request, response); }));
@@ -1852,7 +1830,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodRawCallback(5,
+      ::grpc::Service::MarkMethodRawCallback(4,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurDeviceSettings(context, request, response); }));
@@ -1874,7 +1852,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_TextMessages() {
-      ::grpc::Service::MarkMethodRawCallback(6,
+      ::grpc::Service::MarkMethodRawCallback(5,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->TextMessages(context, request, response); }));
@@ -1896,7 +1874,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodRawCallback(7,
+      ::grpc::Service::MarkMethodRawCallback(6,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurMeasuredDataCP2(context, request, response); }));
@@ -1918,7 +1896,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodRawCallback(8,
+      ::grpc::Service::MarkMethodRawCallback(7,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurLowAlarmLimitsCP2(context, request, response); }));
@@ -1940,7 +1918,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodRawCallback(9,
+      ::grpc::Service::MarkMethodRawCallback(8,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurHighAlarmLimitsCP2(context, request, response); }));
@@ -1962,7 +1940,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodRawCallback(10,
+      ::grpc::Service::MarkMethodRawCallback(9,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurAlarmsCP2(context, request, response); }));
@@ -1984,7 +1962,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithRawCallbackMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodRawCallback(11,
+      ::grpc::Service::MarkMethodRawCallback(10,
           new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
             [this](
                    ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->DeviceIdentification(context, request, response); }));
@@ -1998,6 +1976,28 @@ class Medibus final {
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* DeviceIdentification(
+      ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
+  };
+  template <class BaseClass>
+  class WithRawCallbackMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithRawCallbackMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodRawCallback(11,
+          new ::grpc::internal::CallbackUnaryHandler< ::grpc::ByteBuffer, ::grpc::ByteBuffer>(
+            [this](
+                   ::grpc::CallbackServerContext* context, const ::grpc::ByteBuffer* request, ::grpc::ByteBuffer* response) { return this->CurAlarmsCP3(context, request, response); }));
+    }
+    ~WithRawCallbackMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable synchronous version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    virtual ::grpc::ServerUnaryReactor* CurAlarmsCP3(
       ::grpc::CallbackServerContext* /*context*/, const ::grpc::ByteBuffer* /*request*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
@@ -2067,39 +2067,12 @@ class Medibus final {
       ::grpc::CallbackServerContext* /*context*/, ::grpc::ByteBuffer* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
-  class WithStreamedUnaryMethod_CurAlarmsCP3 : public BaseClass {
-   private:
-    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
-   public:
-    WithStreamedUnaryMethod_CurAlarmsCP3() {
-      ::grpc::Service::MarkMethodStreamed(0,
-        new ::grpc::internal::StreamedUnaryHandler<
-          ::medibus::MedibusRequest, ::medibus::MedibusReply>(
-            [this](::grpc::ServerContext* context,
-                   ::grpc::ServerUnaryStreamer<
-                     ::medibus::MedibusRequest, ::medibus::MedibusReply>* streamer) {
-                       return this->StreamedCurAlarmsCP3(context,
-                         streamer);
-                  }));
-    }
-    ~WithStreamedUnaryMethod_CurAlarmsCP3() override {
-      BaseClassMustBeDerivedFromService(this);
-    }
-    // disable regular version of this method
-    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
-      abort();
-      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
-    }
-    // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedCurAlarmsCP3(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::MedibusRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
-  };
-  template <class BaseClass>
   class WithStreamedUnaryMethod_CurMeasuredDataCP1 : public BaseClass {
    private:
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurMeasuredDataCP1() {
-      ::grpc::Service::MarkMethodStreamed(1,
+      ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2126,7 +2099,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurLowAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodStreamed(2,
+      ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2153,7 +2126,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurHighAlarmLimitsCP1() {
-      ::grpc::Service::MarkMethodStreamed(3,
+      ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2180,7 +2153,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurAlarmsCP1() {
-      ::grpc::Service::MarkMethodStreamed(4,
+      ::grpc::Service::MarkMethodStreamed(3,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2207,7 +2180,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurDeviceSettings() {
-      ::grpc::Service::MarkMethodStreamed(5,
+      ::grpc::Service::MarkMethodStreamed(4,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2234,7 +2207,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_TextMessages() {
-      ::grpc::Service::MarkMethodStreamed(6,
+      ::grpc::Service::MarkMethodStreamed(5,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2261,7 +2234,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurMeasuredDataCP2() {
-      ::grpc::Service::MarkMethodStreamed(7,
+      ::grpc::Service::MarkMethodStreamed(6,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2288,7 +2261,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurLowAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodStreamed(8,
+      ::grpc::Service::MarkMethodStreamed(7,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2315,7 +2288,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurHighAlarmLimitsCP2() {
-      ::grpc::Service::MarkMethodStreamed(9,
+      ::grpc::Service::MarkMethodStreamed(8,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2342,7 +2315,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_CurAlarmsCP2() {
-      ::grpc::Service::MarkMethodStreamed(10,
+      ::grpc::Service::MarkMethodStreamed(9,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2369,7 +2342,7 @@ class Medibus final {
     void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
    public:
     WithStreamedUnaryMethod_DeviceIdentification() {
-      ::grpc::Service::MarkMethodStreamed(11,
+      ::grpc::Service::MarkMethodStreamed(10,
         new ::grpc::internal::StreamedUnaryHandler<
           ::medibus::DeviceIdentificationRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
@@ -2389,6 +2362,33 @@ class Medibus final {
     }
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedDeviceIdentification(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::DeviceIdentificationRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
+  };
+  template <class BaseClass>
+  class WithStreamedUnaryMethod_CurAlarmsCP3 : public BaseClass {
+   private:
+    void BaseClassMustBeDerivedFromService(const Service* /*service*/) {}
+   public:
+    WithStreamedUnaryMethod_CurAlarmsCP3() {
+      ::grpc::Service::MarkMethodStreamed(11,
+        new ::grpc::internal::StreamedUnaryHandler<
+          ::medibus::MedibusRequest, ::medibus::MedibusReply>(
+            [this](::grpc::ServerContext* context,
+                   ::grpc::ServerUnaryStreamer<
+                     ::medibus::MedibusRequest, ::medibus::MedibusReply>* streamer) {
+                       return this->StreamedCurAlarmsCP3(context,
+                         streamer);
+                  }));
+    }
+    ~WithStreamedUnaryMethod_CurAlarmsCP3() override {
+      BaseClassMustBeDerivedFromService(this);
+    }
+    // disable regular version of this method
+    ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+      abort();
+      return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
+    }
+    // replace default version of method with streamed unary
+    virtual ::grpc::Status StreamedCurAlarmsCP3(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::MedibusRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_RealTime : public BaseClass {
@@ -2417,9 +2417,9 @@ class Medibus final {
     // replace default version of method with streamed unary
     virtual ::grpc::Status StreamedRealTime(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::MedibusRealTimeRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
   };
-  typedef WithStreamedUnaryMethod_CurAlarmsCP3<WithStreamedUnaryMethod_CurMeasuredDataCP1<WithStreamedUnaryMethod_CurLowAlarmLimitsCP1<WithStreamedUnaryMethod_CurHighAlarmLimitsCP1<WithStreamedUnaryMethod_CurAlarmsCP1<WithStreamedUnaryMethod_CurDeviceSettings<WithStreamedUnaryMethod_TextMessages<WithStreamedUnaryMethod_CurMeasuredDataCP2<WithStreamedUnaryMethod_CurLowAlarmLimitsCP2<WithStreamedUnaryMethod_CurHighAlarmLimitsCP2<WithStreamedUnaryMethod_CurAlarmsCP2<WithStreamedUnaryMethod_DeviceIdentification<WithStreamedUnaryMethod_RealTime<Service > > > > > > > > > > > > > StreamedUnaryService;
+  typedef WithStreamedUnaryMethod_CurMeasuredDataCP1<WithStreamedUnaryMethod_CurLowAlarmLimitsCP1<WithStreamedUnaryMethod_CurHighAlarmLimitsCP1<WithStreamedUnaryMethod_CurAlarmsCP1<WithStreamedUnaryMethod_CurDeviceSettings<WithStreamedUnaryMethod_TextMessages<WithStreamedUnaryMethod_CurMeasuredDataCP2<WithStreamedUnaryMethod_CurLowAlarmLimitsCP2<WithStreamedUnaryMethod_CurHighAlarmLimitsCP2<WithStreamedUnaryMethod_CurAlarmsCP2<WithStreamedUnaryMethod_DeviceIdentification<WithStreamedUnaryMethod_CurAlarmsCP3<WithStreamedUnaryMethod_RealTime<Service > > > > > > > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
-  typedef WithStreamedUnaryMethod_CurAlarmsCP3<WithStreamedUnaryMethod_CurMeasuredDataCP1<WithStreamedUnaryMethod_CurLowAlarmLimitsCP1<WithStreamedUnaryMethod_CurHighAlarmLimitsCP1<WithStreamedUnaryMethod_CurAlarmsCP1<WithStreamedUnaryMethod_CurDeviceSettings<WithStreamedUnaryMethod_TextMessages<WithStreamedUnaryMethod_CurMeasuredDataCP2<WithStreamedUnaryMethod_CurLowAlarmLimitsCP2<WithStreamedUnaryMethod_CurHighAlarmLimitsCP2<WithStreamedUnaryMethod_CurAlarmsCP2<WithStreamedUnaryMethod_DeviceIdentification<WithStreamedUnaryMethod_RealTime<Service > > > > > > > > > > > > > StreamedService;
+  typedef WithStreamedUnaryMethod_CurMeasuredDataCP1<WithStreamedUnaryMethod_CurLowAlarmLimitsCP1<WithStreamedUnaryMethod_CurHighAlarmLimitsCP1<WithStreamedUnaryMethod_CurAlarmsCP1<WithStreamedUnaryMethod_CurDeviceSettings<WithStreamedUnaryMethod_TextMessages<WithStreamedUnaryMethod_CurMeasuredDataCP2<WithStreamedUnaryMethod_CurLowAlarmLimitsCP2<WithStreamedUnaryMethod_CurHighAlarmLimitsCP2<WithStreamedUnaryMethod_CurAlarmsCP2<WithStreamedUnaryMethod_DeviceIdentification<WithStreamedUnaryMethod_CurAlarmsCP3<WithStreamedUnaryMethod_RealTime<Service > > > > > > > > > > > > > StreamedService;
 };
 // The following are all request from client to server with the parameter filled with the device responds
 
