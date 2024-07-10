@@ -475,11 +475,11 @@ namespace MedibusServer
 	class CallData
 	{
 	public:
-		CallData(Medibus::AsyncService* pService, ServerCompletionQueue* pCq)
-			:m_pService(pService), m_pCq(pCq), m_eStatus(CREATE) {};
+		CallData(Medibus::AsyncService* pService, ServerCompletionQueue* pCq, std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>* pDataModel)
+			:m_pService(pService), m_pCq(pCq), m_eStatus(CREATE), m_pDataModel(pDataModel) {};
 		virtual ~CallData() {}
 		virtual void Proceed(bool ok) = 0;
-	public:
+
 		Medibus::AsyncService* m_pService;
 		ServerCompletionQueue* m_pCq;
 		enum CallStatus
@@ -495,369 +495,16 @@ namespace MedibusServer
 		// second param is strCode or device id number
 		// third param is value object(including facility, poc, bed )
 		// forth param is sequenceId
-		std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>> m_data;
-	};
-
-
-	class CurMeasuredDataCP1Request final : public CallData
-	{
-	public:
-		explicit CurMeasuredDataCP1Request(Medibus::AsyncService* pService, ServerCompletionQueue* pCq)
-			: CallData(pService, pCq), m_Responder(&m_ctx)
-		{
-			Proceed(true);
-		}
-
-		~CurMeasuredDataCP1Request() {}
-
-		void Proceed(bool ok) override
-		{
-			std::cout << "this:  " << this
-				<< "CurMeasuredDataCP1Request Proceed(), status: " << m_eStatus
-				<< std::endl;
-			if (m_eStatus == CREATE)
-			{
-				std::cout << "this:  " << this
-					<< "CurMeasuredDataCP1Request Proceed(), status: " << m_eStatus
-					<< std::endl;
-				// Make this instance progress to the PROCESS state.
-				m_eStatus = PROCESS;
-				// As part of the initial CREATE state, we *request* that the system
-				// start processing SayHello requests. In this request, "this" acts are
-				// the tag uniquely identifying the request (so that different CallData
-				// instances can serve different requests concurrently), in this case
-				// the memory address of this CallData instance.
-				m_pService->RequestCurMeasuredDataCP1(&m_ctx, &m_Request, &m_Responder, m_pCq, m_pCq,
-					this);
-
-			}
-			else if (m_eStatus == PROCESS)
-			{
-				if (!ok)
-				{
-					// Not ok in PROCESS means the server has been Shutdown
-					// before the call got matched to an incoming RPC.
-					delete this;
-				}
-				// Spawn a new CallData instance to serve new clients while we process
-				// the one for this CallData. The instance will deallocate itself as
-				// part of its FINISH state.
-				new CurMeasuredDataCP1Request(m_pService, m_pCq);
-
-				// The actual processing.
-				/*std::string prefix("Hello ");
-				std::string tmp;
-				for (int i = 0; i < request_.deviceresponds_size(); i++)
-				{
-				  tmp += request_.deviceresponds(i).code() + request_.deviceresponds(i).value() + request_.deviceresponds(i).unit();
-				}
-				reply_.set_message(prefix + tmp);
-				std::cout << "Binding " << this << "Receive message  "  << prefix + tmp << std::endl;*/
-				// And we are done! Let the gRPC runtime know we've finished, using the
-				// memory address of this instance as the uniquely identifying tag for
-				// the event.
-				m_eStatus = FINISH;
-				m_Responder.Finish(m_Reply, grpc::Status::OK, this);
-			}
-			else
-			{
-				GPR_ASSERT(m_eStatus == FINISH);
-				// Once in the FINISH state, deallocate ourselves (CallData).
-				delete this;
-			}
-		}
-
-	private:
-		ServerAsyncResponseWriter<MedibusReply> m_Responder;
-		MedibusRequest m_Request;
-		MedibusReply m_Reply;
-		ServerContext m_ctx;
-	};
-
-	class CurDeviceSettingsRequest final : public CallData
-	{
-	public:
-		explicit CurDeviceSettingsRequest(Medibus::AsyncService* pService, ServerCompletionQueue* pCq)
-			: CallData(pService, pCq), m_Responder(&m_ctx)
-		{
-			Proceed(true);
-		}
-
-		void Proceed(bool ok) override
-		{
-			std::cout << "this:  " << this
-				<< "CurDeviceSettingsRequest Proceed(), status: " << m_eStatus
-				<< std::endl;
-			if (m_eStatus == CREATE)
-			{
-				std::cout << "this:  " << this
-					<< "CurDeviceSettingsRequest Proceed(), status: " << m_eStatus
-					<< std::endl;
-				// Make this instance progress to the PROCESS state.
-				m_eStatus = PROCESS;
-
-				// As part of the initial CREATE state, we *request* that the system
-				// start processing SayHello requests. In this request, "this" acts are
-				// the tag uniquely identifying the request (so that different CallData
-				// instances can serve different requests concurrently), in this case
-				// the memory address of this CallData instance.
-				m_pService->RequestCurDeviceSettings(&m_ctx, &m_Request, &m_Responder, m_pCq, m_pCq,
-					this);
-			}
-			else if (m_eStatus == PROCESS)
-			{
-				if (!ok)
-				{
-					// Not ok in PROCESS means the server has been Shutdown
-					// before the call got matched to an incoming RPC.
-					delete this;
-				}
-				// Spawn a new CallData instance to serve new clients while we process
-				// the one for this CallData. The instance will deallocate itself as
-				// part of its FINISH state.
-				new CurDeviceSettingsRequest(m_pService, m_pCq);
-
-				// The actual processing.
-			   /* std::string prefix("Hello ");
-				std::string tmp;
-				for (int i = 0; i < request_.deviceresponds_size(); i++)
-				{
-					tmp += request_.deviceresponds(i).code() + request_.deviceresponds(i).value() + request_.deviceresponds(i).unit();
-				}
-				reply_.set_message(prefix + tmp);*/
-
-				// And we are done! Let the gRPC runtime know we've finished, using the
-				// memory address of this instance as the uniquely identifying tag for
-				// the event.
-				m_eStatus = FINISH;
-				m_Responder.Finish(m_Reply, grpc::Status::OK, this);
-			}
-			else
-			{
-				GPR_ASSERT(m_eStatus == FINISH);
-				// Once in the FINISH state, deallocate ourselves (CallData).
-				delete this;
-			}
-		}
-
-	private:
-		ServerAsyncResponseWriter<MedibusReply> m_Responder;
-		MedibusRequest m_Request;
-		MedibusReply m_Reply;
-		ServerContext m_ctx;
-	};
-
-	class CurLowAlarmLimitsCP1Request final : public CallData
-	{
-	public:
-		explicit CurLowAlarmLimitsCP1Request(Medibus::AsyncService* pService, ServerCompletionQueue* pCq)
-			: CallData(pService, pCq), m_Responder(&m_ctx)
-		{
-			Proceed(true);
-		}
-
-		void Proceed(bool ok) override
-		{
-			std::cout << "this:  " << this
-				<< "CurLowAlarmLimitsCP1Request Proceed(), status: " << m_eStatus
-				<< std::endl;
-			if (m_eStatus == CREATE)
-			{
-				std::cout << "this:  " << this
-					<< "CurLowAlarmLimitsCP1Request Proceed(), status: " << m_eStatus
-					<< std::endl;
-
-				// Make this instance progress to the PROCESS state.
-				m_eStatus = PROCESS;
-
-				// As part of the initial CREATE state, we *request* that the system
-				// start processing SayHello requests. In this request, "this" acts are
-				// the tag uniquely identifying the request (so that different CallData
-				// instances can serve different requests concurrently), in this case
-				// the memory address of this CallData instance.
-				m_pService->RequestCurLowAlarmLimitsCP1(&m_ctx, &m_Request, &m_Responder, m_pCq, m_pCq,
-					this);
-			}
-			else if (m_eStatus == PROCESS)
-			{
-				if (!ok)
-				{
-					// Not ok in PROCESS means the server has been Shutdown
-					// before the call got matched to an incoming RPC.
-					delete this;
-				}
-				// Spawn a new CallData instance to serve new clients while we process
-				// the one for this CallData. The instance will deallocate itself as
-				// part of its FINISH state.
-				new CurLowAlarmLimitsCP1Request(m_pService, m_pCq);
-
-				// The actual processing.
-				/*std::string prefix("Hello ");
-				std::string tmp;
-				for (int i = 0; i < request_.deviceresponds_size(); i++)
-				{
-					tmp += request_.deviceresponds(i).code() + request_.deviceresponds(i).value() + request_.deviceresponds(i).unit();
-				}
-				reply_.set_message(prefix + tmp);*/
-
-				// And we are done! Let the gRPC runtime know we've finished, using the
-				// memory address of this instance as the uniquely identifying tag for
-				// the event.
-				m_eStatus = FINISH;
-				m_Responder.Finish(m_Reply, grpc::Status::OK, this);
-			}
-			else
-			{
-				GPR_ASSERT(m_eStatus == FINISH);
-				// Once in the FINISH state, deallocate ourselves (CallData).
-				delete this;
-			}
-		}
-
-	private:
-		ServerAsyncResponseWriter<MedibusReply> m_Responder;
-		MedibusRequest m_Request;
-		MedibusReply m_Reply;
-		ServerContext m_ctx;
-	};
-
-	class DataInEachLoopRequest final : public CallData
-	{
-	public:
-		explicit DataInEachLoopRequest(Medibus::AsyncService* pService, ServerCompletionQueue* pCq)
-			: CallData(pService, pCq), m_Responder(&m_ctx), m_stream(&m_ctx)
-		{
-			Proceed(true);
-		}
-
-		void Proceed(bool ok) override
-		{
-			if (m_eStatus == CREATE)
-			{
-				std::cout << "this:  " << this
-					<< "DataInEachLoopRequest Proceed(), status: " << m_eStatus
-					<< std::endl;
-
-				std::string formatted_string = str_format("Waiting for data <{0}> with status <{1}> ", this, m_eStatus);
-				BOOST_LOG(lg) << formatted_string;
-				// Make this instance progress to the PROCESS state.
-				m_eStatus = PROCESS;
-
-				// As part of the initial CREATE state, we *request* that the system
-				// start processing SayHello requests. In this request, "this" acts are
-				// the tag uniquely identifying the request (so that different CallData
-				// instances can serve different requests concurrently), in this case
-				// the memory address of this CallData instance.
-				m_pService->RequestDataInEachLoop(&m_ctx, &m_stream, m_pCq, m_pCq,
-					this);
-			}
-			else if (m_eStatus == PROCESS)
-			{
-				std::cout << "this:  " << this
-					<< "DataInEachLoopRequest Proceed(), status: " << m_eStatus
-					<< std::endl;
-
-				std::string formatted_string = str_format("Processing data <{0}> with status <{1}> ", this, m_eStatus);
-				BOOST_LOG(lg) << formatted_string;
-				if (!ok)
-				{
-					// Not ok in PROCESS means the server has been Shutdown
-					// before the call got matched to an incoming RPC.
-					m_eStatus = FINISH;
-					delete this;
-					return;
-				}
-
-				// The actual processing.
-				// sometimes read will get nothing, so we must check the id if request 
-				m_stream.Read(&m_LoopRequest, this);
-				if (m_LoopRequest.has_instance_id())
-				{
-					// Spawn a new CallData instance to serve new clients while we process
-					// the one for this CallData. The instance will deallocate itself as
-					// part of its FINISH state.
-					new DataInEachLoopRequest(m_pService, m_pCq);
-
-					std::string prefix("Hello ");
-					std::string tmp;
-					if (m_LoopRequest.has_cur_measured_data_cp1())
-					{
-						// handle curmeasureddatacp1
-					}
-					if (m_LoopRequest.has_cur_device_settings())
-					{
-
-						for (int i = 0; i < m_LoopRequest.cur_device_settings().deviceresponds_size(); i++)
-						{
-							auto req = m_LoopRequest.cur_device_settings();
-							/*std::cout << "server side:  "
-								<< "DataInEachLoopRequest Proceed(), status: " << m_eStatus << "\r\n"
-								<< "DataInEachLoopRequest Proceed(), id: " << m_LoopRequest.id() << "\r\n"
-								<< "DataInEachLoopRequest Proceed(), code: " << req.deviceresponds(i).code() << "\r\n"
-								<< "DataInEachLoopRequest Proceed(), value: " << req.deviceresponds(i).value() << "\r\n"
-								<< "DataInEachLoopRequest Proceed(), unit: " << req.deviceresponds(i).unit() << "\r\n"
-								<< std::endl;*/
-
-							std::string formatted_string = str_format("Receiving data with id=<{0}> and code=<{1}> and value=<{2}> and unit=<{3}> ", m_LoopRequest.instance_id(),
-								req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
-							BOOST_LOG(lg) << formatted_string;
-							//tmp += req.deviceresponds(i).code() + req.deviceresponds(i).value() + req.deviceresponds(i).unit();
-
-
-						}
-						//m_Reply.set_message(prefix + tmp);
-
-					}
-
-					if (m_LoopRequest.has_text_messages())
-					{
-
-						for (int i = 0; i < m_LoopRequest.text_messages().deviceresponds_size(); i++)
-						{
-							auto req = m_LoopRequest.text_messages();
-							std::string formatted_string = str_format("Receiving data with id=<{0}> and code=<{1}> and value=<{2}> and unit=<{3}> ", m_LoopRequest.instance_id(),
-								req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
-							BOOST_LOG(lg) << formatted_string;
-
-							//tmp += req.deviceresponds(i).code() + req.deviceresponds(i).value() + req.deviceresponds(i).unit();
-						}
-						//m_Reply.set_message(prefix + tmp);
-
-					}
-
-					// And we are done! Let the gRPC runtime know we've finished, using the
-					// memory address of this instance as the uniquely identifying tag for
-					// the event.
-
-					// for client-side stream, we not to send finish status
-					// m_eStatus = FINISH;
-					// m_Responder.Finish(m_Reply, Status::OK, this);
-				}
-
-
-			}
-			else
-			{
-				GPR_ASSERT(m_eStatus == FINISH);
-				// Once in the FINISH state, deallocate ourselves (CallData).
-				delete this;
-			}
-		}
-
-	private:
-		ServerAsyncResponseWriter<MedibusReply> m_Responder;
-		LoopRequest m_LoopRequest;
-		MedibusReply m_Reply;
-		ServerContext m_ctx;
-		ServerAsyncReader<MedibusReply, LoopRequest> m_stream;
+		std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>* m_pDataModel;
 	};
 
 
 	class DelimitedDataInEachLoopRequest final : public CallData
 	{
 	public:
-		explicit DelimitedDataInEachLoopRequest(Medibus::AsyncService* pService, ServerCompletionQueue* pCq, SdcProvider* pProvider)
-			: CallData(pService, pCq), m_Responder(&m_ctx), m_stream(&m_ctx), m_pProvider(pProvider)
+		explicit DelimitedDataInEachLoopRequest(Medibus::AsyncService* pService, ServerCompletionQueue* pCq, SdcProvider* pProvider,
+			std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>* pdatamodel)
+			: CallData(pService, pCq, pdatamodel), m_Responder(&m_ctx), m_stream(&m_ctx), m_pProvider(pProvider)
 		{
 			Proceed(true);
 		}
@@ -914,7 +561,7 @@ namespace MedibusServer
 					// the one for this CallData. The instance will deallocate itself as
 					// part of its FINISH state.
 					// Waiting for new instance ot the same instance with new connection.
-					new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider);
+					new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider, m_pDataModel);
 
 					// set current status is FINISH and delete ourselves
 					m_eStatus = FINISH;
@@ -937,7 +584,7 @@ namespace MedibusServer
 					// Spawn a new CallData instance to serve new clients while we process
 					// the one for this CallData. The instance will deallocate itself as
 					// part of its FINISH state.
-					new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider);
+					new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider, m_pDataModel);
 
 					// 
 					auto t1 = std::chrono::high_resolution_clock::now();
@@ -964,8 +611,7 @@ namespace MedibusServer
 							}
 							if (m_LoopRequest.has_cur_device_settings())
 							{
-
-								std::map<std::string, std::pair<ExtraInfo, int>> data;
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Device settings");
 								for (int i = 0; i < m_LoopRequest.cur_device_settings().deviceresponds_size(); i++)
 								{
 									auto req = m_LoopRequest.cur_device_settings();
@@ -1045,8 +691,7 @@ namespace MedibusServer
 							if (m_LoopRequest.has_device_identification())
 							{
 								// handle DeviceIdentification
-								std::map<std::string, std::pair<ExtraInfo, int>> data;
-
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Device identification numbers");
 								{
 									auto req = m_LoopRequest.device_identification();
 									ExtraInfo extra_val;
@@ -1068,7 +713,7 @@ namespace MedibusServer
 									}
 									else
 									{
-										if (data[req.deviceresponds().deviceid()].first.facility != req.deviceresponds().facility() 
+										if (data[req.deviceresponds().deviceid()].first.facility != req.deviceresponds().facility()
 											|| data[req.deviceresponds().deviceid()].first.poc != req.deviceresponds().poc()
 											|| data[req.deviceresponds().deviceid()].first.bed != req.deviceresponds().bed())
 										{
@@ -1107,25 +752,26 @@ namespace MedibusServer
 								
 								ExtraInfo extra_value;
 								int sequenceId;
+
+								DeviceInfo deviceInfo;
+
 								for (auto it = data.begin(); it != data.end(); ++it)
 								{
 									// take the first element
 									extra_value = it->second.first;
 									sequenceId = it->second.second;
-									break;
-								}
-								// get the information from json
-								DeviceInfo deviceInfo;
-								if (JsonHandlerSingleton::instance().GetDeviceInfo(extra_value.value, deviceInfo))
-								{
-									if (sequenceId != -1)
+
+									// get the information from json
+									if (JsonHandlerSingleton::instance().GetDeviceInfo(extra_value.value, deviceInfo))
 									{
-										m_pProvider->start(deviceInfo.DeviceName, deviceInfo.CF10TypeCode, "mds0" + deviceInfo.CF10TypeCode);
-										m_pProvider->initLocation(extra_value.facility, extra_value.poc, extra_value.bed);
+										if (sequenceId != -1)
+										{
+											m_pProvider->start(deviceInfo.DeviceName, deviceInfo.CF10TypeCode, "mds0" + deviceInfo.CF10TypeCode);
+											m_pProvider->initLocation(extra_value.facility, extra_value.poc, extra_value.bed);
+										}
 									}
 								}
 
-								
 								// Device settings 
 								data = m_data["Device settings"];
 								for (auto it = data.begin(); it != data.end(); ++it)
@@ -1257,7 +903,7 @@ namespace MedibusServer
 				// the one for this CallData. The instance will deallocate itself as
 				// part of its FINISH state.
 				// Waiting for new instance ot the same instance with new connection.
-				new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider);
+				new DelimitedDataInEachLoopRequest(m_pService, m_pCq, m_pProvider, m_pDataModel);
 
 
 				// Once in the FINISH state, deallocate ourselves (CallData).
@@ -1273,7 +919,10 @@ namespace MedibusServer
 		ServerContext m_ctx;
 		ServerAsyncReader<MedibusReply, DelimitedLoopRequest> m_stream;
 		SdcProvider* m_pProvider;
+		std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>> m_data;
 	};
+
+
 	class ServerImpl final
 	{
 	public:
@@ -1314,7 +963,20 @@ namespace MedibusServer
 				m_vecproviders.emplace_back(std::make_unique<SdcProvider>());
 			}
 				
-
+			for (int i = 0; i < m_nNumThreads; i++)
+			{
+				ExtraInfo extraInfo;
+				std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>> exInfo;
+				std::map<std::string, std::pair<ExtraInfo, int>> innerMap; 
+				//innerMap.emplace("", std::make_pair(extraInfo, -1)) ;
+				exInfo.emplace("Device identification numbers", innerMap);
+				exInfo.emplace("Device settings", innerMap);
+				exInfo.emplace("Measured data and alarm limits", innerMap);
+				exInfo.emplace("Real-time data", innerMap);
+				exInfo.emplace("Alarm status", innerMap);
+				exInfo.emplace("Text messages", innerMap);
+				m_vecdataModel.emplace_back(std::make_unique<std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>>(exInfo));
+			}
 			// Finally assemble the server.
 			m_Server = builder.BuildAndStart();
 			std::cout << "Server listening on " << server_address << std::endl;
@@ -1346,13 +1008,13 @@ namespace MedibusServer
 			   /* new CurMeasuredDataCP1Request(&m_Service, m_vecpCqs[i].get());
 				new CurDeviceSettingsRequest(&m_Service, m_vecpCqs[i].get());
 				new CurLowAlarmLimitsCP1Request(&m_Service, m_vecpCqs[i].get());*/
-				new DelimitedDataInEachLoopRequest(&m_Service, m_vecpCqs[i].get(), m_vecproviders[i].get());
+				new DelimitedDataInEachLoopRequest(&m_Service, m_vecpCqs[i].get(), m_vecproviders[i].get(), m_vecdataModel[i].get());
 				threads.emplace_back(std::thread(&ServerImpl::ServeThread, this, i));
 			}
 			for (auto thr = threads.begin(); thr != threads.end(); ++thr)
 				thr->join();
 		}
-
+		std::vector<std::unique_ptr<std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>>> m_vecdataModel;
 		std::vector<std::unique_ptr<SdcProvider>> m_vecproviders;
 		std::vector<std::unique_ptr<ServerCompletionQueue>> m_vecpCqs;
 		Medibus::AsyncService m_Service;
