@@ -31,10 +31,20 @@ public:
 		const std::string& strUpperRange,
 		const std::string& strDeterminationPeriod,
 		const std::string& strLifeTimePeriod,
+		const std::string& strMaxDelayTime,
 		const std::string& strResolution,
 		const std::string& strDerivation,
 		const std::string& strAvailability);
-	void updateNumericMetricValue(const std::string& handle, int value);
+    void initEnumStringMetric(DFL::Mdib::MdibChangeSet& changeSets, const std::string& strMdsHandle,
+                              const std::string& strVmdHandle, const std::string& strVmdCode,
+                              const std::string& strChannelHandle, const std::string& strChannelCode,
+                              const std::string& strHandleEnumStringMetric, const std::string& strMedicalClass,
+                              const std::string& strTypeCode, const std::string& strUnitCode,
+                              const std::vector<std::string>& vecAllowedValueCodes,
+                              const std::vector<std::string>& vecAllowedValues, const std::string& strMetricCategory,
+                              const std::string& strDerivation, const std::string& strAvailability);
+    void updateNumericMetricValue(const std::string& handle, int value);
+    void updateEnumStringMetricValue(const std::string& handle, const std::string& value);
     void shutdownMdsAndWaitReportSent();
 
 private:
