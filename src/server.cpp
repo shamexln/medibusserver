@@ -1,18 +1,8 @@
 ﻿/*
  *
- * Copyright 2015 gRPC authors.
+ * Copyright 
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ 
  *
  */
 #include <json.hpp>
@@ -73,8 +63,48 @@ namespace keywords = boost::log::keywords;
 
 namespace MedibusServer
 {
+	struct CommonInfo
+	{
+		std::string Handle;
+		std::string MedibusCode;
+		std::string MedibusCodePage;
+		std::string UnitCode;
+		std::string VmdHandle;
+		std::string VmdCF10Code;
+		std::string VmdCF10CodeDes;
+		std::string ChannelHandle;
+		std::string ChannelCF10Code;
+		std::string ChannelCF10CodeDes;
+		std::string CF10TypeCode;
+		std::string Context;
+		std::string CF10TypeCodeDes;
+		std::string MedicalClass;
+	};
+
+	struct SystemAlarmInfo
+	{
+		std::string Handle;
+		std::string SelfCheckPeriod;
+		std::string MaxPhysiologicalParallelAlarms;
+		std::string MaxTechnicalParallelAlarms;
+	};
+
+	struct AlarmInfo
+	{
+		std::string Source;
+		std::string DefaultConditionGenerationDelay;
+		std::string Kind;
+		std::string Priority;
+		std::string AlertType;
+		std::string InitialActivationState;
+		SystemAlarmInfo SysAlarmInfo;
+		CommonInfo CommonInfo;
+	};
+
+
 	struct MetricInfo
 	{
+		std::string Handle;
 		std::string MedibusCode;
 		std::string MedibusCodePage;
 		std::string CurAllowedValueCode;
@@ -93,6 +123,7 @@ namespace MedibusServer
 		std::string DeterminationPeriod;
 		std::string MaxDelayTime;
 		std::string LifeTimePeriod;
+		std::string SamplePeriod;
 		std::string LowRange;
 		std::string UpperRange;
 		std::string VmdHandle;
@@ -167,6 +198,36 @@ namespace MedibusServer
 			if (text_message_map.find(strMedibusCode) != text_message_map.end())
 			{
 				metricInfo = text_message_map[strMedibusCode];
+				return true;
+			}
+			return false;
+		}
+
+		static bool GetRealTime(const std::string& strMedibusCode, MetricInfo& metricInfo)
+		{
+			if (real_time_map.find(strMedibusCode) != real_time_map.end())
+			{
+				metricInfo = real_time_map[strMedibusCode];
+				return true;
+			}
+			return false;
+		}
+
+		static bool GetAlarmStatus1(const std::string& strMedibusCode, AlarmInfo& alarmInfo)
+		{
+			if (alarm_status1_map.find(strMedibusCode) != alarm_status1_map.end())
+			{
+				alarmInfo = alarm_status1_map[strMedibusCode];
+				return true;
+			}
+			return false;
+		}
+
+		static bool GetAlarmStatus2(const std::string& strMedibusCode, AlarmInfo& alarmInfo)
+		{
+			if (alarm_status2_map.find(strMedibusCode) != alarm_status2_map.end())
+			{
+				alarmInfo = alarm_status2_map[strMedibusCode];
 				return true;
 			}
 			return false;
@@ -278,6 +339,9 @@ namespace MedibusServer
 								else if (x.key() == "UnitCode") {
 									metricInfo.UnitCode = x.value();
 								}
+								else if (x.key() == "OwnerHandle") {
+									metricInfo.Handle = x.value();
+								}
 								else if (x.key() == "CF10 Code") {
 									metricInfo.CF10TypeCode = x.value();
 								}
@@ -368,6 +432,9 @@ namespace MedibusServer
 								}
 								else if (x.key() == "UnitCode") {
 									metricInfo.UnitCode = x.value();
+								}
+								else if (x.key() == "OwnerHandle") {
+									metricInfo.Handle = x.value();
 								}
 								else if (x.key() == "CF10 Code") {
 									metricInfo.CF10TypeCode = x.value();
@@ -468,6 +535,9 @@ namespace MedibusServer
 								else if (x.key() == "UnitCode") {
 									metricInfo.UnitCode = x.value();
 								}
+								else if (x.key() == "OwnerHandle") {
+									metricInfo.Handle = x.value();
+								}
 								else if (x.key() == "CF10 Code") {
 									metricInfo.CF10TypeCode = x.value();
 								}
@@ -562,6 +632,9 @@ namespace MedibusServer
 										metricInfo.MedibusCode = x.value();
 									}
 								}
+								else if (x.key() == "OwnerHandle") {
+									metricInfo.Handle = x.value();
+								}
 								else if (x.key() == "Code page") {
 									metricInfo.MedibusCodePage = x.value();
 								}
@@ -648,6 +721,295 @@ namespace MedibusServer
 				}
 			}
 		}
+
+		void getRealTimeFromJson(const json& data)
+		{
+			auto dev = data.find("Real-time data");
+			if (dev != data.end()) {
+				if (dev.value().is_array()) {
+					for (const auto& element : dev.value()) {
+						//std::cout << "Element: " << element << std::endl;
+						MetricInfo metricInfo;
+						for (const auto& x : element.items()) {
+							{
+								//std::cout << "key: " << x.key() << ", value: " << x.value() << '\n';
+								if (x.key() == "Code") {
+									std::string medibuscode = x.value();
+									const char last = medibuscode.back();
+									if (last == 'h' || last == 'H')
+									{
+										std::string str = medibuscode.substr(0, medibuscode.size() - 1);
+										metricInfo.MedibusCode = str;
+									}
+									else
+									{
+										metricInfo.MedibusCode = x.value();
+									}
+								}
+								else if (x.key() == "OwnerHandle") {
+									metricInfo.Handle = x.value();
+								}
+								else if (x.key() == "Code page") {
+									metricInfo.MedibusCodePage = x.value();
+								}
+								else if (x.key() == "AllowedValueCode") {
+									metricInfo.CurAllowedValueCode = x.value();
+								}
+								else if (x.key() == "AllowedValue") {
+									metricInfo.CurAllowedValue = x.value();
+								}
+								else if (x.key() == "AllowedValueCodes") {
+									metricInfo.AllowedValueCodes = x.value();
+								}
+								else if (x.key() == "AllowedValues") {
+									metricInfo.AllowedValues = x.value();
+								}
+								else if (x.key() == "UnitCode") {
+									metricInfo.UnitCode = x.value();
+								}
+								else if (x.key() == "CF10 Code") {
+									metricInfo.CF10TypeCode = x.value();
+								}
+								else if (x.key() == "Full Device\/Context Alarm") {
+									metricInfo.Context = x.value();
+								}
+								else if (x.key() == "CF10Code Description") {
+									metricInfo.CF10TypeCodeDes = x.value();
+								}
+								else if (x.key() == "MedicalClass") {
+									metricInfo.MedicalClass = x.value();
+								}
+								else if (x.key() == "Category") {
+									metricInfo.Category = x.value();
+								}
+								else if (x.key() == "Availability") {
+									metricInfo.Availability = x.value();
+								}
+								else if (x.key() == "Derivation") {
+									metricInfo.Derivation = x.value();
+								}
+								else if (x.key() == "Resolution") {
+									metricInfo.Resolution = x.value();
+								}
+								else if (x.key() == "DeterminationPeriod") {
+									metricInfo.DeterminationPeriod = x.value();
+								}
+								else if (x.key() == "MaxDelayTime") {
+									metricInfo.MaxDelayTime = x.value();
+								}
+								else if (x.key() == "LifeTimePeriod") {
+									metricInfo.LifeTimePeriod = x.value();
+								}
+								else if (x.key() == "SamplePeriod") {
+									metricInfo.SamplePeriod = x.value();
+								}
+								else if (x.key() == "Range") {
+									std::smatch m;
+									std::string val = std::string(x.value());
+									std::regex_match(val, m, std::regex(R"(Upper=\"(\d+|\d*\.\d*)\"\sLower=\"(\d+|\d*\.\d*)\")"));
+									std::string str1 = m[0].str();
+									std::string str2 = m[1].str();
+									std::string str3 = m[2].str();
+									metricInfo.LowRange = m[2].str();
+									metricInfo.UpperRange = m[1].str();
+								}
+								else if (x.key() == "VMD") {
+									metricInfo.VmdHandle = x.value();
+								}
+								else if (x.key() == "VMD CF10Code") {
+									metricInfo.VmdCF10Code = x.value();
+								}
+								else if (x.key() == "VMD Description") {
+									metricInfo.VmdCF10CodeDes = x.value();
+								}
+								else if (x.key() == "Channel") {
+									metricInfo.ChannelHandle = x.value();
+								}
+								else if (x.key() == "Channel CF10 Code") {
+									metricInfo.ChannelCF10Code = x.value();
+								}
+								else if (x.key() == "Channel Description") {
+									metricInfo.ChannelCF10CodeDes = x.value();
+								}
+							}
+						}
+						real_time_map.insert(std::make_pair(metricInfo.MedibusCode, metricInfo));
+					}
+				}
+			}
+		}
+
+		void getAlarmStatus1FromJson(const json& data)
+		{
+			auto dev = data.find("Alarm status1");
+			if (dev != data.end()) {
+				if (dev.value().is_array()) {
+					for (const auto& element : dev.value()) {
+						//std::cout << "Element: " << element << std::endl;
+						AlarmInfo alarmInfo;
+						for (const auto& x : element.items()) {
+							{
+								//std::cout << "key: " << x.key() << ", value: " << x.value() << '\n';
+								if (x.key() == "Code") {
+									std::string medibuscode = x.value();
+									const char last = medibuscode.back();
+									if (last == 'h' || last == 'H')
+									{
+										std::string str = medibuscode.substr(0, medibuscode.size() - 1);
+										alarmInfo.CommonInfo.MedibusCode = str;
+									}
+									else
+									{
+										alarmInfo.CommonInfo.MedibusCode = x.value();
+									}
+								}
+								else if (x.key() == "Code page") {
+									alarmInfo.CommonInfo.MedibusCodePage = x.value();
+								}
+								else if (x.key() == "CF10 Code") {
+									alarmInfo.CommonInfo.CF10TypeCode = x.value();
+								}
+								else if (x.key() == "Full Device\/Context Alarm") {
+									alarmInfo.CommonInfo.Context = x.value();
+								}
+								else if (x.key() == "CF10Code Description") {
+									alarmInfo.CommonInfo.CF10TypeCodeDes = x.value();
+								}
+								else if (x.key() == "OwnerHandle") {
+									alarmInfo.CommonInfo.Handle = x.value();
+								}
+								else if (x.key() == "SysHandle") {
+									alarmInfo.SysAlarmInfo.Handle = x.value();
+								}
+								else if (x.key() == "OwnerSource") {
+									alarmInfo.Source = x.value();
+								}
+								else if (x.key() == "AlertType") {
+									alarmInfo.AlertType = x.value();
+								}
+								else if (x.key() == "SysSelfCheckPeriod") {
+									alarmInfo.SysAlarmInfo.SelfCheckPeriod = x.value();
+								}
+								else if (x.key() == "SysMaxPhysiologicalParallelAlarms") {
+									alarmInfo.SysAlarmInfo.MaxPhysiologicalParallelAlarms = x.value();
+								}
+								else if (x.key() == "SysMaxTechnicalParallelAlarms") {
+									alarmInfo.SysAlarmInfo.MaxTechnicalParallelAlarms = x.value();
+								}
+								else if (x.key() == "DefaultConditionGenerationDelay") {
+									alarmInfo.DefaultConditionGenerationDelay = x.value();
+								}
+								else if (x.key() == "Kind") {
+									alarmInfo.Kind = x.value();
+								}
+								else if (x.key() == "Priority") {
+									alarmInfo.Priority = x.value();
+								}
+								else if (x.key() == "InitialActivationState") {
+									alarmInfo.InitialActivationState = x.value();
+								}
+								else if (x.key() == "VMD") {
+									alarmInfo.CommonInfo.VmdHandle = x.value();
+								}
+								else if (x.key() == "VMD CF10Code") {
+									alarmInfo.CommonInfo.VmdCF10Code = x.value();
+								}
+								else if (x.key() == "VMD Description") {
+									alarmInfo.CommonInfo.VmdCF10CodeDes = x.value();
+								}
+							}
+						}
+						alarm_status1_map.insert(std::make_pair(alarmInfo.CommonInfo.MedibusCode, alarmInfo));
+					}
+				}
+			}
+		}
+
+		void getAlarmStatus2FromJson(const json& data)
+		{
+			auto dev = data.find("Alarm status2");
+			if (dev != data.end()) {
+				if (dev.value().is_array()) {
+					for (const auto& element : dev.value()) {
+						//std::cout << "Element: " << element << std::endl;
+						AlarmInfo alarmInfo;
+						for (const auto& x : element.items()) {
+							{
+								//std::cout << "key: " << x.key() << ", value: " << x.value() << '\n';
+								if (x.key() == "Code") {
+									std::string medibuscode = x.value();
+									const char last = medibuscode.back();
+									if (last == 'h' || last == 'H')
+									{
+										std::string str = medibuscode.substr(0, medibuscode.size() - 1);
+										alarmInfo.CommonInfo.MedibusCode = str;
+									}
+									else
+									{
+										alarmInfo.CommonInfo.MedibusCode = x.value();
+									}
+								}
+								else if (x.key() == "Code page") {
+									alarmInfo.CommonInfo.MedibusCodePage = x.value();
+								}
+								else if (x.key() == "CF10 Code") {
+									alarmInfo.CommonInfo.CF10TypeCode = x.value();
+								}
+								else if (x.key() == "Full Device\/Context Alarm") {
+									alarmInfo.CommonInfo.Context = x.value();
+								}
+								else if (x.key() == "CF10Code Description") {
+									alarmInfo.CommonInfo.CF10TypeCodeDes = x.value();
+								}
+								else if (x.key() == "OwnerHandle") {
+									alarmInfo.CommonInfo.Handle = x.value();
+								}
+								else if (x.key() == "SysHandle") {
+									alarmInfo.SysAlarmInfo.Handle = x.value();
+								}
+								else if (x.key() == "OwnerSource") {
+									alarmInfo.Source = x.value();
+								}
+								else if (x.key() == "AlertType") {
+									alarmInfo.AlertType = x.value();
+								}
+								else if (x.key() == "SysSelfCheckPeriod") {
+									alarmInfo.SysAlarmInfo.SelfCheckPeriod = x.value();
+								}
+								else if (x.key() == "SysMaxPhysiologicalParallelAlarms") {
+									alarmInfo.SysAlarmInfo.MaxPhysiologicalParallelAlarms = x.value();
+								}
+								else if (x.key() == "SysMaxTechnicalParallelAlarms") {
+									alarmInfo.SysAlarmInfo.MaxTechnicalParallelAlarms = x.value();
+								}
+								else if (x.key() == "DefaultConditionGenerationDelay") {
+									alarmInfo.DefaultConditionGenerationDelay = x.value();
+								}
+								else if (x.key() == "Kind") {
+									alarmInfo.Kind = x.value();
+								}
+								else if (x.key() == "Priority") {
+									alarmInfo.Priority = x.value();
+								}
+								else if (x.key() == "InitialActivationState") {
+									alarmInfo.InitialActivationState = x.value();
+								}
+								else if (x.key() == "VMD") {
+									alarmInfo.CommonInfo.VmdHandle = x.value();
+								}
+								else if (x.key() == "VMD CF10Code") {
+									alarmInfo.CommonInfo.VmdCF10Code = x.value();
+								}
+								else if (x.key() == "VMD Description") {
+									alarmInfo.CommonInfo.VmdCF10CodeDes = x.value();
+								}
+							}
+						}
+						alarm_status2_map.insert(std::make_pair(alarmInfo.CommonInfo.MedibusCode, alarmInfo));
+					}
+				}
+			}
+		}
 		JsonHandlerSingleton()
 		{
 			//data = loadDataFromJson("D:\\project\\MedibusServer\\medibus\\build\\src\\RelWithDebInfo\\example.json");
@@ -667,6 +1029,9 @@ namespace MedibusServer
 			getMeasuredDataAndAlarmLimits1FromJson(data);
 			getMeasuredDataAndAlarmLimits2FromJson(data);
 			getTextMessageFromJson(data);
+			getRealTimeFromJson(data);
+			getAlarmStatus1FromJson(data);
+			getAlarmStatus2FromJson(data);
 		}
 		~JsonHandlerSingleton() {}
 
@@ -675,6 +1040,9 @@ namespace MedibusServer
 		static std::map<std::string, MetricInfo> measured_data_and_alarm_limits1_map;
 		static std::map<std::string, MetricInfo> measured_data_and_alarm_limits2_map;
 		static std::map<std::string, MetricInfo> text_message_map;
+		static std::map<std::string, MetricInfo> real_time_map;
+		static std::map<std::string, AlarmInfo> alarm_status1_map;
+		static std::map<std::string, AlarmInfo> alarm_status2_map;
 		static std::mutex m;
 		json data;
 		
@@ -684,6 +1052,9 @@ namespace MedibusServer
 	std::map<std::string, MetricInfo> JsonHandlerSingleton::measured_data_and_alarm_limits1_map;
 	std::map<std::string, MetricInfo> JsonHandlerSingleton::measured_data_and_alarm_limits2_map;
 	std::map<std::string, MetricInfo> JsonHandlerSingleton::text_message_map;
+	std::map<std::string, MetricInfo> JsonHandlerSingleton::real_time_map;
+	std::map<std::string, AlarmInfo> JsonHandlerSingleton::alarm_status1_map;
+	std::map<std::string, AlarmInfo> JsonHandlerSingleton::alarm_status2_map;
 	std::mutex JsonHandlerSingleton::m;
 
 	class DataQueueSingleton
@@ -717,7 +1088,7 @@ namespace MedibusServer
 			return std::tuple<bool, bool, int>(isSuccess, isFirstTime, sequenceId);
 		};
 		// first parameter is for checking whether my turn(thread) to handle msg
-		// secodn parameter is for checking whether is the first time for this instance
+		// second parameter is for checking whether is the first time for this instance
 		static std::tuple<bool, bool, int> push(std::string instanceId, int sequenceId) {
 			bool isFirstTime = false;
 			bool isSuccess = false;
@@ -738,6 +1109,18 @@ namespace MedibusServer
 			}
 			return std::tuple<bool, bool, int>(isSuccess, isFirstTime, sequenceId);
 		};
+
+		static void remove(std::string instanceId, int sequenceId) {
+			if (instance_sequence_que.empty()) {
+				return;
+			}
+			std::lock_guard<std::mutex> lock(m);
+			//instance_sequence_que.erase(remove_if(begin(instance_sequence_que), end(instance_sequence_que), [instanceId](auto iter) { return *iter == instanceId; }));
+			auto iter = instance_sequence_que.find(instanceId);
+			if (iter != instance_sequence_que.end()) {
+				instance_sequence_que.erase(iter);
+			}
+		}
 
 		static void update(std::string instanceId, int sequenceId) {
 			if (instance_sequence_que.empty()) {
@@ -824,7 +1207,7 @@ namespace MedibusServer
 		std::string MedibusCode;
 		std::string CF10Code;
 		std::string CF10CodeDes;
-		std::string value;
+		std::vector<std::string> values;
 		std::string facility;
 		std::string poc;
 		std::string bed;
@@ -907,7 +1290,7 @@ namespace MedibusServer
 					// before the call got matched to an incoming RPC.
 					// reset sequence id of current instance
 					// for next new connection from the same instance
-					DataQueueSingleton::instance().update(m_LoopRequest.instance_id(), 0);
+					DataQueueSingleton::instance().remove(m_LoopRequest.instance_id(), 0);
 					std::cout << "detect disconnection:  "
 						<< "Instance ID: " << m_LoopRequest.instance_id()
 						<< "ThreadID: " << std::this_thread::get_id()
@@ -971,7 +1354,7 @@ namespace MedibusServer
 									BOOST_LOG(lg) << formatted_string;
 
 									ExtraInfo medibus_val;
-									medibus_val.value = req.deviceresponds(i).value();
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
 									if (data.find(req.deviceresponds(i).code()) == data.end())
 									{
 										// data is new
@@ -979,7 +1362,7 @@ namespace MedibusServer
 									}
 									else
 									{
-										if (data[req.deviceresponds(i).code()].first.value != req.deviceresponds(i).value())
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
 										{
 											// data need to be updated
 											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
@@ -998,14 +1381,151 @@ namespace MedibusServer
 							if (m_LoopRequest.has_cur_low_alarm_limits_cp1())
 							{
 								// handle CurLowAlarmLimitsCP1
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Low Alarm Limits1");
+								for (int i = 0; i < m_LoopRequest.cur_low_alarm_limits_cp1().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_low_alarm_limits_cp1();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current low alarm limits with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+										{
+											// data need to be updated
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+										}
+										// if the code of next time is not available, the sequence id is the last time 
+
+									}
+								}
+								m_data["Low Alarm Limits1"] = data;
 							}
 							if (m_LoopRequest.has_cur_high_alarm_limits_cp1())
 							{
 								// handle CurHighAlarmLimitsCP1
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("High Alarm Limits1");
+								for (int i = 0; i < m_LoopRequest.cur_high_alarm_limits_cp1().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_high_alarm_limits_cp1();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current high alarm limits with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+										{
+											// data need to be updated
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+										}
+										// if the code of next time is not available, the sequence id is the last time 
+
+									}
+								}
+								m_data["High Alarm Limits1"] = data;
 							}
 							if (m_LoopRequest.has_cur_alarms_cp1())
 							{
 								// handle CurAlarmsCP1
+
+								// for cache the code in m_LoopRequest
+								std::vector<std::string> vecCurrentMedibusCodes;
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Alarm status1");
+								for (int i = 0; i < m_LoopRequest.cur_alarms_cp1().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_alarms_cp1();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current alarm status with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									vecCurrentMedibusCodes.emplace_back(req.deviceresponds(i).code());
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].second == -2)
+										{
+											// re-activate
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+											{
+												// data need to be updated
+												data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+											}
+											else
+											{
+												// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+												data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+											}
+											// if the code of next time is not available, the sequence id is the last time 
+										}
+									}
+								}
+
+								// then check is all values in data model in data loop
+								// set sequence -2 when the value is not in request this time
+								for (auto& it : data) {
+
+									// check it exists in request
+									auto result = std::find(vecCurrentMedibusCodes.begin(), vecCurrentMedibusCodes.end(), it.first);
+									if (result == vecCurrentMedibusCodes.end())
+									{
+										// check the sequenceId is not the same with the current sequenceId, meaning the data is obsoleted.
+										if (it.second.second != m_LoopRequest.sequence_id())
+										{
+											it.second.second = -2;
+										}
+									}
+
+
+								}
+								m_data["Alarm status1"] = data;
 							}
 							if (m_LoopRequest.has_cur_device_settings())
 							{
@@ -1030,7 +1550,7 @@ namespace MedibusServer
 									BOOST_LOG(lg) << formatted_string;
 
 									ExtraInfo medibus_val;
-									medibus_val.value = req.deviceresponds(i).value();
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
 									if (data.find(req.deviceresponds(i).code()) == data.end())
 									{
 										// data is new
@@ -1038,7 +1558,7 @@ namespace MedibusServer
 									}
 									else
 									{
-										if (data[req.deviceresponds(i).code()].first.value != req.deviceresponds(i).value())
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
 										{
 											// data need to be updated
 											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
@@ -1152,7 +1672,7 @@ namespace MedibusServer
 									BOOST_LOG(lg) << formatted_string;
 
 									ExtraInfo medibus_val;
-									medibus_val.value = req.deviceresponds(i).value();
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
 									if (data.find(req.deviceresponds(i).code()) == data.end())
 									{
 										// data is new
@@ -1160,7 +1680,7 @@ namespace MedibusServer
 									}
 									else
 									{
-										if (data[req.deviceresponds(i).code()].first.value != req.deviceresponds(i).value())
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
 										{
 											// data need to be updated
 											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
@@ -1179,14 +1699,150 @@ namespace MedibusServer
 							if (m_LoopRequest.has_cur_low_alarm_limits_cp2())
 							{
 								// handle CurLowAlarmLimitsCP2
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Low Alarm Limits2");
+								for (int i = 0; i < m_LoopRequest.cur_low_alarm_limits_cp2().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_low_alarm_limits_cp2();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current low alarm limits2 with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+										{
+											// data need to be updated
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+										}
+										// if the code of next time is not available, the sequence id is the last time 
+
+									}
+								}
+								m_data["Low Alarm Limits2"] = data;
 							}
 							if (m_LoopRequest.has_cur_high_alarm_limits_cp2())
 							{
 								// handle CurHighAlarmLimitsCP2
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("High Alarm Limits2");
+								for (int i = 0; i < m_LoopRequest.cur_high_alarm_limits_cp2().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_high_alarm_limits_cp2();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current high alarm limits2 with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+										{
+											// data need to be updated
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+										}
+										// if the code of next time is not available, the sequence id is the last time 
+
+									}
+								}
+								m_data["High Alarm Limits2"] = data;
 							}
 							if (m_LoopRequest.has_cur_alarms_cp2())
 							{
 								// handle CurAlarmsCP2
+								// for cache the code in m_LoopRequest
+								std::vector<std::string> vecCurrentMedibusCodes;
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Alarm status2");
+								for (int i = 0; i < m_LoopRequest.cur_alarms_cp2().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_alarms_cp2();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current alarm status2 with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									vecCurrentMedibusCodes.emplace_back(req.deviceresponds(i).code());
+									ExtraInfo medibus_val;
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									if (data.find(req.deviceresponds(i).code()) == data.end())
+									{
+										// data is new
+										data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+									}
+									else
+									{
+										if (data[req.deviceresponds(i).code()].second == -2)
+										{
+											// re-activate
+											data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+										}
+										else
+										{
+											if (data[req.deviceresponds(i).code()].first.values.front() != req.deviceresponds(i).value())
+											{
+												// data need to be updated
+												data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+											}
+											else
+											{
+												// set sequenceid -1 to indicate skip this value when we handle this value to SDC
+												data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, -1);
+											}
+											// if the code of next time is not available, the sequence id is the last time 
+										}
+									}
+								}
+
+								// then check is all values in data model in data loop
+								// set sequence -2 when the value is not in request this time
+								for (auto& it : data) {
+
+									// check it exists in request
+									auto result = std::find(vecCurrentMedibusCodes.begin(), vecCurrentMedibusCodes.end(), it.first);
+									if (result == vecCurrentMedibusCodes.end())
+									{
+										// check the sequenceId is not the same with the current sequenceId, meaning the data is obsoleted.
+										if (it.second.second != m_LoopRequest.sequence_id())
+										{
+											it.second.second = -2;
+										}
+									}
+
+
+								}
+								m_data["Alarm status2"] = data;
 							}
 							if (m_LoopRequest.has_device_identification())
 							{
@@ -1195,7 +1851,7 @@ namespace MedibusServer
 								{
 									auto req = m_LoopRequest.device_identification();
 									ExtraInfo extra_val;
-									extra_val.value = req.deviceresponds().deviceid();
+									extra_val.values.emplace_back(req.deviceresponds().deviceid());
 									extra_val.facility = req.deviceresponds().facility();
 									extra_val.poc = req.deviceresponds().poc();
 									extra_val.bed = req.deviceresponds().bed();
@@ -1235,9 +1891,27 @@ namespace MedibusServer
 							{
 								// handle CurAlarmsCP3
 							}
-							if (m_LoopRequest.real_time_size())
+							if (m_LoopRequest.has_cur_real_time_co2())
 							{
-								// handle RealTime
+								// handle RealTime co2
+								std::map<std::string, std::pair<ExtraInfo, int>>& data = m_pDataModel->at("Real-time data");
+								ExtraInfo medibus_val;
+								for (int i = 0; i < m_LoopRequest.cur_real_time_co2().deviceresponds_size(); i++)
+								{
+									auto req = m_LoopRequest.cur_real_time_co2();
+
+									std::stringstream ss;
+									ss << std::this_thread::get_id();
+									std::string str = ss.str();
+									formatted_string = SFormat("Receiving current real-time co2 with thread id=<{0}> and id=<{1}> and sequence id=<{2}>  code=<{3}>  value=<{4}>  unit=<{5}> ", str, m_LoopRequest.instance_id(),
+										m_LoopRequest.sequence_id(), req.deviceresponds(i).code(), req.deviceresponds(i).value(), req.deviceresponds(i).unit());
+									BOOST_LOG(lg) << formatted_string;
+
+									medibus_val.values.emplace_back(req.deviceresponds(i).value());
+									// if the key is the same, the map will replace with the new one.
+									data[req.deviceresponds(i).code()] = std::make_pair(medibus_val, m_LoopRequest.sequence_id());
+								}
+								m_data["Real-time data"] = data;
 							}
 							if (std::get<1>(rtnv)) {
 								// this is the first time, we get the instance_id, so sdc provider must be created.
@@ -1262,7 +1936,7 @@ namespace MedibusServer
 									sequenceId = it->second.second;
 
 									// get the information from json
-									if (JsonHandlerSingleton::instance().GetDeviceInfo(extra_value.value, deviceInfo))
+									if (JsonHandlerSingleton::instance().GetDeviceInfo(extra_value.values.empty()? "": extra_value.values.front(), deviceInfo))
 									{
 										if (sequenceId != -1)
 										{
@@ -1289,19 +1963,24 @@ namespace MedibusServer
 												changeSet, "mds0" + deviceInfo.CF10TypeCode, metricInfo.VmdHandle,
 												metricInfo.VmdCF10Code, metricInfo.ChannelHandle,
 												metricInfo.ChannelCF10Code,
-												metricInfo.MedibusCode + metricInfo.CF10TypeCode, metricInfo.MedicalClass,
+												metricInfo.Handle, metricInfo.MedicalClass,
 												metricInfo.CF10TypeCode, metricInfo.UnitCode, metricInfo.Category,
 												metricInfo.LowRange, metricInfo.UpperRange, "", "", "", metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability);
 
 											// second time to call update metric
-											m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.CF10TypeCode, 
-												extra_value.value.empty()? 0 : std::stoi(extra_value.value));
+											m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+												extra_value.values.empty()? 0 : std::stoi(extra_value.values.front()));
 										}
 									}
 								}
 
 								// Measured data and alarm limits1 
 								data = m_data["Measured data and alarm limits1"];
+								// Alarm limits
+								std::map<std::string, std::pair<ExtraInfo, int>> lowdata;
+								std::map<std::string, std::pair<ExtraInfo, int>> highdata;
+								lowdata = m_data["Low Alarm Limits1"];
+								highdata = m_data["High Alarm Limits1"];
 								for (auto it = data.begin(); it != data.end(); ++it)
 								{
 									extra_value = it->second.first;
@@ -1317,19 +1996,26 @@ namespace MedibusServer
 												changeSet, "mds0" +  deviceInfo.CF10TypeCode, metricInfo.VmdHandle,
 												metricInfo.VmdCF10Code, metricInfo.ChannelHandle,
 												metricInfo.ChannelCF10Code,
-												metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode, metricInfo.MedicalClass,
+												metricInfo.Handle, metricInfo.MedicalClass,
 												metricInfo.CF10TypeCode, metricInfo.UnitCode, metricInfo.Category,
-												metricInfo.LowRange, metricInfo.UpperRange, metricInfo.DeterminationPeriod, metricInfo.LifeTimePeriod, metricInfo.MaxDelayTime, metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability);
+												lowdata[it->first].first.values.empty() ? metricInfo.LowRange : lowdata[it->first].first.values.front(),
+												highdata[it->first].first.values.empty() ? metricInfo.UpperRange : highdata[it->first].first.values.front(), metricInfo.DeterminationPeriod, metricInfo.LifeTimePeriod, metricInfo.MaxDelayTime, metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability);
 
 											// second time to call update metric
-											m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
-												extra_value.value.empty() ? 0 : std::stoi(extra_value.value));
+											m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+												extra_value.values.empty() ? 0 : std::stoi(extra_value.values.front()));
 										}
 									}
 								}
 
-								// Measured data and alarm limits2 
+								
+								
+
+								// Measured data and alarm limits2
 								data = m_data["Measured data and alarm limits2"];
+								// Alarm limits
+								lowdata = m_data["Low Alarm Limits2"];
+								highdata = m_data["High Alarm Limits2"];
 								for (auto it = data.begin(); it != data.end(); ++it)
 								{
 									extra_value = it->second.first;
@@ -1345,13 +2031,14 @@ namespace MedibusServer
 												changeSet, "mds0" + deviceInfo.CF10TypeCode, metricInfo.VmdHandle,
 												metricInfo.VmdCF10Code, metricInfo.ChannelHandle,
 												metricInfo.ChannelCF10Code,
-												metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode, metricInfo.MedicalClass,
+												metricInfo.Handle, metricInfo.MedicalClass,
 												metricInfo.CF10TypeCode, metricInfo.UnitCode, metricInfo.Category,
-												metricInfo.LowRange, metricInfo.UpperRange, metricInfo.DeterminationPeriod, metricInfo.LifeTimePeriod, metricInfo.MaxDelayTime, metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability);
+												lowdata[it->first].first.values.empty() ? metricInfo.LowRange : lowdata[it->first].first.values.front(), 
+												highdata[it->first].first.values.empty() ? metricInfo.UpperRange : highdata[it->first].first.values.front(), metricInfo.DeterminationPeriod, metricInfo.LifeTimePeriod, metricInfo.MaxDelayTime, metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability);
 
 											// second time to call update metric
-											m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
-												extra_value.value.empty() ? 0 : std::stoi(extra_value.value));
+											m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+												extra_value.values.empty() ? 0 : std::stoi(extra_value.values.front()));
 										}
 									}
 								}
@@ -1373,19 +2060,113 @@ namespace MedibusServer
 												changeSet, "mds0" + deviceInfo.CF10TypeCode, metricInfo.VmdHandle,
 												metricInfo.VmdCF10Code, metricInfo.ChannelHandle,
 												metricInfo.ChannelCF10Code,
-												metricInfo.CF10TypeCode, metricInfo.MedicalClass,
+												metricInfo.Handle, metricInfo.MedicalClass,
 												metricInfo.CF10TypeCode, metricInfo.UnitCode, metricInfo.AllowedValueCodes, metricInfo.AllowedValues, metricInfo.Category, metricInfo.Derivation, metricInfo.Availability);
 
 											// second time to call update metric
 											// comment logic which use the value from medibus
 											/*m_pProvider->updateEnumStringMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
 												extra_value.value.empty() ? "" : extra_value.value);*/
-											m_pProvider->updateEnumStringMetricValue(metricInfo.CF10TypeCode,
+											m_pProvider->updateEnumStringMetricValue(metricInfo.Handle,
 											    metricInfo.CurAllowedValue);
 										}
 									}
 								}
-								
+
+								// Real-time 
+								data = m_data["Real-time data"];
+								for (auto it = data.begin(); it != data.end(); ++it)
+								{
+									std::vector<double> dValues;
+									extra_value = it->second.first;
+									sequenceId = it->second.second;
+									// convert std::string top double
+									auto convertString2Float = [](const std::string& metricValue)
+									{
+										if (!metricValue.empty())
+										{
+											return std::stof(metricValue);
+										}
+										return static_cast<float>(0.0);
+									};
+									for (auto& val : extra_value.values)
+									{
+										dValues.emplace_back(static_cast<double>(convertString2Float(val)));
+									}
+									// get the information from json
+									MetricInfo metricInfo;
+									if (JsonHandlerSingleton::instance().GetRealTime(it->first, metricInfo))
+									{
+										{
+											// first time to init metric
+											m_pProvider->initRealTimeMetric(
+												changeSet, "mds0" + deviceInfo.CF10TypeCode, metricInfo.VmdHandle,
+												metricInfo.VmdCF10Code, metricInfo.ChannelHandle,
+												metricInfo.ChannelCF10Code, metricInfo.MedibusCode + metricInfo.CF10TypeCode, metricInfo.MedicalClass,
+												metricInfo.CF10TypeCode, metricInfo.UnitCode, metricInfo.Category, metricInfo.LowRange, metricInfo.UpperRange, metricInfo.DeterminationPeriod, 
+												metricInfo.LifeTimePeriod, metricInfo.MaxDelayTime, metricInfo.Resolution, metricInfo.Derivation, metricInfo.Availability, metricInfo.SamplePeriod);
+
+											// second time to call update metric
+											// comment logic which use the value from medibus
+											/*m_pProvider->updateEnumStringMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
+												extra_value.value.empty() ? "" : extra_value.value);*/
+											m_pProvider->updateRealTimeMetricValue(metricInfo.MedibusCode + metricInfo.CF10TypeCode,
+												dValues);
+										}
+									}
+								}
+
+								// Alarm status 1
+								data = m_data["Alarm status1"];
+								for (auto it = data.begin(); it != data.end(); ++it)
+								{
+									extra_value = it->second.first;
+									sequenceId = it->second.second;
+									
+									// get the information from json
+									AlarmInfo alarmInfo;
+									if (JsonHandlerSingleton::instance().GetAlarmStatus1(it->first, alarmInfo))
+									{
+										{
+											// first time to init metric
+											m_pProvider->initAlarmStatus(
+												changeSet, "mds0" + deviceInfo.CF10TypeCode, alarmInfo.CommonInfo.VmdHandle,
+												alarmInfo.CommonInfo.VmdCF10Code, "", alarmInfo.CommonInfo.MedicalClass,
+												alarmInfo.CommonInfo.CF10TypeCode, alarmInfo.SysAlarmInfo.Handle, alarmInfo.SysAlarmInfo.SelfCheckPeriod, alarmInfo.SysAlarmInfo.MaxPhysiologicalParallelAlarms, 
+												alarmInfo.SysAlarmInfo.MaxTechnicalParallelAlarms, alarmInfo.CommonInfo.Handle, alarmInfo.Source, alarmInfo.DefaultConditionGenerationDelay,
+												alarmInfo.Kind, alarmInfo.Priority, alarmInfo.AlertType, alarmInfo.InitialActivationState);
+
+											// second time to call update metric
+											m_pProvider->updateAlarmStatus("mds0" + deviceInfo.CF10TypeCode, alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, alarmInfo.Priority);
+										}
+									}
+								}
+
+								// Alarm status 2
+								data = m_data["Alarm status2"];
+								for (auto it = data.begin(); it != data.end(); ++it)
+								{
+									extra_value = it->second.first;
+									sequenceId = it->second.second;
+
+									// get the information from json
+									AlarmInfo alarmInfo;
+									if (JsonHandlerSingleton::instance().GetAlarmStatus2(it->first, alarmInfo))
+									{
+										{
+											// first time to init metric
+											m_pProvider->initAlarmStatus(
+												changeSet, "mds0" + deviceInfo.CF10TypeCode, alarmInfo.CommonInfo.VmdHandle,
+												alarmInfo.CommonInfo.VmdCF10Code, "", alarmInfo.CommonInfo.MedicalClass,
+												alarmInfo.CommonInfo.CF10TypeCode, alarmInfo.SysAlarmInfo.Handle, alarmInfo.SysAlarmInfo.SelfCheckPeriod, alarmInfo.SysAlarmInfo.MaxPhysiologicalParallelAlarms,
+												alarmInfo.SysAlarmInfo.MaxTechnicalParallelAlarms, alarmInfo.CommonInfo.Handle, alarmInfo.Source, alarmInfo.DefaultConditionGenerationDelay,
+												alarmInfo.Kind, alarmInfo.Priority, alarmInfo.AlertType, alarmInfo.InitialActivationState);
+
+											// second time to call update metric
+											m_pProvider->updateAlarmStatus("mds0" + deviceInfo.CF10TypeCode, alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, alarmInfo.Priority);
+										}
+									}
+								}
 							}
 							else
 							{
@@ -1408,8 +2189,8 @@ namespace MedibusServer
 										{
 											if (sequenceId != -1)
 											{
-												m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.CF10TypeCode,
-													extra_value.value.empty() ? 0 : std::stoi(extra_value.value));
+												m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+													extra_value.values.empty() ? 0 : std::stoi(extra_value.values.front()));
 
 											}
 										}
@@ -1433,8 +2214,8 @@ namespace MedibusServer
 										{
 											if (sequenceId != -1)
 											{
-												m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
-													extra_value.value.empty() ? 0 : std::stoi(extra_value.value));
+												m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+													extra_value.values.empty() ? 0 : std::stoi(extra_value.values.front()));
 
 											}
 										}
@@ -1458,8 +2239,8 @@ namespace MedibusServer
 										{
 											if (sequenceId != -1)
 											{
-												m_pProvider->updateNumericMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
-													extra_value.value.empty() ? 0 : std::stoi(extra_value.value));
+												m_pProvider->updateNumericMetricValue(metricInfo.Handle,
+													extra_value.values.empty() ? 0 : std::stoi(extra_value.values.front()));
 
 											}
 										}
@@ -1483,19 +2264,108 @@ namespace MedibusServer
 										{
 											if (sequenceId > 0)
 											{
-												// comment logic which use the value from medibus
-												/*m_pProvider->updateEnumStringMetricValue(metricInfo.MedibusCode + metricInfo.MedibusCodePage + metricInfo.CF10TypeCode,
-													extra_value.value.empty() ? "" : extra_value.value);*/
-												m_pProvider->updateEnumStringMetricValue(metricInfo.CF10TypeCode,
+												m_pProvider->updateEnumStringMetricValue(metricInfo.Handle,
 													metricInfo.CurAllowedValue);
-
 											}
 											else if (sequenceId == -2)
 											{
-												m_pProvider->updateEnumStringMetricValue(metricInfo.CF10TypeCode,
+												m_pProvider->updateEnumStringMetricValue(metricInfo.Handle,
 													"");
 											}
 										}
+									}
+								}
+
+								{
+									// Real-time data co2 
+									std::map<std::string, std::pair<ExtraInfo, int>> data;
+									data = m_data["Real-time data"];
+									ExtraInfo extra_value;
+									int sequenceId;
+
+									for (auto it = data.begin(); it != data.end(); ++it)
+									{
+										std::vector<double> dValues;
+										extra_value = it->second.first;
+										sequenceId = it->second.second;
+										// get the information from json
+										MetricInfo metricInfo;
+										// convert std::string top double
+										auto convertString2Float = [](const std::string& metricValue)
+										{
+											if (!metricValue.empty())
+											{
+												return std::stof(metricValue);
+											}
+											return static_cast<float>(0.0);
+										};
+										for (auto& val : extra_value.values)
+										{
+											dValues.emplace_back(static_cast<double>(convertString2Float(val)));
+										}
+										if (JsonHandlerSingleton::instance().GetRealTime(it->first, metricInfo))
+										{
+											m_pProvider->updateRealTimeMetricValue(metricInfo.MedibusCode + metricInfo.CF10TypeCode,
+												dValues);
+										}
+									}
+								}
+
+								{
+									// Alarm status 1 
+									std::map<std::string, std::pair<ExtraInfo, int>> data;
+									data = m_data["Alarm status1"];
+									ExtraInfo extra_value;
+									int sequenceId;
+
+									for (auto it = data.begin(); it != data.end(); ++it)
+									{
+										extra_value = it->second.first;
+										sequenceId = it->second.second;
+										// get the information from json
+										AlarmInfo alarmInfo;
+										// get the information from json
+										if (JsonHandlerSingleton::instance().GetAlarmStatus1(it->first, alarmInfo))
+										{
+											if (sequenceId > 0)
+											{
+												m_pProvider->updateAlarmStatus("mds070001", alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, extra_value.values.front());
+											}
+											else if (sequenceId == -2)
+											{
+												m_pProvider->updateAlarmStatus("mds070001", alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, "");
+											}
+										}
+
+									}
+								}
+
+								{
+									// Alarm status 2
+									std::map<std::string, std::pair<ExtraInfo, int>> data;
+									data = m_data["Alarm status2"];
+									ExtraInfo extra_value;
+									int sequenceId;
+
+									for (auto it = data.begin(); it != data.end(); ++it)
+									{
+										extra_value = it->second.first;
+										sequenceId = it->second.second;
+										// get the information from json
+										AlarmInfo alarmInfo;
+										// get the information from json
+										if (JsonHandlerSingleton::instance().GetAlarmStatus2(it->first, alarmInfo))
+										{
+											if (sequenceId > 0)
+											{
+												m_pProvider->updateAlarmStatus("mds070001", alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, extra_value.values.front());
+											}
+											else if (sequenceId == -2)
+											{
+												m_pProvider->updateAlarmStatus("mds070001", alarmInfo.CommonInfo.VmdHandle, alarmInfo.SysAlarmInfo.Handle, alarmInfo.CommonInfo.Handle, alarmInfo.Kind, "");
+											}
+										}
+
 									}
 								}
 							}
@@ -1524,7 +2394,7 @@ namespace MedibusServer
 									break;
 								}
 								else {
-									// if the sequence id is less than self and time is out, then skip the current sequenceid and insert into table and update the sequenceid with the new one(current - 1 = latester one)
+									// if the sequence id is less than self and time is out, then skip the current sequenceid and insert into table and update the sequenceid with the new one(current - 1 = latest one)
 									// Then handle this data from the beginning of the while loop
 									DataQueueSingleton::instance().update(m_LoopRequest.instance_id(), m_LoopRequest.sequence_id() - 1);
 									std::cout << "wait time(seconds) out:  " << std::chrono::duration_cast<std::chrono::minutes>(t2 - t1).count()
@@ -1546,7 +2416,7 @@ namespace MedibusServer
 
 					// for client-side stream, we not to send finish status
 					// m_eStatus = FINISH;
-					// m_Responder.Finish(m_Reply, Status::OK, this);
+					 //m_Responder.Finish(m_Reply, Status::OK, this);
 				}
 
 
@@ -1643,12 +2513,18 @@ namespace MedibusServer
 				exInfo.emplace("Device identification numbers", innerMap);
 				exInfo.emplace("Device settings", innerMap);
 				exInfo.emplace("Measured data and alarm limits1", innerMap);
+				exInfo.emplace("Low Alarm Limits1", innerMap);
+				exInfo.emplace("High Alarm Limits1", innerMap);
 				exInfo.emplace("Measured data and alarm limits2", innerMap);
+				exInfo.emplace("Low Alarm Limits2", innerMap);
+				exInfo.emplace("High Alarm Limits2", innerMap);
 				exInfo.emplace("Real-time data", innerMap);
-				exInfo.emplace("Alarm status", innerMap);
+				exInfo.emplace("Alarm status1", innerMap);
+				exInfo.emplace("Alarm status2", innerMap);
 				exInfo.emplace("Text messages", innerMap);
 				m_vecdataModel.emplace_back(std::make_unique<std::map<std::string, std::map<std::string, std::pair<ExtraInfo, int>>>>(exInfo));
 			}
+
 			// Finally assemble the server.
 			m_Server = builder.BuildAndStart();
 			std::cout << "Server listening on " << server_address << std::endl;
