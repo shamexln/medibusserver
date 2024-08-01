@@ -1,0 +1,2 @@
+#define SDCPROVIDER_API __declspec(dllexport)
+#define SDCPROVIDER_API __declspec(dllimport)
