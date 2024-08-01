@@ -1,0 +1,75 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 22,
+        "patch": 0
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/bld/${presetName}",
+            "environment": {
+                "CC": null
+            },
+            "cacheVariables": {
+                "CMAKE_INSTALL_PREFIX": "${sourceDir}/../bin",
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_SYSTEM_PROCESSOR": "amd64"
+            },
+            "architecture": {
+                "value": "x64",
+                "strategy": "external"
+            },
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "hostOS": [ "Windows" ]
+                }
+            }
+        },
+        {
+            "name": "TypeRelDebInfo",
+            "hidden": true,
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+                }
+        },
+        {
+            "name": "ToolWinIDE",
+            "hidden": true
+        },
+        {
+            "name": "Win64",
+            "inherits": [
+                "base",
+                "TypeRelDebInfo",
+                "ToolWinIDE"
+            ]
+        }        
+    ],
+    "buildPresets": [
+        {
+            "name": "Win64",
+            "configurePreset": "Win64"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "output": {
+                "verbosity": "verbose"
+            }
+        },
+        {
+            "name": "Win64",
+            "inherits": [
+                "base"
+            ],
+            "configurePreset": "Win64"
+        }
+    ]
+}

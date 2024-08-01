@@ -42,7 +42,7 @@ service Medibus {
   rpc CurAlarmsCP3 (MedibusRequest) returns (MedibusReply) {}
   
   // Request real time 
-  rpc RealTime (MedibusRealTimeRequest) returns (MedibusReply) {}
+  rpc RealTime (MedibusRequest) returns (MedibusReply) {}
 
   // Request all data for each medibus loop 
   rpc DataInEachLoop (stream LoopRequest) returns (MedibusReply) {}
@@ -89,20 +89,6 @@ message MedibusReply {
   string message = 2;
 }
 
-// The request real time message
-message MedibusRealTimeRequest {
-  optional string instance_id = 1;
-  optional fixed64 sequence_id = 2;
-  message DeviceRespond {
-  optional string min = 1;
-  optional string max = 2;
-  optional string maxbin = 3;
-  optional string interval = 4;
-  optional string description = 5;
-  }
-  repeated DeviceRespond deviceresponds = 3;
-  optional string description = 4;
-}
 
 // The request common message
 message LoopRequest {
@@ -120,7 +106,12 @@ message LoopRequest {
   optional MedibusRequest cur_alarms_cp2 = 12;
   optional DeviceIdentificationRequest device_identification = 13;
   optional MedibusRequest cur_alarms_cp3 = 14;
-  repeated MedibusRealTimeRequest real_time = 15;
+  optional MedibusRequest cur_real_time_vol = 15;
+  optional MedibusRequest cur_real_time_flow = 16;
+  optional MedibusRequest cur_real_time_paw = 17;
+  optional MedibusRequest cur_real_time_co2 = 18;
+  optional MedibusRequest cur_real_time_ptrach = 19;
+  
  
 }
 

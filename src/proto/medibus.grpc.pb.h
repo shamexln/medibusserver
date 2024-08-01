@@ -133,11 +133,11 @@ class Medibus final {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
     }
     // Request real time 
-    virtual ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
+    virtual ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(AsyncRealTimeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> PrepareAsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>> PrepareAsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>>(PrepareAsyncRealTimeRaw(context, request, cq));
     }
     // Request all data for each medibus loop 
@@ -200,8 +200,8 @@ class Medibus final {
       virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
       virtual void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Request real time 
-      virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) = 0;
       // Request all data for each medibus loop 
       virtual void DataInEachLoop(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::ClientWriteReactor< ::medibus::LoopRequest>* reactor) = 0;
       // Request all data for each medibus loop 
@@ -235,8 +235,8 @@ class Medibus final {
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) = 0;
     virtual ::grpc::ClientWriterInterface< ::medibus::LoopRequest>* DataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response) = 0;
     virtual ::grpc::ClientAsyncWriterInterface< ::medibus::LoopRequest>* AsyncDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq, void* tag) = 0;
     virtual ::grpc::ClientAsyncWriterInterface< ::medibus::LoopRequest>* PrepareAsyncDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq) = 0;
@@ -331,11 +331,11 @@ class Medibus final {
     std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncCurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(PrepareAsyncCurAlarmsCP3Raw(context, request, cq));
     }
-    ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
+    ::grpc::Status RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> AsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(AsyncRealTimeRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>> PrepareAsyncRealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
       return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>>(PrepareAsyncRealTimeRaw(context, request, cq));
     }
     std::unique_ptr< ::grpc::ClientWriter< ::medibus::LoopRequest>> DataInEachLoop(::grpc::ClientContext* context, ::medibus::MedibusReply* response) {
@@ -383,8 +383,8 @@ class Medibus final {
       void DeviceIdentification(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
       void CurAlarmsCP3(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
-      void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)>) override;
+      void RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) override;
       void DataInEachLoop(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::ClientWriteReactor< ::medibus::LoopRequest>* reactor) override;
       void DelimitedDataInEachLoop(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::ClientWriteReactor< ::medibus::DelimitedLoopRequest>* reactor) override;
      private:
@@ -422,8 +422,8 @@ class Medibus final {
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncDeviceIdentificationRaw(::grpc::ClientContext* context, const ::medibus::DeviceIdentificationRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncCurAlarmsCP3Raw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) override;
     ::grpc::ClientWriter< ::medibus::LoopRequest>* DataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response) override;
     ::grpc::ClientAsyncWriter< ::medibus::LoopRequest>* AsyncDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq, void* tag) override;
     ::grpc::ClientAsyncWriter< ::medibus::LoopRequest>* PrepareAsyncDataInEachLoopRaw(::grpc::ClientContext* context, ::medibus::MedibusReply* response, ::grpc::CompletionQueue* cq) override;
@@ -477,7 +477,7 @@ class Medibus final {
     // Request current Alarms (Codepage 3)
     virtual ::grpc::Status CurAlarmsCP3(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request real time 
-    virtual ::grpc::Status RealTime(::grpc::ServerContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response);
+    virtual ::grpc::Status RealTime(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response);
     // Request all data for each medibus loop 
     virtual ::grpc::Status DataInEachLoop(::grpc::ServerContext* context, ::grpc::ServerReader< ::medibus::LoopRequest>* reader, ::medibus::MedibusReply* response);
     // Request all data for each medibus loop 
@@ -735,11 +735,11 @@ class Medibus final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestRealTime(::grpc::ServerContext* context, ::medibus::MedibusRealTimeRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestRealTime(::grpc::ServerContext* context, ::medibus::MedibusRequest* request, ::grpc::ServerAsyncResponseWriter< ::medibus::MedibusReply>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(12, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -1115,25 +1115,25 @@ class Medibus final {
    public:
     WithCallbackMethod_RealTime() {
       ::grpc::Service::MarkMethodCallback(12,
-          new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply>(
+          new ::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response) { return this->RealTime(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) { return this->RealTime(context, request, response); }));}
     void SetMessageAllocatorFor_RealTime(
-        ::grpc::MessageAllocator< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply>* allocator) {
+        ::grpc::MessageAllocator< ::medibus::MedibusRequest, ::medibus::MedibusReply>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(12);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::medibus::MedibusRequest, ::medibus::MedibusReply>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_RealTime() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* RealTime(
-      ::grpc::CallbackServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_DataInEachLoop : public BaseClass {
@@ -1397,7 +1397,7 @@ class Medibus final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -1688,7 +1688,7 @@ class Medibus final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -2015,7 +2015,7 @@ class Medibus final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -2398,10 +2398,10 @@ class Medibus final {
     WithStreamedUnaryMethod_RealTime() {
       ::grpc::Service::MarkMethodStreamed(12,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply>(
+          ::medibus::MedibusRequest, ::medibus::MedibusReply>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply>* streamer) {
+                     ::medibus::MedibusRequest, ::medibus::MedibusReply>* streamer) {
                        return this->StreamedRealTime(context,
                          streamer);
                   }));
@@ -2410,12 +2410,12 @@ class Medibus final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRealTimeRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
+    ::grpc::Status RealTime(::grpc::ServerContext* /*context*/, const ::medibus::MedibusRequest* /*request*/, ::medibus::MedibusReply* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedRealTime(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::MedibusRealTimeRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedRealTime(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::medibus::MedibusRequest,::medibus::MedibusReply>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_CurMeasuredDataCP1<WithStreamedUnaryMethod_CurLowAlarmLimitsCP1<WithStreamedUnaryMethod_CurHighAlarmLimitsCP1<WithStreamedUnaryMethod_CurAlarmsCP1<WithStreamedUnaryMethod_CurDeviceSettings<WithStreamedUnaryMethod_TextMessages<WithStreamedUnaryMethod_CurMeasuredDataCP2<WithStreamedUnaryMethod_CurLowAlarmLimitsCP2<WithStreamedUnaryMethod_CurHighAlarmLimitsCP2<WithStreamedUnaryMethod_CurAlarmsCP2<WithStreamedUnaryMethod_DeviceIdentification<WithStreamedUnaryMethod_CurAlarmsCP3<WithStreamedUnaryMethod_RealTime<Service > > > > > > > > > > > > > StreamedUnaryService;
   typedef Service SplitStreamedService;

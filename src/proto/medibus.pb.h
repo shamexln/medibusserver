@@ -57,12 +57,6 @@ extern DeviceIdentificationRequest_DeviceIdentificationRespondDefaultTypeInterna
 class LoopRequest;
 struct LoopRequestDefaultTypeInternal;
 extern LoopRequestDefaultTypeInternal _LoopRequest_default_instance_;
-class MedibusRealTimeRequest;
-struct MedibusRealTimeRequestDefaultTypeInternal;
-extern MedibusRealTimeRequestDefaultTypeInternal _MedibusRealTimeRequest_default_instance_;
-class MedibusRealTimeRequest_DeviceRespond;
-struct MedibusRealTimeRequest_DeviceRespondDefaultTypeInternal;
-extern MedibusRealTimeRequest_DeviceRespondDefaultTypeInternal _MedibusRealTimeRequest_DeviceRespond_default_instance_;
 class MedibusReply;
 struct MedibusReplyDefaultTypeInternal;
 extern MedibusReplyDefaultTypeInternal _MedibusReply_default_instance_;
@@ -78,8 +72,6 @@ template<> ::medibus::DelimitedLoopRequest* Arena::CreateMaybeMessage<::medibus:
 template<> ::medibus::DeviceIdentificationRequest* Arena::CreateMaybeMessage<::medibus::DeviceIdentificationRequest>(Arena*);
 template<> ::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond* Arena::CreateMaybeMessage<::medibus::DeviceIdentificationRequest_DeviceIdentificationRespond>(Arena*);
 template<> ::medibus::LoopRequest* Arena::CreateMaybeMessage<::medibus::LoopRequest>(Arena*);
-template<> ::medibus::MedibusRealTimeRequest* Arena::CreateMaybeMessage<::medibus::MedibusRealTimeRequest>(Arena*);
-template<> ::medibus::MedibusRealTimeRequest_DeviceRespond* Arena::CreateMaybeMessage<::medibus::MedibusRealTimeRequest_DeviceRespond>(Arena*);
 template<> ::medibus::MedibusReply* Arena::CreateMaybeMessage<::medibus::MedibusReply>(Arena*);
 template<> ::medibus::MedibusRequest* Arena::CreateMaybeMessage<::medibus::MedibusRequest>(Arena*);
 template<> ::medibus::MedibusRequest_DeviceRespond* Arena::CreateMaybeMessage<::medibus::MedibusRequest_DeviceRespond>(Arena*);
@@ -1168,459 +1160,6 @@ class MedibusReply final :
 };
 // -------------------------------------------------------------------
 
-class MedibusRealTimeRequest_DeviceRespond final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:medibus.MedibusRealTimeRequest.DeviceRespond) */ {
- public:
-  inline MedibusRealTimeRequest_DeviceRespond() : MedibusRealTimeRequest_DeviceRespond(nullptr) {}
-  ~MedibusRealTimeRequest_DeviceRespond() override;
-  explicit PROTOBUF_CONSTEXPR MedibusRealTimeRequest_DeviceRespond(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  MedibusRealTimeRequest_DeviceRespond(const MedibusRealTimeRequest_DeviceRespond& from);
-  MedibusRealTimeRequest_DeviceRespond(MedibusRealTimeRequest_DeviceRespond&& from) noexcept
-    : MedibusRealTimeRequest_DeviceRespond() {
-    *this = ::std::move(from);
-  }
-
-  inline MedibusRealTimeRequest_DeviceRespond& operator=(const MedibusRealTimeRequest_DeviceRespond& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline MedibusRealTimeRequest_DeviceRespond& operator=(MedibusRealTimeRequest_DeviceRespond&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const MedibusRealTimeRequest_DeviceRespond& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const MedibusRealTimeRequest_DeviceRespond* internal_default_instance() {
-    return reinterpret_cast<const MedibusRealTimeRequest_DeviceRespond*>(
-               &_MedibusRealTimeRequest_DeviceRespond_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    5;
-
-  friend void swap(MedibusRealTimeRequest_DeviceRespond& a, MedibusRealTimeRequest_DeviceRespond& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(MedibusRealTimeRequest_DeviceRespond* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(MedibusRealTimeRequest_DeviceRespond* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  MedibusRealTimeRequest_DeviceRespond* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<MedibusRealTimeRequest_DeviceRespond>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const MedibusRealTimeRequest_DeviceRespond& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const MedibusRealTimeRequest_DeviceRespond& from) {
-    MedibusRealTimeRequest_DeviceRespond::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(MedibusRealTimeRequest_DeviceRespond* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "medibus.MedibusRealTimeRequest.DeviceRespond";
-  }
-  protected:
-  explicit MedibusRealTimeRequest_DeviceRespond(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kMinFieldNumber = 1,
-    kMaxFieldNumber = 2,
-    kMaxbinFieldNumber = 3,
-    kIntervalFieldNumber = 4,
-    kDescriptionFieldNumber = 5,
-  };
-  // optional string min = 1;
-  bool has_min() const;
-  private:
-  bool _internal_has_min() const;
-  public:
-  void clear_min();
-  const std::string& min() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_min(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_min();
-  PROTOBUF_NODISCARD std::string* release_min();
-  void set_allocated_min(std::string* min);
-  private:
-  const std::string& _internal_min() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_min(const std::string& value);
-  std::string* _internal_mutable_min();
-  public:
-
-  // optional string max = 2;
-  bool has_max() const;
-  private:
-  bool _internal_has_max() const;
-  public:
-  void clear_max();
-  const std::string& max() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_max(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_max();
-  PROTOBUF_NODISCARD std::string* release_max();
-  void set_allocated_max(std::string* max);
-  private:
-  const std::string& _internal_max() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_max(const std::string& value);
-  std::string* _internal_mutable_max();
-  public:
-
-  // optional string maxbin = 3;
-  bool has_maxbin() const;
-  private:
-  bool _internal_has_maxbin() const;
-  public:
-  void clear_maxbin();
-  const std::string& maxbin() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_maxbin(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_maxbin();
-  PROTOBUF_NODISCARD std::string* release_maxbin();
-  void set_allocated_maxbin(std::string* maxbin);
-  private:
-  const std::string& _internal_maxbin() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_maxbin(const std::string& value);
-  std::string* _internal_mutable_maxbin();
-  public:
-
-  // optional string interval = 4;
-  bool has_interval() const;
-  private:
-  bool _internal_has_interval() const;
-  public:
-  void clear_interval();
-  const std::string& interval() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_interval(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_interval();
-  PROTOBUF_NODISCARD std::string* release_interval();
-  void set_allocated_interval(std::string* interval);
-  private:
-  const std::string& _internal_interval() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_interval(const std::string& value);
-  std::string* _internal_mutable_interval();
-  public:
-
-  // optional string description = 5;
-  bool has_description() const;
-  private:
-  bool _internal_has_description() const;
-  public:
-  void clear_description();
-  const std::string& description() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_description(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_description();
-  PROTOBUF_NODISCARD std::string* release_description();
-  void set_allocated_description(std::string* description);
-  private:
-  const std::string& _internal_description() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_description(const std::string& value);
-  std::string* _internal_mutable_description();
-  public:
-
-  // @@protoc_insertion_point(class_scope:medibus.MedibusRealTimeRequest.DeviceRespond)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr min_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr max_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr maxbin_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr interval_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr description_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_medibus_2eproto;
-};
-// -------------------------------------------------------------------
-
-class MedibusRealTimeRequest final :
-    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:medibus.MedibusRealTimeRequest) */ {
- public:
-  inline MedibusRealTimeRequest() : MedibusRealTimeRequest(nullptr) {}
-  ~MedibusRealTimeRequest() override;
-  explicit PROTOBUF_CONSTEXPR MedibusRealTimeRequest(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
-
-  MedibusRealTimeRequest(const MedibusRealTimeRequest& from);
-  MedibusRealTimeRequest(MedibusRealTimeRequest&& from) noexcept
-    : MedibusRealTimeRequest() {
-    *this = ::std::move(from);
-  }
-
-  inline MedibusRealTimeRequest& operator=(const MedibusRealTimeRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline MedibusRealTimeRequest& operator=(MedibusRealTimeRequest&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
-      CopyFrom(from);
-    }
-    return *this;
-  }
-
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const MedibusRealTimeRequest& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const MedibusRealTimeRequest* internal_default_instance() {
-    return reinterpret_cast<const MedibusRealTimeRequest*>(
-               &_MedibusRealTimeRequest_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    6;
-
-  friend void swap(MedibusRealTimeRequest& a, MedibusRealTimeRequest& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(MedibusRealTimeRequest* other) {
-    if (other == this) return;
-  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
-      InternalSwap(other);
-    } else {
-      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
-    }
-  }
-  void UnsafeArenaSwap(MedibusRealTimeRequest* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
-
-  // implements Message ----------------------------------------------
-
-  MedibusRealTimeRequest* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<MedibusRealTimeRequest>(arena);
-  }
-  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const MedibusRealTimeRequest& from);
-  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const MedibusRealTimeRequest& from) {
-    MedibusRealTimeRequest::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
-  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
-
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(MedibusRealTimeRequest* other);
-
-  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
-  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "medibus.MedibusRealTimeRequest";
-  }
-  protected:
-  explicit MedibusRealTimeRequest(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
-
-  static const ClassData _class_data_;
-  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-  // nested types ----------------------------------------------------
-
-  typedef MedibusRealTimeRequest_DeviceRespond DeviceRespond;
-
-  // accessors -------------------------------------------------------
-
-  enum : int {
-    kDevicerespondsFieldNumber = 3,
-    kInstanceIdFieldNumber = 1,
-    kDescriptionFieldNumber = 4,
-    kSequenceIdFieldNumber = 2,
-  };
-  // repeated .medibus.MedibusRealTimeRequest.DeviceRespond deviceresponds = 3;
-  int deviceresponds_size() const;
-  private:
-  int _internal_deviceresponds_size() const;
-  public:
-  void clear_deviceresponds();
-  ::medibus::MedibusRealTimeRequest_DeviceRespond* mutable_deviceresponds(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest_DeviceRespond >*
-      mutable_deviceresponds();
-  private:
-  const ::medibus::MedibusRealTimeRequest_DeviceRespond& _internal_deviceresponds(int index) const;
-  ::medibus::MedibusRealTimeRequest_DeviceRespond* _internal_add_deviceresponds();
-  public:
-  const ::medibus::MedibusRealTimeRequest_DeviceRespond& deviceresponds(int index) const;
-  ::medibus::MedibusRealTimeRequest_DeviceRespond* add_deviceresponds();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest_DeviceRespond >&
-      deviceresponds() const;
-
-  // optional string instance_id = 1;
-  bool has_instance_id() const;
-  private:
-  bool _internal_has_instance_id() const;
-  public:
-  void clear_instance_id();
-  const std::string& instance_id() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_instance_id(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_instance_id();
-  PROTOBUF_NODISCARD std::string* release_instance_id();
-  void set_allocated_instance_id(std::string* instance_id);
-  private:
-  const std::string& _internal_instance_id() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_instance_id(const std::string& value);
-  std::string* _internal_mutable_instance_id();
-  public:
-
-  // optional string description = 4;
-  bool has_description() const;
-  private:
-  bool _internal_has_description() const;
-  public:
-  void clear_description();
-  const std::string& description() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_description(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_description();
-  PROTOBUF_NODISCARD std::string* release_description();
-  void set_allocated_description(std::string* description);
-  private:
-  const std::string& _internal_description() const;
-  inline PROTOBUF_ALWAYS_INLINE void _internal_set_description(const std::string& value);
-  std::string* _internal_mutable_description();
-  public:
-
-  // optional fixed64 sequence_id = 2;
-  bool has_sequence_id() const;
-  private:
-  bool _internal_has_sequence_id() const;
-  public:
-  void clear_sequence_id();
-  uint64_t sequence_id() const;
-  void set_sequence_id(uint64_t value);
-  private:
-  uint64_t _internal_sequence_id() const;
-  void _internal_set_sequence_id(uint64_t value);
-  public:
-
-  // @@protoc_insertion_point(class_scope:medibus.MedibusRealTimeRequest)
- private:
-  class _Internal;
-
-  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest_DeviceRespond > deviceresponds_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr instance_id_;
-    ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr description_;
-    uint64_t sequence_id_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_medibus_2eproto;
-};
-// -------------------------------------------------------------------
-
 class LoopRequest final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:medibus.LoopRequest) */ {
  public:
@@ -1669,7 +1208,7 @@ class LoopRequest final :
                &_LoopRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    7;
+    5;
 
   friend void swap(LoopRequest& a, LoopRequest& b) {
     a.Swap(&b);
@@ -1742,7 +1281,6 @@ class LoopRequest final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kRealTimeFieldNumber = 15,
     kInstanceIdFieldNumber = 1,
     kCurMeasuredDataCp1FieldNumber = 3,
     kCurLowAlarmLimitsCp1FieldNumber = 4,
@@ -1756,26 +1294,13 @@ class LoopRequest final :
     kCurAlarmsCp2FieldNumber = 12,
     kDeviceIdentificationFieldNumber = 13,
     kCurAlarmsCp3FieldNumber = 14,
+    kCurRealTimeVolFieldNumber = 15,
+    kCurRealTimeFlowFieldNumber = 16,
+    kCurRealTimePawFieldNumber = 17,
+    kCurRealTimeCo2FieldNumber = 18,
+    kCurRealTimePtrachFieldNumber = 19,
     kSequenceIdFieldNumber = 2,
   };
-  // repeated .medibus.MedibusRealTimeRequest real_time = 15;
-  int real_time_size() const;
-  private:
-  int _internal_real_time_size() const;
-  public:
-  void clear_real_time();
-  ::medibus::MedibusRealTimeRequest* mutable_real_time(int index);
-  ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest >*
-      mutable_real_time();
-  private:
-  const ::medibus::MedibusRealTimeRequest& _internal_real_time(int index) const;
-  ::medibus::MedibusRealTimeRequest* _internal_add_real_time();
-  public:
-  const ::medibus::MedibusRealTimeRequest& real_time(int index) const;
-  ::medibus::MedibusRealTimeRequest* add_real_time();
-  const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest >&
-      real_time() const;
-
   // optional string instance_id = 1;
   bool has_instance_id() const;
   private:
@@ -2010,6 +1535,96 @@ class LoopRequest final :
       ::medibus::MedibusRequest* cur_alarms_cp3);
   ::medibus::MedibusRequest* unsafe_arena_release_cur_alarms_cp3();
 
+  // optional .medibus.MedibusRequest cur_real_time_vol = 15;
+  bool has_cur_real_time_vol() const;
+  private:
+  bool _internal_has_cur_real_time_vol() const;
+  public:
+  void clear_cur_real_time_vol();
+  const ::medibus::MedibusRequest& cur_real_time_vol() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_real_time_vol();
+  ::medibus::MedibusRequest* mutable_cur_real_time_vol();
+  void set_allocated_cur_real_time_vol(::medibus::MedibusRequest* cur_real_time_vol);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_real_time_vol() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_real_time_vol();
+  public:
+  void unsafe_arena_set_allocated_cur_real_time_vol(
+      ::medibus::MedibusRequest* cur_real_time_vol);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_real_time_vol();
+
+  // optional .medibus.MedibusRequest cur_real_time_flow = 16;
+  bool has_cur_real_time_flow() const;
+  private:
+  bool _internal_has_cur_real_time_flow() const;
+  public:
+  void clear_cur_real_time_flow();
+  const ::medibus::MedibusRequest& cur_real_time_flow() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_real_time_flow();
+  ::medibus::MedibusRequest* mutable_cur_real_time_flow();
+  void set_allocated_cur_real_time_flow(::medibus::MedibusRequest* cur_real_time_flow);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_real_time_flow() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_real_time_flow();
+  public:
+  void unsafe_arena_set_allocated_cur_real_time_flow(
+      ::medibus::MedibusRequest* cur_real_time_flow);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_real_time_flow();
+
+  // optional .medibus.MedibusRequest cur_real_time_paw = 17;
+  bool has_cur_real_time_paw() const;
+  private:
+  bool _internal_has_cur_real_time_paw() const;
+  public:
+  void clear_cur_real_time_paw();
+  const ::medibus::MedibusRequest& cur_real_time_paw() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_real_time_paw();
+  ::medibus::MedibusRequest* mutable_cur_real_time_paw();
+  void set_allocated_cur_real_time_paw(::medibus::MedibusRequest* cur_real_time_paw);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_real_time_paw() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_real_time_paw();
+  public:
+  void unsafe_arena_set_allocated_cur_real_time_paw(
+      ::medibus::MedibusRequest* cur_real_time_paw);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_real_time_paw();
+
+  // optional .medibus.MedibusRequest cur_real_time_co2 = 18;
+  bool has_cur_real_time_co2() const;
+  private:
+  bool _internal_has_cur_real_time_co2() const;
+  public:
+  void clear_cur_real_time_co2();
+  const ::medibus::MedibusRequest& cur_real_time_co2() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_real_time_co2();
+  ::medibus::MedibusRequest* mutable_cur_real_time_co2();
+  void set_allocated_cur_real_time_co2(::medibus::MedibusRequest* cur_real_time_co2);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_real_time_co2() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_real_time_co2();
+  public:
+  void unsafe_arena_set_allocated_cur_real_time_co2(
+      ::medibus::MedibusRequest* cur_real_time_co2);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_real_time_co2();
+
+  // optional .medibus.MedibusRequest cur_real_time_ptrach = 19;
+  bool has_cur_real_time_ptrach() const;
+  private:
+  bool _internal_has_cur_real_time_ptrach() const;
+  public:
+  void clear_cur_real_time_ptrach();
+  const ::medibus::MedibusRequest& cur_real_time_ptrach() const;
+  PROTOBUF_NODISCARD ::medibus::MedibusRequest* release_cur_real_time_ptrach();
+  ::medibus::MedibusRequest* mutable_cur_real_time_ptrach();
+  void set_allocated_cur_real_time_ptrach(::medibus::MedibusRequest* cur_real_time_ptrach);
+  private:
+  const ::medibus::MedibusRequest& _internal_cur_real_time_ptrach() const;
+  ::medibus::MedibusRequest* _internal_mutable_cur_real_time_ptrach();
+  public:
+  void unsafe_arena_set_allocated_cur_real_time_ptrach(
+      ::medibus::MedibusRequest* cur_real_time_ptrach);
+  ::medibus::MedibusRequest* unsafe_arena_release_cur_real_time_ptrach();
+
   // optional fixed64 sequence_id = 2;
   bool has_sequence_id() const;
   private:
@@ -2033,7 +1648,6 @@ class LoopRequest final :
   struct Impl_ {
     ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest > real_time_;
     ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr instance_id_;
     ::medibus::MedibusRequest* cur_measured_data_cp1_;
     ::medibus::MedibusRequest* cur_low_alarm_limits_cp1_;
@@ -2047,6 +1661,11 @@ class LoopRequest final :
     ::medibus::MedibusRequest* cur_alarms_cp2_;
     ::medibus::DeviceIdentificationRequest* device_identification_;
     ::medibus::MedibusRequest* cur_alarms_cp3_;
+    ::medibus::MedibusRequest* cur_real_time_vol_;
+    ::medibus::MedibusRequest* cur_real_time_flow_;
+    ::medibus::MedibusRequest* cur_real_time_paw_;
+    ::medibus::MedibusRequest* cur_real_time_co2_;
+    ::medibus::MedibusRequest* cur_real_time_ptrach_;
     uint64_t sequence_id_;
   };
   union { Impl_ _impl_; };
@@ -2102,7 +1721,7 @@ class DelimitedLoopRequest final :
                &_DelimitedLoopRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    8;
+    6;
 
   friend void swap(DelimitedLoopRequest& a, DelimitedLoopRequest& b) {
     a.Swap(&b);
@@ -3495,558 +3114,6 @@ inline void MedibusReply::set_allocated_message(std::string* message) {
 
 // -------------------------------------------------------------------
 
-// MedibusRealTimeRequest_DeviceRespond
-
-// optional string min = 1;
-inline bool MedibusRealTimeRequest_DeviceRespond::_internal_has_min() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest_DeviceRespond::has_min() const {
-  return _internal_has_min();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::clear_min() {
-  _impl_.min_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::min() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.DeviceRespond.min)
-  return _internal_min();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest_DeviceRespond::set_min(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000001u;
- _impl_.min_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.DeviceRespond.min)
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::mutable_min() {
-  std::string* _s = _internal_mutable_min();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.DeviceRespond.min)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::_internal_min() const {
-  return _impl_.min_.Get();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::_internal_set_min(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.min_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::_internal_mutable_min() {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.min_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::release_min() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.DeviceRespond.min)
-  if (!_internal_has_min()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* p = _impl_.min_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.min_.IsDefault()) {
-    _impl_.min_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest_DeviceRespond::set_allocated_min(std::string* min) {
-  if (min != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.min_.SetAllocated(min, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.min_.IsDefault()) {
-    _impl_.min_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.DeviceRespond.min)
-}
-
-// optional string max = 2;
-inline bool MedibusRealTimeRequest_DeviceRespond::_internal_has_max() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest_DeviceRespond::has_max() const {
-  return _internal_has_max();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::clear_max() {
-  _impl_.max_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::max() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.DeviceRespond.max)
-  return _internal_max();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest_DeviceRespond::set_max(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000002u;
- _impl_.max_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.DeviceRespond.max)
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::mutable_max() {
-  std::string* _s = _internal_mutable_max();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.DeviceRespond.max)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::_internal_max() const {
-  return _impl_.max_.Get();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::_internal_set_max(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.max_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::_internal_mutable_max() {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  return _impl_.max_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::release_max() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.DeviceRespond.max)
-  if (!_internal_has_max()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  auto* p = _impl_.max_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.max_.IsDefault()) {
-    _impl_.max_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest_DeviceRespond::set_allocated_max(std::string* max) {
-  if (max != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  _impl_.max_.SetAllocated(max, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.max_.IsDefault()) {
-    _impl_.max_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.DeviceRespond.max)
-}
-
-// optional string maxbin = 3;
-inline bool MedibusRealTimeRequest_DeviceRespond::_internal_has_maxbin() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest_DeviceRespond::has_maxbin() const {
-  return _internal_has_maxbin();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::clear_maxbin() {
-  _impl_.maxbin_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::maxbin() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.DeviceRespond.maxbin)
-  return _internal_maxbin();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest_DeviceRespond::set_maxbin(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000004u;
- _impl_.maxbin_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.DeviceRespond.maxbin)
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::mutable_maxbin() {
-  std::string* _s = _internal_mutable_maxbin();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.DeviceRespond.maxbin)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::_internal_maxbin() const {
-  return _impl_.maxbin_.Get();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::_internal_set_maxbin(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.maxbin_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::_internal_mutable_maxbin() {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  return _impl_.maxbin_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::release_maxbin() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.DeviceRespond.maxbin)
-  if (!_internal_has_maxbin()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000004u;
-  auto* p = _impl_.maxbin_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.maxbin_.IsDefault()) {
-    _impl_.maxbin_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest_DeviceRespond::set_allocated_maxbin(std::string* maxbin) {
-  if (maxbin != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
-  }
-  _impl_.maxbin_.SetAllocated(maxbin, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.maxbin_.IsDefault()) {
-    _impl_.maxbin_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.DeviceRespond.maxbin)
-}
-
-// optional string interval = 4;
-inline bool MedibusRealTimeRequest_DeviceRespond::_internal_has_interval() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest_DeviceRespond::has_interval() const {
-  return _internal_has_interval();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::clear_interval() {
-  _impl_.interval_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000008u;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::interval() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.DeviceRespond.interval)
-  return _internal_interval();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest_DeviceRespond::set_interval(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000008u;
- _impl_.interval_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.DeviceRespond.interval)
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::mutable_interval() {
-  std::string* _s = _internal_mutable_interval();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.DeviceRespond.interval)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::_internal_interval() const {
-  return _impl_.interval_.Get();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::_internal_set_interval(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000008u;
-  _impl_.interval_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::_internal_mutable_interval() {
-  _impl_._has_bits_[0] |= 0x00000008u;
-  return _impl_.interval_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::release_interval() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.DeviceRespond.interval)
-  if (!_internal_has_interval()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000008u;
-  auto* p = _impl_.interval_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.interval_.IsDefault()) {
-    _impl_.interval_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest_DeviceRespond::set_allocated_interval(std::string* interval) {
-  if (interval != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000008u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
-  }
-  _impl_.interval_.SetAllocated(interval, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.interval_.IsDefault()) {
-    _impl_.interval_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.DeviceRespond.interval)
-}
-
-// optional string description = 5;
-inline bool MedibusRealTimeRequest_DeviceRespond::_internal_has_description() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest_DeviceRespond::has_description() const {
-  return _internal_has_description();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::clear_description() {
-  _impl_.description_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000010u;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::description() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.DeviceRespond.description)
-  return _internal_description();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest_DeviceRespond::set_description(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000010u;
- _impl_.description_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.DeviceRespond.description)
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::mutable_description() {
-  std::string* _s = _internal_mutable_description();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.DeviceRespond.description)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest_DeviceRespond::_internal_description() const {
-  return _impl_.description_.Get();
-}
-inline void MedibusRealTimeRequest_DeviceRespond::_internal_set_description(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.description_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::_internal_mutable_description() {
-  _impl_._has_bits_[0] |= 0x00000010u;
-  return _impl_.description_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest_DeviceRespond::release_description() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.DeviceRespond.description)
-  if (!_internal_has_description()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000010u;
-  auto* p = _impl_.description_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.description_.IsDefault()) {
-    _impl_.description_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest_DeviceRespond::set_allocated_description(std::string* description) {
-  if (description != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000010u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000010u;
-  }
-  _impl_.description_.SetAllocated(description, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.description_.IsDefault()) {
-    _impl_.description_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.DeviceRespond.description)
-}
-
-// -------------------------------------------------------------------
-
-// MedibusRealTimeRequest
-
-// optional string instance_id = 1;
-inline bool MedibusRealTimeRequest::_internal_has_instance_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest::has_instance_id() const {
-  return _internal_has_instance_id();
-}
-inline void MedibusRealTimeRequest::clear_instance_id() {
-  _impl_.instance_id_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& MedibusRealTimeRequest::instance_id() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.instance_id)
-  return _internal_instance_id();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest::set_instance_id(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000001u;
- _impl_.instance_id_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.instance_id)
-}
-inline std::string* MedibusRealTimeRequest::mutable_instance_id() {
-  std::string* _s = _internal_mutable_instance_id();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.instance_id)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest::_internal_instance_id() const {
-  return _impl_.instance_id_.Get();
-}
-inline void MedibusRealTimeRequest::_internal_set_instance_id(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.instance_id_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest::_internal_mutable_instance_id() {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.instance_id_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest::release_instance_id() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.instance_id)
-  if (!_internal_has_instance_id()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* p = _impl_.instance_id_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.instance_id_.IsDefault()) {
-    _impl_.instance_id_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest::set_allocated_instance_id(std::string* instance_id) {
-  if (instance_id != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.instance_id_.SetAllocated(instance_id, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.instance_id_.IsDefault()) {
-    _impl_.instance_id_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.instance_id)
-}
-
-// optional fixed64 sequence_id = 2;
-inline bool MedibusRealTimeRequest::_internal_has_sequence_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest::has_sequence_id() const {
-  return _internal_has_sequence_id();
-}
-inline void MedibusRealTimeRequest::clear_sequence_id() {
-  _impl_.sequence_id_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline uint64_t MedibusRealTimeRequest::_internal_sequence_id() const {
-  return _impl_.sequence_id_;
-}
-inline uint64_t MedibusRealTimeRequest::sequence_id() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.sequence_id)
-  return _internal_sequence_id();
-}
-inline void MedibusRealTimeRequest::_internal_set_sequence_id(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.sequence_id_ = value;
-}
-inline void MedibusRealTimeRequest::set_sequence_id(uint64_t value) {
-  _internal_set_sequence_id(value);
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.sequence_id)
-}
-
-// repeated .medibus.MedibusRealTimeRequest.DeviceRespond deviceresponds = 3;
-inline int MedibusRealTimeRequest::_internal_deviceresponds_size() const {
-  return _impl_.deviceresponds_.size();
-}
-inline int MedibusRealTimeRequest::deviceresponds_size() const {
-  return _internal_deviceresponds_size();
-}
-inline void MedibusRealTimeRequest::clear_deviceresponds() {
-  _impl_.deviceresponds_.Clear();
-}
-inline ::medibus::MedibusRealTimeRequest_DeviceRespond* MedibusRealTimeRequest::mutable_deviceresponds(int index) {
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.deviceresponds)
-  return _impl_.deviceresponds_.Mutable(index);
-}
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest_DeviceRespond >*
-MedibusRealTimeRequest::mutable_deviceresponds() {
-  // @@protoc_insertion_point(field_mutable_list:medibus.MedibusRealTimeRequest.deviceresponds)
-  return &_impl_.deviceresponds_;
-}
-inline const ::medibus::MedibusRealTimeRequest_DeviceRespond& MedibusRealTimeRequest::_internal_deviceresponds(int index) const {
-  return _impl_.deviceresponds_.Get(index);
-}
-inline const ::medibus::MedibusRealTimeRequest_DeviceRespond& MedibusRealTimeRequest::deviceresponds(int index) const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.deviceresponds)
-  return _internal_deviceresponds(index);
-}
-inline ::medibus::MedibusRealTimeRequest_DeviceRespond* MedibusRealTimeRequest::_internal_add_deviceresponds() {
-  return _impl_.deviceresponds_.Add();
-}
-inline ::medibus::MedibusRealTimeRequest_DeviceRespond* MedibusRealTimeRequest::add_deviceresponds() {
-  ::medibus::MedibusRealTimeRequest_DeviceRespond* _add = _internal_add_deviceresponds();
-  // @@protoc_insertion_point(field_add:medibus.MedibusRealTimeRequest.deviceresponds)
-  return _add;
-}
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest_DeviceRespond >&
-MedibusRealTimeRequest::deviceresponds() const {
-  // @@protoc_insertion_point(field_list:medibus.MedibusRealTimeRequest.deviceresponds)
-  return _impl_.deviceresponds_;
-}
-
-// optional string description = 4;
-inline bool MedibusRealTimeRequest::_internal_has_description() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool MedibusRealTimeRequest::has_description() const {
-  return _internal_has_description();
-}
-inline void MedibusRealTimeRequest::clear_description() {
-  _impl_.description_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline const std::string& MedibusRealTimeRequest::description() const {
-  // @@protoc_insertion_point(field_get:medibus.MedibusRealTimeRequest.description)
-  return _internal_description();
-}
-template <typename ArgT0, typename... ArgT>
-inline PROTOBUF_ALWAYS_INLINE
-void MedibusRealTimeRequest::set_description(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000002u;
- _impl_.description_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:medibus.MedibusRealTimeRequest.description)
-}
-inline std::string* MedibusRealTimeRequest::mutable_description() {
-  std::string* _s = _internal_mutable_description();
-  // @@protoc_insertion_point(field_mutable:medibus.MedibusRealTimeRequest.description)
-  return _s;
-}
-inline const std::string& MedibusRealTimeRequest::_internal_description() const {
-  return _impl_.description_.Get();
-}
-inline void MedibusRealTimeRequest::_internal_set_description(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.description_.Set(value, GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest::_internal_mutable_description() {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  return _impl_.description_.Mutable(GetArenaForAllocation());
-}
-inline std::string* MedibusRealTimeRequest::release_description() {
-  // @@protoc_insertion_point(field_release:medibus.MedibusRealTimeRequest.description)
-  if (!_internal_has_description()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  auto* p = _impl_.description_.Release();
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.description_.IsDefault()) {
-    _impl_.description_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void MedibusRealTimeRequest::set_allocated_description(std::string* description) {
-  if (description != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  _impl_.description_.SetAllocated(description, GetArenaForAllocation());
-#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.description_.IsDefault()) {
-    _impl_.description_.Set("", GetArenaForAllocation());
-  }
-#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:medibus.MedibusRealTimeRequest.description)
-}
-
-// -------------------------------------------------------------------
-
 // LoopRequest
 
 // optional string instance_id = 1;
@@ -4119,7 +3186,7 @@ inline void LoopRequest::set_allocated_instance_id(std::string* instance_id) {
 
 // optional fixed64 sequence_id = 2;
 inline bool LoopRequest::_internal_has_sequence_id() const {
-  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00040000u) != 0;
   return value;
 }
 inline bool LoopRequest::has_sequence_id() const {
@@ -4127,7 +3194,7 @@ inline bool LoopRequest::has_sequence_id() const {
 }
 inline void LoopRequest::clear_sequence_id() {
   _impl_.sequence_id_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00002000u;
+  _impl_._has_bits_[0] &= ~0x00040000u;
 }
 inline uint64_t LoopRequest::_internal_sequence_id() const {
   return _impl_.sequence_id_;
@@ -4137,7 +3204,7 @@ inline uint64_t LoopRequest::sequence_id() const {
   return _internal_sequence_id();
 }
 inline void LoopRequest::_internal_set_sequence_id(uint64_t value) {
-  _impl_._has_bits_[0] |= 0x00002000u;
+  _impl_._has_bits_[0] |= 0x00040000u;
   _impl_.sequence_id_ = value;
 }
 inline void LoopRequest::set_sequence_id(uint64_t value) {
@@ -5225,44 +4292,454 @@ inline void LoopRequest::set_allocated_cur_alarms_cp3(::medibus::MedibusRequest*
   // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_alarms_cp3)
 }
 
-// repeated .medibus.MedibusRealTimeRequest real_time = 15;
-inline int LoopRequest::_internal_real_time_size() const {
-  return _impl_.real_time_.size();
+// optional .medibus.MedibusRequest cur_real_time_vol = 15;
+inline bool LoopRequest::_internal_has_cur_real_time_vol() const {
+  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_real_time_vol_ != nullptr);
+  return value;
 }
-inline int LoopRequest::real_time_size() const {
-  return _internal_real_time_size();
+inline bool LoopRequest::has_cur_real_time_vol() const {
+  return _internal_has_cur_real_time_vol();
 }
-inline void LoopRequest::clear_real_time() {
-  _impl_.real_time_.Clear();
+inline void LoopRequest::clear_cur_real_time_vol() {
+  if (_impl_.cur_real_time_vol_ != nullptr) _impl_.cur_real_time_vol_->Clear();
+  _impl_._has_bits_[0] &= ~0x00002000u;
 }
-inline ::medibus::MedibusRealTimeRequest* LoopRequest::mutable_real_time(int index) {
-  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.real_time)
-  return _impl_.real_time_.Mutable(index);
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_real_time_vol() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_real_time_vol_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
 }
-inline ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest >*
-LoopRequest::mutable_real_time() {
-  // @@protoc_insertion_point(field_mutable_list:medibus.LoopRequest.real_time)
-  return &_impl_.real_time_;
+inline const ::medibus::MedibusRequest& LoopRequest::cur_real_time_vol() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_real_time_vol)
+  return _internal_cur_real_time_vol();
 }
-inline const ::medibus::MedibusRealTimeRequest& LoopRequest::_internal_real_time(int index) const {
-  return _impl_.real_time_.Get(index);
+inline void LoopRequest::unsafe_arena_set_allocated_cur_real_time_vol(
+    ::medibus::MedibusRequest* cur_real_time_vol) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_real_time_vol_);
+  }
+  _impl_.cur_real_time_vol_ = cur_real_time_vol;
+  if (cur_real_time_vol) {
+    _impl_._has_bits_[0] |= 0x00002000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00002000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_real_time_vol)
 }
-inline const ::medibus::MedibusRealTimeRequest& LoopRequest::real_time(int index) const {
-  // @@protoc_insertion_point(field_get:medibus.LoopRequest.real_time)
-  return _internal_real_time(index);
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_real_time_vol() {
+  _impl_._has_bits_[0] &= ~0x00002000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_vol_;
+  _impl_.cur_real_time_vol_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
 }
-inline ::medibus::MedibusRealTimeRequest* LoopRequest::_internal_add_real_time() {
-  return _impl_.real_time_.Add();
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_real_time_vol() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_real_time_vol)
+  _impl_._has_bits_[0] &= ~0x00002000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_vol_;
+  _impl_.cur_real_time_vol_ = nullptr;
+  return temp;
 }
-inline ::medibus::MedibusRealTimeRequest* LoopRequest::add_real_time() {
-  ::medibus::MedibusRealTimeRequest* _add = _internal_add_real_time();
-  // @@protoc_insertion_point(field_add:medibus.LoopRequest.real_time)
-  return _add;
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_real_time_vol() {
+  _impl_._has_bits_[0] |= 0x00002000u;
+  if (_impl_.cur_real_time_vol_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_real_time_vol_ = p;
+  }
+  return _impl_.cur_real_time_vol_;
 }
-inline const ::PROTOBUF_NAMESPACE_ID::RepeatedPtrField< ::medibus::MedibusRealTimeRequest >&
-LoopRequest::real_time() const {
-  // @@protoc_insertion_point(field_list:medibus.LoopRequest.real_time)
-  return _impl_.real_time_;
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_real_time_vol() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_real_time_vol();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_real_time_vol)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_real_time_vol(::medibus::MedibusRequest* cur_real_time_vol) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_real_time_vol_;
+  }
+  if (cur_real_time_vol) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_real_time_vol);
+    if (message_arena != submessage_arena) {
+      cur_real_time_vol = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_real_time_vol, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00002000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00002000u;
+  }
+  _impl_.cur_real_time_vol_ = cur_real_time_vol;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_real_time_vol)
+}
+
+// optional .medibus.MedibusRequest cur_real_time_flow = 16;
+inline bool LoopRequest::_internal_has_cur_real_time_flow() const {
+  bool value = (_impl_._has_bits_[0] & 0x00004000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_real_time_flow_ != nullptr);
+  return value;
+}
+inline bool LoopRequest::has_cur_real_time_flow() const {
+  return _internal_has_cur_real_time_flow();
+}
+inline void LoopRequest::clear_cur_real_time_flow() {
+  if (_impl_.cur_real_time_flow_ != nullptr) _impl_.cur_real_time_flow_->Clear();
+  _impl_._has_bits_[0] &= ~0x00004000u;
+}
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_real_time_flow() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_real_time_flow_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
+}
+inline const ::medibus::MedibusRequest& LoopRequest::cur_real_time_flow() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_real_time_flow)
+  return _internal_cur_real_time_flow();
+}
+inline void LoopRequest::unsafe_arena_set_allocated_cur_real_time_flow(
+    ::medibus::MedibusRequest* cur_real_time_flow) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_real_time_flow_);
+  }
+  _impl_.cur_real_time_flow_ = cur_real_time_flow;
+  if (cur_real_time_flow) {
+    _impl_._has_bits_[0] |= 0x00004000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00004000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_real_time_flow)
+}
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_real_time_flow() {
+  _impl_._has_bits_[0] &= ~0x00004000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_flow_;
+  _impl_.cur_real_time_flow_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_real_time_flow() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_real_time_flow)
+  _impl_._has_bits_[0] &= ~0x00004000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_flow_;
+  _impl_.cur_real_time_flow_ = nullptr;
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_real_time_flow() {
+  _impl_._has_bits_[0] |= 0x00004000u;
+  if (_impl_.cur_real_time_flow_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_real_time_flow_ = p;
+  }
+  return _impl_.cur_real_time_flow_;
+}
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_real_time_flow() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_real_time_flow();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_real_time_flow)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_real_time_flow(::medibus::MedibusRequest* cur_real_time_flow) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_real_time_flow_;
+  }
+  if (cur_real_time_flow) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_real_time_flow);
+    if (message_arena != submessage_arena) {
+      cur_real_time_flow = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_real_time_flow, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00004000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00004000u;
+  }
+  _impl_.cur_real_time_flow_ = cur_real_time_flow;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_real_time_flow)
+}
+
+// optional .medibus.MedibusRequest cur_real_time_paw = 17;
+inline bool LoopRequest::_internal_has_cur_real_time_paw() const {
+  bool value = (_impl_._has_bits_[0] & 0x00008000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_real_time_paw_ != nullptr);
+  return value;
+}
+inline bool LoopRequest::has_cur_real_time_paw() const {
+  return _internal_has_cur_real_time_paw();
+}
+inline void LoopRequest::clear_cur_real_time_paw() {
+  if (_impl_.cur_real_time_paw_ != nullptr) _impl_.cur_real_time_paw_->Clear();
+  _impl_._has_bits_[0] &= ~0x00008000u;
+}
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_real_time_paw() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_real_time_paw_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
+}
+inline const ::medibus::MedibusRequest& LoopRequest::cur_real_time_paw() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_real_time_paw)
+  return _internal_cur_real_time_paw();
+}
+inline void LoopRequest::unsafe_arena_set_allocated_cur_real_time_paw(
+    ::medibus::MedibusRequest* cur_real_time_paw) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_real_time_paw_);
+  }
+  _impl_.cur_real_time_paw_ = cur_real_time_paw;
+  if (cur_real_time_paw) {
+    _impl_._has_bits_[0] |= 0x00008000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00008000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_real_time_paw)
+}
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_real_time_paw() {
+  _impl_._has_bits_[0] &= ~0x00008000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_paw_;
+  _impl_.cur_real_time_paw_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_real_time_paw() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_real_time_paw)
+  _impl_._has_bits_[0] &= ~0x00008000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_paw_;
+  _impl_.cur_real_time_paw_ = nullptr;
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_real_time_paw() {
+  _impl_._has_bits_[0] |= 0x00008000u;
+  if (_impl_.cur_real_time_paw_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_real_time_paw_ = p;
+  }
+  return _impl_.cur_real_time_paw_;
+}
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_real_time_paw() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_real_time_paw();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_real_time_paw)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_real_time_paw(::medibus::MedibusRequest* cur_real_time_paw) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_real_time_paw_;
+  }
+  if (cur_real_time_paw) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_real_time_paw);
+    if (message_arena != submessage_arena) {
+      cur_real_time_paw = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_real_time_paw, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00008000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00008000u;
+  }
+  _impl_.cur_real_time_paw_ = cur_real_time_paw;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_real_time_paw)
+}
+
+// optional .medibus.MedibusRequest cur_real_time_co2 = 18;
+inline bool LoopRequest::_internal_has_cur_real_time_co2() const {
+  bool value = (_impl_._has_bits_[0] & 0x00010000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_real_time_co2_ != nullptr);
+  return value;
+}
+inline bool LoopRequest::has_cur_real_time_co2() const {
+  return _internal_has_cur_real_time_co2();
+}
+inline void LoopRequest::clear_cur_real_time_co2() {
+  if (_impl_.cur_real_time_co2_ != nullptr) _impl_.cur_real_time_co2_->Clear();
+  _impl_._has_bits_[0] &= ~0x00010000u;
+}
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_real_time_co2() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_real_time_co2_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
+}
+inline const ::medibus::MedibusRequest& LoopRequest::cur_real_time_co2() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_real_time_co2)
+  return _internal_cur_real_time_co2();
+}
+inline void LoopRequest::unsafe_arena_set_allocated_cur_real_time_co2(
+    ::medibus::MedibusRequest* cur_real_time_co2) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_real_time_co2_);
+  }
+  _impl_.cur_real_time_co2_ = cur_real_time_co2;
+  if (cur_real_time_co2) {
+    _impl_._has_bits_[0] |= 0x00010000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00010000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_real_time_co2)
+}
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_real_time_co2() {
+  _impl_._has_bits_[0] &= ~0x00010000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_co2_;
+  _impl_.cur_real_time_co2_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_real_time_co2() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_real_time_co2)
+  _impl_._has_bits_[0] &= ~0x00010000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_co2_;
+  _impl_.cur_real_time_co2_ = nullptr;
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_real_time_co2() {
+  _impl_._has_bits_[0] |= 0x00010000u;
+  if (_impl_.cur_real_time_co2_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_real_time_co2_ = p;
+  }
+  return _impl_.cur_real_time_co2_;
+}
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_real_time_co2() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_real_time_co2();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_real_time_co2)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_real_time_co2(::medibus::MedibusRequest* cur_real_time_co2) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_real_time_co2_;
+  }
+  if (cur_real_time_co2) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_real_time_co2);
+    if (message_arena != submessage_arena) {
+      cur_real_time_co2 = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_real_time_co2, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00010000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00010000u;
+  }
+  _impl_.cur_real_time_co2_ = cur_real_time_co2;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_real_time_co2)
+}
+
+// optional .medibus.MedibusRequest cur_real_time_ptrach = 19;
+inline bool LoopRequest::_internal_has_cur_real_time_ptrach() const {
+  bool value = (_impl_._has_bits_[0] & 0x00020000u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.cur_real_time_ptrach_ != nullptr);
+  return value;
+}
+inline bool LoopRequest::has_cur_real_time_ptrach() const {
+  return _internal_has_cur_real_time_ptrach();
+}
+inline void LoopRequest::clear_cur_real_time_ptrach() {
+  if (_impl_.cur_real_time_ptrach_ != nullptr) _impl_.cur_real_time_ptrach_->Clear();
+  _impl_._has_bits_[0] &= ~0x00020000u;
+}
+inline const ::medibus::MedibusRequest& LoopRequest::_internal_cur_real_time_ptrach() const {
+  const ::medibus::MedibusRequest* p = _impl_.cur_real_time_ptrach_;
+  return p != nullptr ? *p : reinterpret_cast<const ::medibus::MedibusRequest&>(
+      ::medibus::_MedibusRequest_default_instance_);
+}
+inline const ::medibus::MedibusRequest& LoopRequest::cur_real_time_ptrach() const {
+  // @@protoc_insertion_point(field_get:medibus.LoopRequest.cur_real_time_ptrach)
+  return _internal_cur_real_time_ptrach();
+}
+inline void LoopRequest::unsafe_arena_set_allocated_cur_real_time_ptrach(
+    ::medibus::MedibusRequest* cur_real_time_ptrach) {
+  if (GetArenaForAllocation() == nullptr) {
+    delete reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(_impl_.cur_real_time_ptrach_);
+  }
+  _impl_.cur_real_time_ptrach_ = cur_real_time_ptrach;
+  if (cur_real_time_ptrach) {
+    _impl_._has_bits_[0] |= 0x00020000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00020000u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:medibus.LoopRequest.cur_real_time_ptrach)
+}
+inline ::medibus::MedibusRequest* LoopRequest::release_cur_real_time_ptrach() {
+  _impl_._has_bits_[0] &= ~0x00020000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_ptrach_;
+  _impl_.cur_real_time_ptrach_ = nullptr;
+#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+  auto* old =  reinterpret_cast<::PROTOBUF_NAMESPACE_ID::MessageLite*>(temp);
+  temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  if (GetArenaForAllocation() == nullptr) { delete old; }
+#else  // PROTOBUF_FORCE_COPY_IN_RELEASE
+  if (GetArenaForAllocation() != nullptr) {
+    temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+  }
+#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::unsafe_arena_release_cur_real_time_ptrach() {
+  // @@protoc_insertion_point(field_release:medibus.LoopRequest.cur_real_time_ptrach)
+  _impl_._has_bits_[0] &= ~0x00020000u;
+  ::medibus::MedibusRequest* temp = _impl_.cur_real_time_ptrach_;
+  _impl_.cur_real_time_ptrach_ = nullptr;
+  return temp;
+}
+inline ::medibus::MedibusRequest* LoopRequest::_internal_mutable_cur_real_time_ptrach() {
+  _impl_._has_bits_[0] |= 0x00020000u;
+  if (_impl_.cur_real_time_ptrach_ == nullptr) {
+    auto* p = CreateMaybeMessage<::medibus::MedibusRequest>(GetArenaForAllocation());
+    _impl_.cur_real_time_ptrach_ = p;
+  }
+  return _impl_.cur_real_time_ptrach_;
+}
+inline ::medibus::MedibusRequest* LoopRequest::mutable_cur_real_time_ptrach() {
+  ::medibus::MedibusRequest* _msg = _internal_mutable_cur_real_time_ptrach();
+  // @@protoc_insertion_point(field_mutable:medibus.LoopRequest.cur_real_time_ptrach)
+  return _msg;
+}
+inline void LoopRequest::set_allocated_cur_real_time_ptrach(::medibus::MedibusRequest* cur_real_time_ptrach) {
+  ::PROTOBUF_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
+  if (message_arena == nullptr) {
+    delete _impl_.cur_real_time_ptrach_;
+  }
+  if (cur_real_time_ptrach) {
+    ::PROTOBUF_NAMESPACE_ID::Arena* submessage_arena =
+        ::PROTOBUF_NAMESPACE_ID::Arena::InternalGetOwningArena(cur_real_time_ptrach);
+    if (message_arena != submessage_arena) {
+      cur_real_time_ptrach = ::PROTOBUF_NAMESPACE_ID::internal::GetOwnedMessage(
+          message_arena, cur_real_time_ptrach, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00020000u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00020000u;
+  }
+  _impl_.cur_real_time_ptrach_ = cur_real_time_ptrach;
+  // @@protoc_insertion_point(field_set_allocated:medibus.LoopRequest.cur_real_time_ptrach)
 }
 
 // -------------------------------------------------------------------
@@ -5340,10 +4817,6 @@ inline void DelimitedLoopRequest::set_allocated_msg(std::string* msg) {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
-// -------------------------------------------------------------------
-
-// -------------------------------------------------------------------
-
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -339,23 +339,23 @@ void Medibus::Stub::async::CurAlarmsCP3(::grpc::ClientContext* context, const ::
   return result;
 }
 
-::grpc::Status Medibus::Stub::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::medibus::MedibusReply* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RealTime_, context, request, response);
+::grpc::Status Medibus::Stub::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::medibus::MedibusReply* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_RealTime_, context, request, response);
 }
 
-void Medibus::Stub::async::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RealTime_, context, request, response, std::move(f));
+void Medibus::Stub::async::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RealTime_, context, request, response, std::move(f));
 }
 
-void Medibus::Stub::async::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) {
+void Medibus::Stub::async::RealTime(::grpc::ClientContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_RealTime_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::medibus::MedibusReply, ::medibus::MedibusRealTimeRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RealTime_, context, request);
+::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::PrepareAsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::medibus::MedibusReply, ::medibus::MedibusRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_RealTime_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRealTimeRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::medibus::MedibusReply>* Medibus::Stub::AsyncRealTimeRaw(::grpc::ClientContext* context, const ::medibus::MedibusRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncRealTimeRaw(context, request, cq);
   result->StartCall();
@@ -518,10 +518,10 @@ Medibus::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       Medibus_method_names[12],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< Medibus::Service, ::medibus::MedibusRealTimeRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< Medibus::Service, ::medibus::MedibusRequest, ::medibus::MedibusReply, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](Medibus::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::medibus::MedibusRealTimeRequest* req,
+             const ::medibus::MedibusRequest* req,
              ::medibus::MedibusReply* resp) {
                return service->RealTime(ctx, req, resp);
              }, this)));
@@ -634,7 +634,7 @@ Medibus::Service::~Service() {
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status Medibus::Service::RealTime(::grpc::ServerContext* context, const ::medibus::MedibusRealTimeRequest* request, ::medibus::MedibusReply* response) {
+::grpc::Status Medibus::Service::RealTime(::grpc::ServerContext* context, const ::medibus::MedibusRequest* request, ::medibus::MedibusReply* response) {
   (void) context;
   (void) request;
   (void) response;
